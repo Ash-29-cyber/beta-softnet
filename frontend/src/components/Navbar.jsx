@@ -183,7 +183,7 @@ export default function Navbar() {
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex-shrink-0 flex items-center -ml-2 sm:-ml-4 space-x-4">
+          <div className="flex-shrink-0 flex items-center -ml-2 sm:-ml-4 space-x-4 flex-1 justify-start">
             <Link to="/" className="flex items-center select-none">
               <img src="/logo.png" alt="Beta Logo" className="h-12 w-auto object-contain rounded-lg shadow-sm" />
             </Link>
@@ -228,8 +228,8 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Desktop Nav Links, Search, and Auth CTA */}
-          <div className="hidden md:flex items-center space-x-6 ml-auto z-20">
+          {/* Desktop Nav Links (Centered) */}
+          <div className="hidden md:flex items-center justify-center flex-1 z-20">
             {/* Desktop Nav Links */}
             <div className="flex items-center space-x-0.5 bg-slate-100/90 p-1 rounded-full border border-slate-200/80 shadow-inner nav-pill-container">
             {navLinks.map((link) => {
@@ -647,6 +647,10 @@ export default function Navbar() {
               );
             })}
             </div>
+          </div>
+
+          {/* Desktop Search, Profile & Auth CTA */}
+          <div className="hidden md:flex items-center justify-end space-x-4 flex-1 z-20">
 
             {/* Header Search Bar */}
             <div ref={searchContainerRef} className="mr-2 flex items-center justify-center">

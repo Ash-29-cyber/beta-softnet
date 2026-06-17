@@ -1,0 +1,11 @@
+package com.beta;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class CorporateApiApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(CorporateApiApplication.class, args);
+    }
+}

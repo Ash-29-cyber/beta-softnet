@@ -118,8 +118,10 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Desktop Nav Links */}
-          <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center space-x-0.5 bg-slate-100/90 p-1 rounded-full border border-slate-200/80 shadow-inner nav-pill-container z-10">
+          {/* Desktop Nav Links, Search, and Auth CTA */}
+          <div className="hidden md:flex items-center space-x-6 ml-auto z-20">
+            {/* Desktop Nav Links */}
+            <div className="flex items-center space-x-0.5 bg-slate-100/90 p-1 rounded-full border border-slate-200/80 shadow-inner nav-pill-container">
             {navLinks.map((link) => {
               if (link.name === 'Products') {
                 return (
@@ -380,10 +382,7 @@ export default function Navbar() {
                 </Link>
               );
             })}
-          </div>
-
-          {/* Auth CTA Buttons */}
-          <div className="hidden md:flex items-center space-x-4 ml-auto z-20">
+            </div>
             {/* Header Search Bar */}
             <div className="relative w-28 lg:w-36 xl:w-44 mr-2 nav-search-container">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-blue-300/80 nav-search-icon" />

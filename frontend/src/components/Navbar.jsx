@@ -95,7 +95,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex-1 flex items-center justify-start">
+          <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="flex items-center space-x-2 text-slate-800 hover:text-[#004AAD] font-black text-2xl tracking-wider">
               <div className="h-10 w-10 bg-white border border-[#e2f0e8] rounded-xl flex items-center justify-center shadow-lg shadow-emerald-950/5 select-none">
                 <svg viewBox="0 0 100 115" className="h-7 w-7 text-[#004bbf]" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -119,8 +119,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Nav Links */}
-          <div className="flex-shrink-0 hidden md:flex items-center justify-center">
-            <div className="flex items-center space-x-0.5 bg-slate-100/90 p-1 rounded-full border border-slate-200/80 shadow-inner nav-pill-container">
+          <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center space-x-0.5 bg-slate-100/90 p-1 rounded-full border border-slate-200/80 shadow-inner nav-pill-container z-10">
             {navLinks.map((link) => {
               if (link.name === 'Products') {
                 return (
@@ -381,11 +380,10 @@ export default function Navbar() {
                 </Link>
               );
             })}
-            </div>
           </div>
 
           {/* Auth CTA Buttons */}
-          <div className="flex-1 hidden md:flex items-center justify-end space-x-4 ml-auto">
+          <div className="hidden md:flex items-center space-x-4 ml-auto z-20">
             {/* Header Search Bar */}
             <div className="relative w-28 lg:w-36 xl:w-44 mr-2 nav-search-container">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-blue-300/80 nav-search-icon" />
@@ -463,20 +461,20 @@ export default function Navbar() {
                 )}
               </div>
             ) : (
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 flex-shrink-0">
                 <Link
                   to="/login"
-                  className="flex items-center space-x-1.5 px-4 py-1.5 rounded-full bg-slate-100/90 border border-slate-200/80 text-slate-700 hover:bg-slate-200/60 transition duration-300 text-xs font-bold cursor-pointer header-signin-btn"
+                  className="flex items-center space-x-1.5 px-4 py-1.5 rounded-full bg-slate-100/90 border border-slate-200/80 text-slate-700 hover:bg-slate-200/60 transition duration-300 text-xs font-bold cursor-pointer header-signin-btn whitespace-nowrap flex-shrink-0"
                 >
-                  <LogIn className="h-3.5 w-3.5 text-slate-500" />
-                  <span className="text-slate-700">Sign In</span>
+                  <LogIn className="h-3.5 w-3.5 text-slate-500 flex-shrink-0" />
+                  <span className="text-slate-700 whitespace-nowrap">Sign In</span>
                 </Link>
                 <Link
                   to="/signup"
-                  className="flex items-center space-x-1.5 px-4 py-1.5 rounded-full bg-[#004AAD] border border-[#004AAD] text-white hover:bg-[#003882] hover:border-[#003882] transition duration-300 text-xs font-bold cursor-pointer shadow-md shadow-blue-950/20 header-signup-btn"
+                  className="flex items-center space-x-1.5 px-4 py-1.5 rounded-full bg-[#004AAD] border border-[#004AAD] text-white hover:bg-[#003882] hover:border-[#003882] transition duration-300 text-xs font-bold cursor-pointer shadow-md shadow-blue-950/20 header-signup-btn whitespace-nowrap flex-shrink-0"
                 >
-                  <UserPlus className="h-3.5 w-3.5 text-white" />
-                  <span className="text-white">Sign Up</span>
+                  <UserPlus className="h-3.5 w-3.5 text-white flex-shrink-0" />
+                  <span className="text-white whitespace-nowrap">Sign Up</span>
                 </Link>
               </div>
             )}

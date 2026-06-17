@@ -17,18 +17,27 @@ export default function About() {
   ];
 
   return (
-    <div className="relative min-h-screen pt-20 pb-24 px-4 sm:px-6 lg:px-8">
-      {/* Background blobs */}
-      <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-cyan-500/5 rounded-full blur-[100px] pointer-events-none" />
+    <div className="min-h-screen bg-[#F8FAFC] pb-24">
+      {/* Hero Section */}
+      <div className="relative overflow-hidden bg-gradient-to-tr from-[#004AAD] to-[#0066f2] py-20 text-white text-center">
+        {/* Glow grid mesh overlay */}
+        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none opacity-40" />
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[60%] rounded-full bg-blue-400/20 blur-[130px] pointer-events-none" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[60%] rounded-full bg-indigo-400/20 blur-[130px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto space-y-24">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4">
+        <div className="max-w-4xl mx-auto px-4 relative z-10 space-y-6">
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-300 text-xs font-bold uppercase tracking-widest text-black select-none"
+          >
+            <Compass className="h-3.5 w-3.5 text-black" />
+            <span>About Beta Softnet</span>
+          </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-extrabold text-white"
+            className="text-4xl md:text-5xl font-extrabold tracking-tight select-none"
           >
             We Build Software for the Future
           </motion.h1>
@@ -36,11 +45,14 @@ export default function About() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.1 }}
-            className="text-slate-400 text-lg"
+            className="text-blue-100 text-sm md:text-base max-w-xl mx-auto font-medium select-none"
           >
             Beta Softnet designs integrated platforms that simplify and secure how modern corporate teams work.
           </motion.p>
         </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 space-y-24">
 
         {/* Company Story & Vision */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">

@@ -11,81 +11,11 @@ export default function Navbar() {
   const [isDropdownCategoryOpen, setIsDropdownCategoryOpen] = useState(true);
   const [isDropdownPublicOpen, setIsDropdownPublicOpen] = useState(false);
   const [isDropdownBusinessOpen, setIsDropdownBusinessOpen] = useState(false);
-  const [isSupportOpen, setIsSupportOpen] = useState(false);
   const [isMobileProductsOpen, setIsMobileProductsOpen] = useState(false);
   const [isMobileCategoryOpen, setIsMobileCategoryOpen] = useState(true);
   const [isMobilePublicOpen, setIsMobilePublicOpen] = useState(false);
   const [isMobileBusinessOpen, setIsMobileBusinessOpen] = useState(false);
-  const [isMobileSupportOpen, setIsMobileSupportOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [activeFaq, setActiveFaq] = useState(null);
-  const [activeMobileFaq, setActiveMobileFaq] = useState(null);
-
-  const [copiedText, setCopiedText] = useState('');
-  const [showChatAssistant, setShowChatAssistant] = useState(false);
-  const [chatMessages, setChatMessages] = useState([
-    { sender: 'bot', text: "Hi! I'm your Beta Support Assistant. How can I help you today?" }
-  ]);
-  const [isTyping, setIsTyping] = useState(false);
-
-  const supportContactInfo = {
-    phone: '+1 (800) 555-0199',
-    email: 'support@betasoftnet.com',
-    hours: 'Mon - Fri, 9:00 AM - 6:00 PM IST'
-  };
-
-  const supportFaqs = [
-    { q: 'How do I access my products?', a: 'Navigate to the Products overview page to launch your active integrations.' },
-    { q: 'Is my data secure with Beta?', a: 'Yes, all data in transit and at rest is secured using bank-grade 256-bit SSL encryption.' },
-    { q: 'How do I submit feedback?', a: 'We would love to hear from you. Send us an email at support@betasoftnet.com.' }
-  ];
-
-  const chatPrompts = [
-    { label: 'Check Server Status', value: 'status' },
-    { label: 'Reset Password', value: 'password' },
-    { label: 'Product Integrations', value: 'integrations' },
-    { label: 'Average Response Time', value: 'response' }
-  ];
-
-  const handleCopyText = (text, type) => {
-    navigator.clipboard.writeText(text);
-    setCopiedText(type);
-    setTimeout(() => {
-      setCopiedText('');
-    }, 2000);
-  };
-
-  const handleChatPromptClick = (prompt) => {
-    if (isTyping) return;
-    
-    // Add user message
-    const updatedMessages = [...chatMessages, { sender: 'user', text: prompt.label }];
-    setChatMessages(updatedMessages);
-    setIsTyping(true);
-
-    setTimeout(() => {
-      let reply = '';
-      if (prompt.value === 'status') {
-        reply = 'All Beta Softnet core services (BNX Mail, B2Auth Security, Cliks) are fully operational. Average latency: 42ms. Status: 100% Up.';
-      } else if (prompt.value === 'password') {
-        reply = 'To reset your password, click your profile menu in the navbar and go to Account Profile, or contact support@betasoftnet.com.';
-      } else if (prompt.value === 'integrations') {
-        reply = 'Beta provides seamless SDKs for Node.js, Python, and Java. Refer to the Products Overview dashboard to get your API keys.';
-      } else if (prompt.value === 'response') {
-        reply = 'Our average email and phone support response time is 12.5 minutes, backed by our 24/7 dedicated tier-1 engineering helpdesk.';
-      }
-
-      setChatMessages(prev => [...prev, { sender: 'bot', text: reply }]);
-      setIsTyping(false);
-    }, 850);
-  };
-
-  const resetChat = () => {
-    setChatMessages([
-      { sender: 'bot', text: "Hi! I'm your Beta Support Assistant. How can I help you today?" }
-    ]);
-    setShowChatAssistant(false);
-  };
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [selectedCity, setSelectedCity] = useState('Mumbai');
@@ -99,15 +29,11 @@ export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const supportRef = useRef(null);
   const profileRef = useRef(null);
   const productsDropdownRef = useRef(null);
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (supportRef.current && !supportRef.current.contains(event.target)) {
-        setIsSupportOpen(false);
-      }
       if (profileRef.current && !profileRef.current.contains(event.target)) {
         setIsProfileOpen(false);
       }
@@ -168,7 +94,7 @@ export default function Navbar() {
     { name: 'About Us', path: '/about' },
     { name: 'Careers', path: '/careers' },
     { name: 'Partners', path: '/partners' },
-    { name: 'Support', path: '#' },
+    { name: 'Support', path: '/support' },
   ];
 
   const handleLogout = () => {
@@ -181,11 +107,11 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-[#e2f0e8] shadow-sm text-slate-800">
       <div className="w-full px-4 sm:px-6 lg:px-8">
-        <div className="relative flex items-center justify-between h-16">
+        <div className="relative flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center -ml-2 sm:-ml-4 space-x-4 flex-1 justify-start">
             <Link to="/" className="flex items-center select-none">
-              <img src="/logo.png" alt="Beta Logo" className="h-12 w-auto object-contain rounded-lg shadow-sm" />
+              <img src="/logo.png" alt="Beta Logo" className="h-16 w-auto object-contain rounded-lg shadow-sm" />
             </Link>
 
             {/* Location Dropdown */}
@@ -244,7 +170,6 @@ export default function Navbar() {
                       type="button"
                       onClick={() => {
                         setIsDropdownOpen(!isDropdownOpen);
-                        setIsSupportOpen(false);
                       }}
                       className={`flex items-center space-x-1 focus:outline-none cursor-pointer ${isActive('/products') || isDropdownOpen ? 'active-pill' : ''}`}
                     >
@@ -391,250 +316,6 @@ export default function Navbar() {
                 );
               }
 
-              if (link.name === 'Support') {
-                return (
-                  <div
-                    key={link.name}
-                    ref={supportRef}
-                    className="relative"
-                  >
-                    <button 
-                      type="button"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setIsSupportOpen(!isSupportOpen);
-                        setIsDropdownOpen(false);
-                      }}
-                      className={`flex items-center space-x-1 focus:outline-none cursor-pointer ${isSupportOpen ? 'active-pill' : ''}`}
-                    >
-                      <span>Support</span>
-                      <ChevronDown className={`h-3.5 w-3.5 text-slate-400 transform transition-transform ${isSupportOpen ? 'rotate-180' : ''}`} />
-                    </button>
-                    
-                    {isSupportOpen && (
-                      <div className="absolute right-[-140px] mt-3 w-[520px] rounded-2xl bg-white/95 backdrop-blur-md border border-slate-200/80 border-t-4 border-t-emerald-600 shadow-2xl p-5 z-50 text-left text-slate-800 animate-fadeIn">
-                        {showChatAssistant ? (
-                          /* Chat Assistant View */
-                          <div className="space-y-4">
-                            {/* Chat Header */}
-                            <div className="flex justify-between items-center border-b border-slate-100 pb-3">
-                              <div className="flex items-center space-x-2">
-                                <div className="h-7 w-7 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600">
-                                  <MessageSquare className="h-4 w-4" />
-                                </div>
-                                <div>
-                                  <div className="flex items-center space-x-1.5">
-                                    <h4 className="font-extrabold text-xs text-slate-800 uppercase tracking-wider">Beta Support AI</h4>
-                                    <span className="relative flex h-2 w-2">
-                                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-450 opacity-75"></span>
-                                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-555"></span>
-                                    </span>
-                                  </div>
-                                  <p className="text-[9px] text-slate-400 font-medium">Virtual Helpdesk Assistant</p>
-                                </div>
-                              </div>
-                              <button
-                                type="button"
-                                onClick={() => setShowChatAssistant(false)}
-                                className="text-[10px] font-extrabold text-[#004AAD] hover:text-[#003c8a] transition uppercase tracking-wider px-2.5 py-1 rounded-lg hover:bg-slate-100 cursor-pointer"
-                              >
-                                Back to Info
-                              </button>
-                            </div>
-
-                            {/* Chat Messages */}
-                            <div className="h-[210px] overflow-y-auto space-y-3 p-3 bg-slate-50/60 rounded-xl border border-slate-150/50 text-xs">
-                              {chatMessages.map((msg, index) => (
-                                <div
-                                  key={index}
-                                  className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-                                >
-                                  <div
-                                    className={`max-w-[85%] rounded-2xl px-3 py-2 leading-relaxed shadow-sm ${
-                                      msg.sender === 'user'
-                                        ? 'bg-emerald-600 text-white font-semibold rounded-tr-none'
-                                        : 'bg-white border border-slate-200 text-slate-750 font-medium rounded-tl-none'
-                                    }`}
-                                  >
-                                    {msg.text}
-                                  </div>
-                                </div>
-                              ))}
-                              {isTyping && (
-                                <div className="flex justify-start">
-                                  <div className="bg-white border border-slate-200 text-slate-400 font-medium rounded-2xl rounded-tl-none px-3 py-2 flex items-center space-x-1">
-                                    <span className="w-1.5 h-1.5 bg-slate-450 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
-                                    <span className="w-1.5 h-1.5 bg-slate-450 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
-                                    <span className="w-1.5 h-1.5 bg-slate-450 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
-                                  </div>
-                                </div>
-                              )}
-                            </div>
-
-                            {/* Suggested Prompts */}
-                            <div className="space-y-1.5">
-                              <p className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">Select a question to ask:</p>
-                              <div className="grid grid-cols-2 gap-2">
-                                {chatPrompts.map((p, idx) => (
-                                  <button
-                                    key={idx}
-                                    type="button"
-                                    onClick={() => handleChatPromptClick(p)}
-                                    className="px-3 py-2 text-left rounded-xl border border-slate-200 bg-white hover:border-[#004AAD]/40 hover:bg-[#004AAD]/5 text-[10px] font-bold text-slate-750 transition cursor-pointer select-none truncate"
-                                  >
-                                    {p.label}
-                                  </button>
-                                ))}
-                              </div>
-                            </div>
-
-                            {/* Footer / Reset */}
-                            <div className="border-t border-slate-100 pt-2 flex justify-between items-center text-[9px] font-bold text-slate-400 uppercase tracking-wider animate-fadeIn">
-                              <span>Instant AI Help</span>
-                              <button
-                                type="button"
-                                onClick={resetChat}
-                                className="flex items-center space-x-1 text-red-500 hover:text-red-650 transition cursor-pointer"
-                              >
-                                <RefreshCw className="h-3 w-3" />
-                                <span>Reset Chat</span>
-                              </button>
-                            </div>
-                          </div>
-                        ) : (
-                          /* Static Info View */
-                          <div className="space-y-4">
-                            {/* Header */}
-                            <div className="border-b border-slate-100 pb-3 flex justify-between items-center">
-                              <div>
-                                <h4 className="font-extrabold text-sm text-[#004AAD] uppercase tracking-wider">Help & Support Center</h4>
-                                <p className="text-[10px] text-slate-400 font-medium mt-0.5">Instant self-service tools and operational metrics.</p>
-                              </div>
-                              <div className="flex items-center space-x-1.5 bg-emerald-50 border border-emerald-100 rounded-full px-2.5 py-1 select-none">
-                                <span className="relative flex h-2 w-2">
-                                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-450 opacity-75"></span>
-                                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-555"></span>
-                                </span>
-                                <span className="text-emerald-700 font-extrabold text-[9px] uppercase tracking-wider">All Systems Operational</span>
-                              </div>
-                            </div>
-
-                            {/* Two-Column Grid */}
-                            <div className="grid grid-cols-12 gap-4">
-                              {/* Left Column: Contact & Chat Trigger */}
-                              <div className="col-span-6 space-y-3">
-                                <p className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">Helpdesk Channels</p>
-                                
-                                {/* Phone card */}
-                                <div className="p-3 bg-slate-50 border border-slate-150 rounded-2xl relative group transition hover:border-[#004AAD]/20">
-                                  <div className="flex items-center space-x-2 mb-1.5">
-                                    <Phone className="h-3.5 w-3.5 text-slate-500" />
-                                    <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">Phone Hotline</span>
-                                  </div>
-                                  <div className="flex items-center justify-between">
-                                    <span className="text-xs font-bold text-slate-800 select-all">{supportContactInfo.phone}</span>
-                                    <button
-                                      type="button"
-                                      onClick={() => handleCopyText(supportContactInfo.phone, 'phone')}
-                                      className="text-slate-400 hover:text-[#004AAD] transition cursor-pointer"
-                                      title="Copy number"
-                                    >
-                                      {copiedText === 'phone' ? (
-                                        <Check className="h-3.5 w-3.5 text-emerald-600 animate-fadeIn" />
-                                      ) : (
-                                        <Copy className="h-3.5 w-3.5" />
-                                      )}
-                                    </button>
-                                  </div>
-                                  {copiedText === 'phone' && (
-                                    <span className="absolute -top-2 right-2 px-1.5 py-0.5 rounded bg-emerald-600 text-white text-[8px] font-bold uppercase animate-fadeIn">Copied!</span>
-                                  )}
-                                </div>
-
-                                {/* Email card */}
-                                <div className="p-3 bg-slate-50 border border-slate-150 rounded-2xl relative group transition hover:border-[#004AAD]/20">
-                                  <div className="flex items-center space-x-2 mb-1.5">
-                                    <Mail className="h-3.5 w-3.5 text-slate-500" />
-                                    <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">Email Support</span>
-                                  </div>
-                                  <div className="flex items-center justify-between">
-                                    <a href={`mailto:${supportContactInfo.email}`} className="text-xs font-bold text-[#004AAD] hover:underline truncate mr-1">{supportContactInfo.email}</a>
-                                    <button
-                                      type="button"
-                                      onClick={() => handleCopyText(supportContactInfo.email, 'email')}
-                                      className="text-slate-400 hover:text-[#004AAD] transition cursor-pointer"
-                                      title="Copy email"
-                                    >
-                                      {copiedText === 'email' ? (
-                                        <Check className="h-3.5 w-3.5 text-emerald-600 animate-fadeIn" />
-                                      ) : (
-                                        <Copy className="h-3.5 w-3.5" />
-                                      )}
-                                    </button>
-                                  </div>
-                                  {copiedText === 'email' && (
-                                    <span className="absolute -top-2 right-2 px-1.5 py-0.5 rounded bg-emerald-600 text-white text-[8px] font-bold uppercase animate-fadeIn">Copied!</span>
-                                  )}
-                                </div>
-
-                                {/* Hours card */}
-                                <div className="p-2.5 bg-slate-50/50 border border-slate-100 rounded-xl flex items-center space-x-2 select-none">
-                                  <Clock className="h-3.5 w-3.5 text-slate-450 flex-shrink-0" />
-                                  <div className="min-w-0">
-                                    <p className="text-[8px] text-slate-450 font-bold uppercase tracking-wider">Support Hours</p>
-                                    <p className="text-[9.5px] font-semibold text-slate-600 truncate">{supportContactInfo.hours}</p>
-                                  </div>
-                                </div>
-
-                                {/* Start Chat Button */}
-                                <button
-                                  type="button"
-                                  onClick={() => setShowChatAssistant(true)}
-                                  className="w-full flex items-center justify-center space-x-2 py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold transition duration-300 shadow-md shadow-emerald-955/10 cursor-pointer"
-                                >
-                                  <MessageSquare className="h-4 w-4 text-white" />
-                                  <span className="text-white">Start Support Chat</span>
-                                </button>
-                              </div>
-
-                              {/* Right Column: FAQs */}
-                              <div className="col-span-6 space-y-3">
-                                <div className="flex items-center justify-between">
-                                  <p className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">Quick FAQs</p>
-                                  <div className="flex items-center space-x-1 text-emerald-700 font-bold text-[9px] uppercase tracking-wider bg-emerald-50 rounded-full px-2 py-0.5 select-none">
-                                    <Activity className="h-3 w-3" />
-                                    <span>Resp: &lt; 15m</span>
-                                  </div>
-                                </div>
-
-                                <div className="space-y-2 max-h-[260px] overflow-y-auto pr-1">
-                                  {supportFaqs.map((faq, idx) => (
-                                    <div key={idx} className="border border-slate-150 rounded-xl overflow-hidden bg-white shadow-sm transition hover:border-slate-200">
-                                      <button
-                                        type="button"
-                                        onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
-                                        className="w-full flex items-center justify-between p-2.5 text-left text-[11.5px] font-bold text-slate-800 hover:bg-slate-50 transition focus:outline-none cursor-pointer"
-                                      >
-                                        <span className="pr-2">{faq.q}</span>
-                                        <ChevronDown className={`h-3 w-3 text-slate-400 shrink-0 transform transition-transform duration-200 ${activeFaq === idx ? 'rotate-180' : ''}`} />
-                                      </button>
-                                      {activeFaq === idx && (
-                                        <div className="px-2.5 pb-2.5 pt-0.5 text-[10.5px] text-slate-500 font-medium leading-relaxed border-t border-slate-50 bg-slate-50/20 animate-fadeIn">
-                                          {faq.a}
-                                        </div>
-                                      )}
-                                    </div>
-                                  ))}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                );
-              }
 
               return (
                 <Link
@@ -821,7 +502,6 @@ export default function Navbar() {
                     <button
                       onClick={() => {
                         setIsMobileProductsOpen(!isMobileProductsOpen);
-                        setIsMobileSupportOpen(false);
                       }}
                       className="w-full flex items-center justify-between px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-100 hover:text-[#004AAD] focus:outline-none cursor-pointer"
                     >
@@ -907,198 +587,6 @@ export default function Navbar() {
                 );
               }
 
-              if (link.name === 'Support') {
-                return (
-                  <div key={link.name} className="space-y-1">
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setIsMobileSupportOpen(!isMobileSupportOpen);
-                        setIsMobileProductsOpen(false);
-                      }}
-                      className="w-full flex items-center justify-between px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-100 hover:text-[#004AAD] focus:outline-none cursor-pointer"
-                    >
-                      <span>Support</span>
-                      <ChevronDown className={`h-4 w-4 text-slate-400 transform transition-transform ${isMobileSupportOpen ? 'rotate-180' : ''}`} />
-                    </button>
-                    {isMobileSupportOpen && (
-                      <div className="pl-4 pr-3 py-3 space-y-3 bg-slate-50 border border-slate-150/80 rounded-lg text-left animate-fadeIn">
-                        {showChatAssistant ? (
-                          /* Mobile Chat Assistant View */
-                          <div className="space-y-3">
-                            <div className="flex justify-between items-center border-b border-slate-200/60 pb-2">
-                              <div className="flex items-center space-x-1.5">
-                                <MessageSquare className="h-4 w-4 text-emerald-650" />
-                                <span className="text-xs font-bold text-slate-800">Support Chat</span>
-                              </div>
-                              <button
-                                type="button"
-                                onClick={() => setShowChatAssistant(false)}
-                                className="text-[10px] font-extrabold text-[#004AAD] uppercase tracking-wider px-2 py-0.5 rounded hover:bg-slate-200/50 cursor-pointer"
-                              >
-                                Exit Chat
-                              </button>
-                            </div>
-
-                            {/* Chat Messages */}
-                            <div className="max-h-[180px] overflow-y-auto space-y-2.5 p-2 bg-white rounded-lg border border-slate-205 text-[11px]">
-                              {chatMessages.map((msg, index) => (
-                                <div
-                                  key={index}
-                                  className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-                                >
-                                  <div
-                                    className={`max-w-[90%] rounded-xl px-2.5 py-1.5 leading-relaxed shadow-sm ${
-                                      msg.sender === 'user'
-                                        ? 'bg-emerald-600 text-white font-semibold rounded-tr-none'
-                                        : 'bg-slate-105 border border-slate-150 text-slate-750 font-medium rounded-tl-none'
-                                    }`}
-                                  >
-                                    {msg.text}
-                                  </div>
-                                </div>
-                              ))}
-                              {isTyping && (
-                                <div className="flex justify-start">
-                                  <div className="bg-slate-105 border border-slate-150 text-slate-400 font-medium rounded-xl rounded-tl-none px-2.5 py-1.5 flex items-center space-x-1">
-                                    <span className="w-1 h-1 bg-slate-450 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
-                                    <span className="w-1 h-1 bg-slate-450 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
-                                    <span className="w-1 h-1 bg-slate-450 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
-                                  </div>
-                                </div>
-                              )}
-                            </div>
-
-                            {/* Prompts list */}
-                            <div className="space-y-1">
-                              <p className="text-[8px] text-slate-450 font-bold uppercase tracking-wider">Tap to ask:</p>
-                              <div className="grid grid-cols-2 gap-1.5">
-                                {chatPrompts.map((p, idx) => (
-                                  <button
-                                    key={idx}
-                                    type="button"
-                                    onClick={() => handleChatPromptClick(p)}
-                                    className="px-2 py-1.5 text-left rounded-lg border border-slate-200 bg-white text-[9px] font-bold text-slate-700 transition cursor-pointer select-none truncate"
-                                  >
-                                    {p.label}
-                                  </button>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-                        ) : (
-                          /* Mobile Info View */
-                          <>
-                            {/* Status Indicators */}
-                            <div className="flex justify-between items-center bg-white border border-slate-200/80 rounded-lg px-2.5 py-1.5 text-[10px] select-none">
-                              <div className="flex items-center space-x-1">
-                                <span className="relative flex h-2 w-2">
-                                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-450 opacity-75"></span>
-                                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-555"></span>
-                                </span>
-                                <span className="font-extrabold text-emerald-700">All Systems Operational</span>
-                              </div>
-                              <span className="text-slate-450 font-semibold">Resp: &lt;15m</span>
-                            </div>
-
-                            {/* Contact Channels */}
-                            <div className="space-y-2">
-                              <p className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">Helpdesk Channels</p>
-                              <div className="space-y-2 text-xs">
-                                <div className="flex items-center justify-between border-b border-slate-200/60 pb-1.5 relative">
-                                  <div className="flex items-center space-x-1.5">
-                                    <Phone className="h-3.5 w-3.5 text-slate-400" />
-                                    <span className="text-slate-500 font-medium">Hotline:</span>
-                                    <span className="font-bold text-slate-800 select-all">{supportContactInfo.phone}</span>
-                                  </div>
-                                  <button
-                                    type="button"
-                                    onClick={() => handleCopyText(supportContactInfo.phone, 'phone-mob')}
-                                    className="text-slate-400 hover:text-[#004AAD] transition cursor-pointer"
-                                  >
-                                    {copiedText === 'phone-mob' ? (
-                                      <Check className="h-3.5 w-3.5 text-emerald-600 animate-fadeIn" />
-                                    ) : (
-                                      <Copy className="h-3.5 w-3.5" />
-                                    )}
-                                  </button>
-                                  {copiedText === 'phone-mob' && (
-                                    <span className="absolute -top-3 right-0 px-1 py-0.2 rounded bg-emerald-600 text-white text-[7px] font-bold uppercase animate-fadeIn">Copied!</span>
-                                  )}
-                                </div>
-                                
-                                <div className="flex items-center justify-between border-b border-slate-200/60 pb-1.5 relative">
-                                  <div className="flex items-center space-x-1.5 min-w-0">
-                                    <Mail className="h-3.5 w-3.5 text-slate-400" />
-                                    <span className="text-slate-500 font-medium">Email:</span>
-                                    <a href={`mailto:${supportContactInfo.email}`} className="font-bold text-[#004AAD] hover:underline truncate">{supportContactInfo.email}</a>
-                                  </div>
-                                  <button
-                                    type="button"
-                                    onClick={() => handleCopyText(supportContactInfo.email, 'email-mob')}
-                                    className="text-slate-400 hover:text-[#004AAD] transition cursor-pointer"
-                                  >
-                                    {copiedText === 'email-mob' ? (
-                                      <Check className="h-3.5 w-3.5 text-emerald-600 animate-fadeIn" />
-                                    ) : (
-                                      <Copy className="h-3.5 w-3.5" />
-                                    )}
-                                  </button>
-                                  {copiedText === 'email-mob' && (
-                                    <span className="absolute -top-3 right-0 px-1 py-0.2 rounded bg-emerald-600 text-white text-[7px] font-bold uppercase animate-fadeIn">Copied!</span>
-                                  )}
-                                </div>
-
-                                <div className="flex items-center space-x-1.5">
-                                  <Clock className="h-3.5 w-3.5 text-slate-400" />
-                                  <span className="text-slate-500 font-medium">Hours:</span>
-                                  <span className="font-semibold text-slate-600 text-[10px]">{supportContactInfo.hours}</span>
-                                </div>
-                              </div>
-                            </div>
-
-                            {/* Start Support Chat Button */}
-                            <button
-                              type="button"
-                              onClick={() => setShowChatAssistant(true)}
-                              className="w-full flex items-center justify-center space-x-1.5 py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition cursor-pointer"
-                            >
-                              <MessageSquare className="h-3.5 w-3.5 text-white" />
-                              <span className="text-white">Start Support Chat</span>
-                            </button>
-
-                            {/* FAQs */}
-                            <div className="space-y-2 border-t border-slate-200/80 pt-2.5">
-                              <p className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">Quick FAQs</p>
-                              <div className="space-y-1.5">
-                                {supportFaqs.map((faq, idx) => (
-                                  <div key={idx} className="border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm">
-                                    <button
-                                      type="button"
-                                      onClick={() => setActiveMobileFaq(activeMobileFaq === idx ? null : idx)}
-                                      className="w-full flex items-center justify-between p-2 text-left text-[11px] font-bold text-slate-800 hover:bg-slate-50 transition focus:outline-none cursor-pointer"
-                                    >
-                                      <span className="pr-2">{faq.q}</span>
-                                      <ChevronDown className={`h-3 w-3 text-slate-400 shrink-0 transform transition-transform ${activeMobileFaq === idx ? 'rotate-180' : ''}`} />
-                                    </button>
-                                    {activeMobileFaq === idx && (
-                                      <div className="px-2 pb-2 pt-0.5 text-[10px] text-slate-500 font-medium leading-relaxed border-t border-slate-100 bg-slate-50/20 animate-fadeIn">
-                                        {faq.a}
-                                      </div>
-                                    )}
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          </>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                );
-              }
-
               return (
                 <Link
                   key={link.name}
@@ -1169,6 +657,8 @@ export default function Navbar() {
           </div>
         </div>
       )}
+
+
 
     </nav>
   );

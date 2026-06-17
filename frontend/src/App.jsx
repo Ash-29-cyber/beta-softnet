@@ -9,6 +9,7 @@ import Careers from './pages/Careers';
 import Partners from './pages/Partners';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Support from './pages/Support';
 import CliksBusinessDashboard from './pages/CliksBusinessDashboard';
 import BnxMailDashboard from './pages/BnxMailDashboard';
 import AdminDashboard from './pages/AdminDashboard';
@@ -40,6 +41,7 @@ function AppContent() {
           <Route path="/partners" element={<Partners />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/support" element={<Support />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/cliks-business" element={<CliksBusinessDashboard />} />
           <Route path="/cliks-business/dashboard" element={<CliksBusinessDashboard />} />

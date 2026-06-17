@@ -280,6 +280,19 @@ footer strong {
 .bg-gradient-to-tr.from-blue-600.to-cyan-500 {
   background: linear-gradient(to top right, #004AAD, #3b82f6) !important;
 }
+
+/* Force white text inside blue hero banners to override general light theme rules */
+.hero-blue-banner h1,
+.hero-blue-banner h2,
+.hero-blue-banner h3,
+.hero-blue-banner h4,
+.hero-blue-banner h5,
+.hero-blue-banner h6 {
+  color: #ffffff !important;
+}
+.hero-blue-banner p {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
 .hover\:from-blue-500:hover {
   --tw-gradient-from: #004AAD !important;
 }

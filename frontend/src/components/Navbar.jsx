@@ -114,8 +114,7 @@ export default function Navbar() {
               <img src="/logo.png" alt="Beta Logo" className="h-16 w-auto object-contain rounded-lg shadow-sm" />
             </Link>
 
-            {/* Location Dropdown */}
-            <div className="relative animate-fadeIn" ref={locationRef}>
+            <div className="relative animate-fadeIn ml-12 sm:ml-16" ref={locationRef}>
               <button
                 onClick={() => setIsLocationOpen(!isLocationOpen)}
                 className="flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-slate-100/90 border border-slate-200/80 hover:bg-slate-200/60 transition duration-300 text-xs font-bold text-slate-700 cursor-pointer focus:outline-none"

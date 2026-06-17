@@ -143,7 +143,7 @@ export default function Partners() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.05 }}
-                  className="glass-card p-6 rounded-2xl border border-slate-800 hover:border-slate-700 transition-all duration-300 flex flex-col justify-between group hover:shadow-lg hover:shadow-blue-500/5 text-left"
+                  className="glass-card p-6 rounded-2xl border border-slate-200 hover:border-slate-300 transition-all duration-300 flex flex-col justify-between group hover:shadow-lg hover:shadow-blue-500/5 text-left"
                 >
                   <div className="space-y-4">
                     <div className={`h-12 w-12 rounded-xl bg-gradient-to-tr ${partner.color} p-2.5 text-white flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300`}>
@@ -155,7 +155,7 @@ export default function Partners() {
                       <p className="text-sm text-slate-400 mt-2 leading-relaxed">{partner.desc}</p>
                     </div>
                   </div>
-                  <div className="mt-6 pt-4 border-t border-slate-900 flex items-center text-xs font-bold text-slate-500 group-hover:text-blue-400 transition-colors">
+                  <div className="mt-6 pt-4 border-t border-slate-100 flex items-center text-xs font-bold text-slate-500 group-hover:text-[#004AAD] transition-colors">
                     <span>Explore Alliance</span>
                     <ArrowRight className="h-3.5 w-3.5 ml-1.5 transform group-hover:translate-x-1 transition-transform" />
                   </div>
@@ -193,7 +193,7 @@ export default function Partners() {
             </div>
 
             {/* Simulated Live status panel */}
-            <div className="glass-card p-6 rounded-2xl border border-slate-800 text-left space-y-3">
+            <div className="glass-card p-6 rounded-2xl border border-slate-200 text-left space-y-3">
               <div className="flex items-center space-x-2">
                 <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Alliance Onboarding</span>

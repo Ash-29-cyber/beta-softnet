@@ -20,7 +20,7 @@ function AppContent() {
   const isDashboardMode = location.pathname.startsWith('/admin') || location.pathname.startsWith('/cliks-business') || location.pathname.startsWith('/bnx-mail');
 
   return (
-    <div className={`flex flex-col min-h-screen ${isDashboardMode ? 'bg-[#f3f7f5]' : 'bg-dark-950 text-slate-100'} relative`}>
+    <div className={`flex flex-col min-h-screen ${isDashboardMode ? 'bg-[#f3f7f5]' : 'bg-dark-900 text-slate-800'} relative`}>
       {/* Dynamic Cosmic Background Blobs */}
       {!isDashboardMode && (
         <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">

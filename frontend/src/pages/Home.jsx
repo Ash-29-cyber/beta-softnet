@@ -55,7 +55,7 @@ export default function Home() {
           className="text-center max-w-4xl mx-auto space-y-6"
         >
           {/* Tagline Pill */}
-          <motion.div variants={itemVariants} className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-950/50 border border-blue-900/50 text-blue-400 text-xs font-semibold tracking-wide">
+          <motion.div variants={itemVariants} className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#E9F4FF] border border-[#004AAD]/20 text-[#004AAD] text-xs font-semibold tracking-wide shadow-sm">
             <Terminal className="h-3.5 w-3.5" />
             <span>V1.0.0 RELEASED</span>
           </motion.div>
@@ -98,7 +98,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.8 }}
-          className="relative glass-card rounded-2xl p-2 border border-slate-800 shadow-2xl shadow-blue-500/5"
+          className="relative glass-card rounded-2xl p-2 border border-slate-200 shadow-2xl"
         >
           <div className="rounded-xl overflow-hidden bg-slate-950 border border-slate-900 aspect-video md:aspect-[2.1/1] relative flex items-center justify-center">
             {/* Design Grid Background */}
@@ -136,18 +136,18 @@ export default function Home() {
       </div>
 
       {/* Stats Section */}
-      <div className="border-y border-slate-900 bg-slate-950/40 py-16 mb-24">
+      <div className="border-y border-slate-200 bg-[#E9F4FF]/60 py-16 mb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat) => {
               const Icon = stat.icon;
               return (
                 <div key={stat.label} className="text-center space-y-2">
-                  <div className="inline-flex p-2.5 bg-slate-900 rounded-lg mb-2">
-                    <Icon className={`h-6 w-6 ${stat.color}`} />
+                  <div className="inline-flex p-2.5 bg-white rounded-xl mb-2 border border-[#004AAD]/10 shadow-sm">
+                    <Icon className="h-6 w-6 text-[#004AAD]" />
                   </div>
-                  <div className="text-3xl md:text-4xl font-extrabold text-white">{stat.value}</div>
-                  <div className="text-xs md:text-sm font-medium text-slate-500 uppercase tracking-wider">{stat.label}</div>
+                  <div className="text-3xl md:text-4xl font-extrabold text-[#004AAD]">{stat.value}</div>
+                  <div className="text-xs md:text-sm font-semibold text-slate-605 uppercase tracking-wider">{stat.label}</div>
                 </div>
               );
             })}
@@ -228,19 +228,19 @@ export default function Home() {
 
       {/* CTA Section */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-        <div className="relative glass-card rounded-3xl p-8 md:p-16 border border-slate-800 overflow-hidden text-center">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-950/20 via-cyan-950/20 to-indigo-950/20 pointer-events-none" />
+        <div className="relative glass-card rounded-3xl p-8 md:p-16 border border-[#004AAD]/10 overflow-hidden text-center shadow-xl">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#E9F4FF]/50 via-white to-[#E9F4FF]/50 pointer-events-none" />
           <div className="relative z-10 space-y-6 max-w-2xl mx-auto">
-            <h2 className="text-3xl md:text-5xl font-extrabold text-white leading-tight">
+            <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 leading-tight">
               Ready to Upgrade Your Corporate Software?
             </h2>
-            <p className="text-slate-400">
+            <p className="text-slate-600 max-w-xl mx-auto">
               Unify your group mailbox, auth logs, dashboard notes, and project backlogs under one centralized portal.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <Link
                 to="/products"
-                className="w-full sm:w-auto px-8 py-3.5 rounded-lg text-sm font-semibold glass-card text-white hover:bg-slate-800 border border-slate-800 transition"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-lg text-sm font-semibold bg-[#004AAD] hover:bg-[#003882] text-white shadow-md transition duration-300 hover:scale-[1.02]"
               >
                 Browse Product Suites
               </Link>

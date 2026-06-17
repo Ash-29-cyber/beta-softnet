@@ -130,7 +130,7 @@ export default function About() {
 
           <div className="relative max-w-4xl mx-auto">
             {/* Center line */}
-            <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[1px] bg-slate-800 hidden md:block" />
+            <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[1px] bg-slate-200 hidden md:block" />
 
             <div className="space-y-8 md:space-y-16">
               {milestones.map((milestone, idx) => {
@@ -158,7 +158,7 @@ export default function About() {
                     </div>
 
                     {/* Timeline Node */}
-                    <div className="hidden md:flex h-8 w-8 rounded-full bg-slate-950 border-2 border-blue-500/80 items-center justify-center z-10">
+                    <div className="hidden md:flex h-8 w-8 rounded-full bg-white border-2 border-[#004AAD] items-center justify-center z-10">
                       <ChevronRight className="h-3 w-3 text-blue-400 rotate-90" />
                     </div>
 

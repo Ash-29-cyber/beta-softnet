@@ -147,11 +147,11 @@ export default function Products() {
         <div className="pt-2 flex justify-start">
           {isCliksBusiness ? (
             <Link
-              to="/cliks-business/dashboard"
-              className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition duration-300 shadow-md shadow-emerald-500/10"
+              to="/partners"
+              className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-bold transition duration-300"
             >
-              <span>Launch Demo App</span>
-              <ChevronRight className="h-3.5 w-3.5 text-white" />
+              <span>Request Integration</span>
+              <ChevronRight className="h-3.5 w-3.5 text-slate-500" />
             </Link>
           ) : (
             <Link
@@ -189,7 +189,7 @@ export default function Products() {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-emerald-400 text-xs font-semibold"
+            className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#E9F4FF] border border-[#004AAD]/20 text-[#004AAD] text-xs font-semibold"
           >
             <Activity className="h-3.5 w-3.5" />
             <span>ENTERPRISE SUITE</span>

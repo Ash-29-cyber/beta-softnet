@@ -153,31 +153,31 @@ export default function Careers() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full max-w-lg glass-card rounded-3xl p-6 md:p-8 border border-slate-800 shadow-2xl"
+              className="relative w-full max-w-lg glass-card rounded-3xl p-6 md:p-8 border border-slate-200 shadow-2xl"
             >
               <button
                 onClick={() => setSelectedJob(null)}
-                className="absolute right-4 top-4 p-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition"
+                className="absolute right-4 top-4 p-1.5 rounded-lg hover:bg-slate-200 text-slate-450 hover:text-slate-800 transition"
               >
                 <X className="h-5 w-5" />
               </button>
 
               <div className="mb-6 space-y-1 text-left">
-                <span className="text-xs font-bold text-blue-400 uppercase tracking-widest">Apply for position</span>
+                <span className="text-xs font-bold text-blue-500 uppercase tracking-widest">Apply for position</span>
                 <h3 className="text-2xl font-extrabold text-white">{selectedJob.title}</h3>
                 <p className="text-slate-500 text-xs">{selectedJob.team} &bull; {selectedJob.location}</p>
               </div>
 
               {status === 'success' ? (
                 <div className="py-8 text-center space-y-4">
-                  <div className="h-12 w-12 rounded-full bg-emerald-950/40 border border-emerald-900/50 flex items-center justify-center mx-auto text-emerald-400">
+                  <div className="h-12 w-12 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center mx-auto text-emerald-600">
                     <CheckCircle2 className="h-6 w-6" />
                   </div>
                   <h4 className="text-lg font-bold text-white">Application Received!</h4>
                   <p className="text-slate-400 text-xs leading-relaxed max-w-sm mx-auto">{message}</p>
                   <button
                     onClick={() => setSelectedJob(null)}
-                    className="px-6 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold transition"
+                    className="px-6 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-bold transition"
                   >
                     Close Modal
                   </button>
@@ -223,7 +223,7 @@ export default function Careers() {
 
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-slate-400 uppercase">Resume Upload (PDF Only)</label>
-                    <div className="relative border border-dashed border-slate-800 rounded-lg p-6 bg-slate-900/60 hover:bg-slate-900 hover:border-slate-700 transition flex flex-col items-center justify-center cursor-pointer">
+                    <div className="relative border border-dashed border-[#004AAD]/20 rounded-lg p-6 bg-[#E9F4FF]/30 hover:bg-[#E9F4FF]/50 hover:border-[#004AAD]/40 transition flex flex-col items-center justify-center cursor-pointer">
                       <input
                         type="file"
                         accept=".pdf"
@@ -232,7 +232,7 @@ export default function Careers() {
                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                       />
                       <Upload className="h-6 w-6 text-slate-500 mb-2" />
-                      <span className="text-xs text-slate-400 font-medium">
+                      <span className="text-xs text-[#004AAD] font-semibold">
                         {resume ? resume.name : 'Click or drag PDF resume here'}
                       </span>
                     </div>

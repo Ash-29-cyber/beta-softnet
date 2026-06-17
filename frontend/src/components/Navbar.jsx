@@ -189,56 +189,50 @@ export default function Navbar() {
                                 {/* Public Products */}
                                 {isDropdownPublicOpen && (
                                   <div className="flex flex-col gap-3 pt-1 pb-1">
-                                    <Link
-                                      to="/bnx-mail/dashboard"
-                                      onClick={() => setIsDropdownOpen(false)}
-                                      className="flex items-center space-x-2.5 p-1.5 rounded-lg hover:bg-slate-50 transition group"
+                                    <div
+                                      className="flex items-center space-x-2.5 p-1.5 rounded-lg transition group select-none"
                                     >
                                       <div className="h-7 w-7 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 flex-shrink-0">
                                         <Mail className="h-4 w-4" />
                                       </div>
                                       <div>
                                         <div className="flex items-center space-x-2">
-                                          <p className="font-bold text-slate-800 group-hover:text-[#004AAD] transition-colors text-[11px]">BNX MAIL</p>
+                                          <p className="font-bold text-slate-800 text-[11px]">BNX MAIL</p>
                                           <span className="px-1.5 py-0.2 rounded bg-blue-50 text-blue-600 border border-blue-100 text-[8px] font-bold uppercase tracking-wider">Public</span>
                                         </div>
                                         <p className="text-[9px] text-slate-400 font-medium">Collaborative group inbox</p>
                                       </div>
-                                    </Link>
+                                    </div>
 
-                                     <Link
-                                      to="/products#b2auth-security"
-                                      onClick={() => setIsDropdownOpen(false)}
-                                      className="flex items-center space-x-2.5 p-1.5 rounded-lg hover:bg-slate-50 transition group"
+                                    <div
+                                      className="flex items-center space-x-2.5 p-1.5 rounded-lg transition group select-none"
                                     >
                                       <div className="h-7 w-7 rounded-full bg-cyan-50 border border-cyan-100 flex items-center justify-center text-cyan-600 flex-shrink-0">
                                         <Shield className="h-4 w-4" />
                                       </div>
                                       <div>
                                         <div className="flex items-center space-x-2">
-                                          <p className="font-bold text-slate-800 group-hover:text-[#004AAD] transition-colors text-[11px]">B2AUTH SECURITY</p>
+                                          <p className="font-bold text-slate-800 text-[11px]">B2AUTH SECURITY</p>
                                           <span className="px-1.5 py-0.2 rounded bg-blue-50 text-blue-600 border border-blue-100 text-[8px] font-bold uppercase tracking-wider">Public</span>
                                         </div>
                                         <p className="text-[9px] text-slate-400 font-medium">MFA & SSO Gateway</p>
                                       </div>
-                                    </Link>
+                                    </div>
 
-                                    <Link
-                                      to="/products#cliks"
-                                      onClick={() => setIsDropdownOpen(false)}
-                                      className="flex items-center space-x-2.5 p-1.5 rounded-lg hover:bg-slate-50 transition group"
+                                    <div
+                                      className="flex items-center space-x-2.5 p-1.5 rounded-lg transition group select-none"
                                     >
                                       <div className="h-7 w-7 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 flex-shrink-0">
                                         <User className="h-4 w-4" />
                                       </div>
                                       <div>
                                         <div className="flex items-center space-x-2">
-                                          <p className="font-bold text-slate-800 group-hover:text-[#004AAD] transition-colors text-[11px]">CLIKS</p>
+                                          <p className="font-bold text-slate-800 text-[11px]">CLIKS</p>
                                           <span className="px-1.5 py-0.2 rounded bg-blue-50 text-blue-600 border border-blue-100 text-[8px] font-bold uppercase tracking-wider">Public</span>
                                         </div>
                                         <p className="text-[9px] text-slate-400 font-medium">Notes & calendars</p>
                                       </div>
-                                    </Link>
+                                    </div>
                                   </div>
                                 )}
                               </td>
@@ -547,39 +541,24 @@ export default function Navbar() {
                           </button>
                           {isMobilePublicOpen && (
                             <div className="pl-6 space-y-2 py-1">
-                              <Link
-                                to="/bnx-mail/dashboard"
-                                onClick={() => {
-                                  setIsMobileProductsOpen(false);
-                                  setIsOpen(false);
-                                }}
-                                className="flex items-center space-x-2 text-slate-600 hover:text-[#004AAD] text-xs py-1"
+                              <div
+                                className="flex items-center space-x-2 text-slate-600 text-xs py-1 select-none"
                               >
                                 <Mail className="h-4 w-4 text-blue-500" />
                                 <span>BNX Mail</span>
-                              </Link>
-                              <Link
-                                to="/products#b2auth-security"
-                                onClick={() => {
-                                  setIsMobileProductsOpen(false);
-                                  setIsOpen(false);
-                                }}
-                                className="flex items-center space-x-2 text-slate-600 hover:text-[#004AAD] text-xs py-1"
+                              </div>
+                              <div
+                                className="flex items-center space-x-2 text-slate-600 text-xs py-1 select-none"
                               >
                                 <Shield className="h-4 w-4 text-cyan-500" />
                                 <span>B2Auth Security</span>
-                              </Link>
-                              <Link
-                                to="/products#cliks"
-                                onClick={() => {
-                                  setIsMobileProductsOpen(false);
-                                  setIsOpen(false);
-                                }}
-                                className="flex items-center space-x-2 text-slate-600 hover:text-[#004AAD] text-xs py-1"
+                              </div>
+                              <div
+                                className="flex items-center space-x-2 text-slate-600 text-xs py-1 select-none"
                               >
                                 <User className="h-4 w-4 text-emerald-500" />
                                 <span>Cliks</span>
-                              </Link>
+                              </div>
                             </div>
                           )}
                         </div>

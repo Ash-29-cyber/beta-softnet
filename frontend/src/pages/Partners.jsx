@@ -58,20 +58,20 @@ function CountUpNumber({ value }) {
 }
 
 const benefits = [
-  { id: 1, title: 'Revenue Growth', desc: 'Co-selling, referral fees, revenue splits, and tier-based commission networks.', icon: Zap, color: 'text-cyan-400', bg: 'bg-cyan-500/10 border-cyan-500/20' },
-  { id: 2, title: 'Technical Support', desc: 'Direct access to core engineering support slack and dedicated partner sandbox portals.', icon: Cpu, color: 'text-purple-400', bg: 'bg-purple-500/10 border-purple-500/20' },
-  { id: 3, title: 'Joint Marketing', desc: 'Co-branded campaigns, featured ecosystem catalog spots, and shared event sponsorships.', icon: Handshake, color: 'text-emerald-400', bg: 'bg-emerald-500/10 border-emerald-500/20' },
-  { id: 4, title: 'Product Training', desc: 'In-depth engineering masterclasses, partner certifications, and cloud sandbox credits.', icon: Award, color: 'text-amber-450', bg: 'bg-amber-500/10 border-amber-500/20' },
-  { id: 5, title: 'Early Access Programs', desc: 'Beta SDK availability, draft RFC reviews, and early releases of the unified database layer.', icon: Layers, color: 'text-pink-400', bg: 'bg-pink-500/10 border-pink-500/20' },
-  { id: 6, title: 'Dedicated Partner Manager', desc: 'Personal alliance lead to navigate integrations, coordinate updates, and monitor tier health.', icon: Users, color: 'text-sky-400', bg: 'bg-sky-500/10 border-sky-500/20' }
+  { id: 1, title: 'Revenue Growth', desc: 'Co-selling, referral fees, revenue splits, and tier-based commission networks.', icon: Zap, color: 'text-[#FF6325]', bg: 'bg-[#FF6325]/10 border-[#FF6325]/20' },
+  { id: 2, title: 'Technical Support', desc: 'Direct access to core engineering support slack and dedicated partner sandbox portals.', icon: Cpu, color: 'text-[#3B82F6]', bg: 'bg-[#0E0F89]/20 border-[#0E0F89]/30' },
+  { id: 3, title: 'Joint Marketing', desc: 'Co-branded campaigns, featured ecosystem catalog spots, and shared event sponsorships.', icon: Handshake, color: 'text-[#10B981]', bg: 'bg-[#135029]/20 border-[#135029]/30' },
+  { id: 4, title: 'Product Training', desc: 'In-depth engineering masterclasses, partner certifications, and cloud sandbox credits.', icon: Award, color: 'text-[#FF6325]', bg: 'bg-[#FF6325]/10 border-[#FF6325]/20' },
+  { id: 5, title: 'Early Access Programs', desc: 'Beta SDK availability, draft RFC reviews, and early releases of the unified database layer.', icon: Layers, color: 'text-[#3B82F6]', bg: 'bg-[#0E0F89]/20 border-[#0E0F89]/30' },
+  { id: 6, title: 'Dedicated Partner Manager', desc: 'Personal alliance lead to navigate integrations, coordinate updates, and monitor tier health.', icon: Users, color: 'text-[#10B981]', bg: 'bg-[#135029]/20 border-[#135029]/30' }
 ];
 
 const categories = [
-  { title: 'Technology Partner', desc: 'Build plugins, widgets, and connected integrations on top of the BNX Mail and Cliks platforms.', icon: Code2, color: 'text-cyan-400', border: 'border-cyan-500/20 hover:border-cyan-500/50' },
-  { title: 'Integration Partner', desc: 'Provide migrations, security auditing, and systems deployment syncs for enterprise clients.', icon: Cpu, color: 'text-purple-400', border: 'border-purple-500/20 hover:border-purple-500/50' },
-  { title: 'Reseller Partner', desc: 'Distribute licenses, support local regional accounts, and coordinate market sales packages.', icon: Users, color: 'text-emerald-400', border: 'border-emerald-500/20 hover:border-emerald-500/50' },
-  { title: 'Consulting Partner', desc: 'Deliver strategic advisory, business process re-engineering, and product adoption modules.', icon: Compass, color: 'text-pink-400', border: 'border-pink-500/20 hover:border-pink-500/50' },
-  { title: 'Strategic Alliance Partner', desc: 'Co-engineer core infrastructure services, network protocols, and auth gateways.', icon: Handshake, color: 'text-amber-400', border: 'border-amber-500/20 hover:border-amber-500/50' }
+  { title: 'Technology Partner', desc: 'Build plugins, widgets, and connected integrations on top of the BNX Mail and Cliks platforms.', icon: Code2, color: 'text-[#FF6325]', hoverColor: 'group-hover:text-[#FF6325]', border: 'border-[#FF6325]/20 hover:border-[#FF6325]/50' },
+  { title: 'Integration Partner', desc: 'Provide migrations, security auditing, and systems deployment syncs for enterprise clients.', icon: Cpu, color: 'text-[#3B82F6]', hoverColor: 'group-hover:text-[#3B82F6]', border: 'border-[#0E0F89]/20 hover:border-[#0E0F89]/50' },
+  { title: 'Reseller Partner', desc: 'Distribute licenses, support local regional accounts, and coordinate market sales packages.', icon: Users, color: 'text-[#10B981]', hoverColor: 'group-hover:text-[#10B981]', border: 'border-[#135029]/20 hover:border-[#135029]/50' },
+  { title: 'Consulting Partner', desc: 'Deliver strategic advisory, business process re-engineering, and product adoption modules.', icon: Compass, color: 'text-[#FF6325]', hoverColor: 'group-hover:text-[#FF6325]', border: 'border-[#FF6325]/20 hover:border-[#FF6325]/50' },
+  { title: 'Strategic Alliance Partner', desc: 'Co-engineer core infrastructure services, network protocols, and auth gateways.', icon: Handshake, color: 'text-[#3B82F6]', hoverColor: 'group-hover:text-[#3B82F6]', border: 'border-[#0E0F89]/20 hover:border-[#0E0F89]/50' }
 ];
 
 const successStories = [
@@ -98,6 +98,16 @@ const resources = [
   { title: 'Integration Guides', desc: 'Step-by-step migration maps and container setups.', icon: Cpu },
   { title: 'Partner Toolkit', desc: 'Branding kits, joint marketing templates, and pricing boards.', icon: Handshake }
 ];
+
+const getRoadmapColor = (index) => {
+  const colorMap = [
+    { border: 'border-[#FF6325]', text: 'text-[#FF6325]', shadow: 'shadow-[#FF6325]/10', hoverBg: 'group-hover:bg-[#FF6325]', hoverText: 'group-hover:text-white', focusText: 'group-hover:text-[#FF6325]' },
+    { border: 'border-[#3B82F6]', text: 'text-[#3B82F6]', shadow: 'shadow-[#0E0F89]/10', hoverBg: 'group-hover:bg-[#0E0F89]', hoverText: 'group-hover:text-white', focusText: 'group-hover:text-[#3B82F6]' },
+    { border: 'border-[#10B981]', text: 'text-[#10B981]', shadow: 'shadow-[#135029]/10', hoverBg: 'group-hover:bg-[#135029]', hoverText: 'group-hover:text-white', focusText: 'group-hover:text-[#10B981]' },
+    { border: 'border-[#FF6325]', text: 'text-[#FF6325]', shadow: 'shadow-[#FF6325]/10', hoverBg: 'group-hover:bg-[#FF6325]', hoverText: 'group-hover:text-white', focusText: 'group-hover:text-[#FF6325]' },
+  ];
+  return colorMap[index % colorMap.length];
+};
 
 export default function Partners() {
   // Multi-step Application Wizard State
@@ -180,8 +190,8 @@ export default function Partners() {
     <div className="partners-futuristic-theme min-h-screen relative overflow-hidden pb-20 pt-24">
       <style>{`
         .partners-futuristic-theme {
-          background-color: #050816 !important;
-          color: #FFFFFF !important;
+          background: linear-gradient(135deg, #F5F7FB 0%, #E2EDFA 50%, #C8DCF7 100%) !important;
+          color: #334155 !important;
           position: relative;
           z-index: 10;
         }
@@ -191,10 +201,10 @@ export default function Partners() {
         .partners-futuristic-theme h4, 
         .partners-futuristic-theme h5, 
         .partners-futuristic-theme h6 {
-          color: #FFFFFF !important;
+          color: #0A3161 !important;
         }
         .partners-futuristic-theme p {
-          color: #CBD5E1 !important; /* Secondary Text */
+          color: #475569 !important; /* Secondary text - Slate 600 */
         }
         .partners-futuristic-theme span {
           color: inherit;
@@ -203,10 +213,104 @@ export default function Partners() {
           color: inherit;
         }
         .partners-futuristic-theme label {
-          color: #CBD5E1 !important;
+          color: #475569 !important;
         }
 
-        /* Animated blobs */
+        /* Input fields overrides for light theme */
+        .partners-futuristic-theme input,
+        .partners-futuristic-theme select,
+        .partners-futuristic-theme textarea {
+          background-color: rgba(255, 255, 255, 0.9) !important;
+          color: #0F172A !important;
+          border: 1px solid rgba(10, 49, 97, 0.15) !important;
+        }
+        .partners-futuristic-theme input::placeholder,
+        .partners-futuristic-theme textarea::placeholder {
+          color: #94A3B8 !important;
+        }
+        .partners-futuristic-theme input:focus,
+        .partners-futuristic-theme select:focus,
+        .partners-futuristic-theme textarea:focus {
+          border-color: #FF6325 !important;
+          box-shadow: 0 0 0 2px rgba(255, 99, 37, 0.15) !important;
+        }
+
+        /* Dropdown options styling */
+        .partners-futuristic-theme select option {
+          background-color: #FFFFFF !important;
+          color: #0F172A !important;
+        }
+
+        /* Wizard navigation & scroll buttons */
+        .partners-futuristic-theme button.bg-slate-900\\/80,
+        .partners-futuristic-theme button.bg-white\\/5 {
+          background-color: #FFFFFF !important;
+          color: #0A3161 !important;
+          border: 1px solid rgba(10, 49, 97, 0.15) !important;
+        }
+        .partners-futuristic-theme button.bg-slate-900\\/80:hover,
+        .partners-futuristic-theme button.bg-white\\/5:hover {
+          background-color: #F8FAFC !important;
+          border-color: #FF6325 !important;
+        }
+
+        /* Timeline and progress indicator overrides */
+        .partners-futuristic-theme .h-9.w-9.rounded-full.bg-slate-900 {
+          background-color: #FFFFFF !important;
+        }
+        .partners-futuristic-theme .bg-slate-900.border-slate-800.text-slate-500 {
+          background-color: #FFFFFF !important;
+          border: 1px solid rgba(10, 49, 97, 0.15) !important;
+          color: #64748B !important;
+        }
+        .partners-futuristic-theme .bg-slate-800 {
+          background-color: rgba(10, 49, 97, 0.1) !important;
+        }
+
+        /* Hero top pill override */
+        .partners-futuristic-theme .bg-white\\/5.border-white\\/10.text-\\[\\#00E5FF\\],
+        .partners-futuristic-theme .bg-white\\/5.border-white\\/10 {
+          background-color: rgba(10, 49, 97, 0.05) !important;
+          border-color: rgba(10, 49, 97, 0.15) !important;
+          color: #FF6325 !important;
+        }
+        .partners-futuristic-theme .bg-white\\/5.border-white\\/10.text-\\[\\#00E5FF\\] span,
+        .partners-futuristic-theme .bg-white\\/5.border-white\\/10.text-\\[\\#00E5FF\\] svg {
+          color: #FF6325 !important;
+        }
+
+        /* Hero primary action button */
+        .partners-futuristic-theme .shadow-cyan-500\\/25 {
+          background-color: #FF6325 !important;
+          border-color: #FF6325 !important;
+          color: #FFFFFF !important;
+          box-shadow: 0 10px 25px rgba(255, 99, 37, 0.25) !important;
+        }
+        .partners-futuristic-theme .shadow-cyan-500\\/25:hover {
+          background-color: #e0531b !important;
+          border-color: #e0531b !important;
+        }
+
+        /* Hero secondary action button */
+        .partners-futuristic-theme a[href="#partner-categories"] {
+          background-color: #FFFFFF !important;
+          color: #0A3161 !important;
+          border: 1px solid rgba(10, 49, 97, 0.15) !important;
+        }
+        .partners-futuristic-theme a[href="#partner-categories"]:hover {
+          background-color: #F8FAFC !important;
+          border-color: #FF6325 !important;
+        }
+
+        /* Network SVG backgrounds */
+        .partners-futuristic-theme svg line[stroke="#00E5FF"] { stroke: rgba(255, 99, 37, 0.25) !important; }
+        .partners-futuristic-theme svg line[stroke="#7C3AED"] { stroke: rgba(14, 15, 137, 0.25) !important; }
+        .partners-futuristic-theme svg line[stroke="#00FFB2"] { stroke: rgba(19, 80, 41, 0.25) !important; }
+        .partners-futuristic-theme svg circle[fill="#00E5FF"] { fill: #FF6325 !important; }
+        .partners-futuristic-theme svg circle[fill="#7C3AED"] { fill: #0E0F89 !important; }
+        .partners-futuristic-theme svg circle[fill="#00FFB2"] { fill: #135029 !important; }
+
+        /* Animated blobs on light bg */
         @keyframes floatCyan {
           0% { transform: translate(0px, 0px) scale(1); }
           50% { transform: translate(40px, -60px) scale(1.1); }
@@ -219,9 +323,11 @@ export default function Partners() {
         }
         .blob-cyan-pulse {
           animation: floatCyan 14s ease-in-out infinite;
+          background-color: rgba(255, 99, 37, 0.05) !important;
         }
         .blob-purple-pulse {
           animation: floatPurple 18s ease-in-out infinite;
+          background-color: rgba(14, 15, 137, 0.05) !important;
         }
 
         /* Orbit rotation */
@@ -243,19 +349,24 @@ export default function Partners() {
           animation: flowPulse 2s linear infinite;
         }
 
-        /* Neon glassmorphic hover shadows */
+        /* Zoho-style clean light glass cards */
         .glass-card-neon {
-          background: rgba(15, 23, 42, 0.6) !important;
+          background: rgba(255, 255, 255, 0.75) !important;
           backdrop-filter: blur(16px) !important;
-          border: 1px solid rgba(0, 229, 255, 0.15) !important;
-          box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4) !important;
+          border: 1px solid rgba(10, 49, 97, 0.12) !important;
+          box-shadow: 0 8px 32px 0 rgba(10, 49, 97, 0.04) !important;
           transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
         }
         .glass-card-neon:hover {
-          background: rgba(15, 23, 42, 0.95) !important;
-          border-color: rgba(0, 255, 178, 0.4) !important; /* Teal border */
-          box-shadow: 0 0 25px rgba(0, 229, 255, 0.35) !important; /* Cyan glow */
+          background: rgba(255, 255, 255, 0.95) !important;
+          border-color: rgba(255, 99, 37, 0.45) !important; /* Brand orange border */
+          box-shadow: 0 12px 40px 0 rgba(10, 49, 97, 0.08) !important;
           transform: translateY(-5px);
+        }
+
+        /* Borders override for light theme */
+        .partners-futuristic-theme .border-white\\/5 {
+          border-color: rgba(10, 49, 97, 0.1) !important;
         }
 
         /* Custom scrollbar hidden */
@@ -292,8 +403,8 @@ export default function Partners() {
         .roadmap-line-glowing::after {
           content: '';
           position: absolute;
-          background: linear-gradient(90deg, #00E5FF, #7C3AED);
-          box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+          background: linear-gradient(90deg, #FF6325, #0E0F89);
+          box-shadow: 0 0 10px rgba(255, 99, 37, 0.3);
         }
       `}</style>
 
@@ -379,7 +490,7 @@ export default function Partners() {
         {/* SECTION 2: PARTNER ECOSYSTEM VISUALIZATION */}
         <div className="space-y-16">
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-[#7C3AED] text-xs font-semibold uppercase tracking-wider">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#FF6325]/10 border border-[#FF6325]/20 text-[#FF6325] text-xs font-semibold uppercase tracking-wider">
               <Layers className="h-3.5 w-3.5" />
               <span>Interactive Hub</span>
             </div>
@@ -388,29 +499,29 @@ export default function Partners() {
           </div>
 
           {/* Central Interactive Orbit Node Map */}
-          <div className="relative max-w-2xl mx-auto h-[450px] flex items-center justify-center rounded-3xl bg-[#0F172A]/40 border border-purple-500/10 shadow-2xl p-6 overflow-hidden">
+          <div className="relative max-w-2xl mx-auto h-[450px] flex items-center justify-center rounded-3xl bg-[#0E0F89] border border-[#FF6325]/15 shadow-2xl p-6 overflow-hidden">
             {/* Background grids */}
-            <div className="absolute inset-0 bg-[radial-gradient(rgba(0,229,255,0.05)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none opacity-40" />
+            <div className="absolute inset-0 bg-[radial-gradient(rgba(255,99,37,0.05)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none opacity-40" />
 
             <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 600 450">
               {/* Connected Orbit paths */}
-              <circle cx="300" cy="225" r="160" fill="none" stroke="rgba(124, 58, 237, 0.15)" strokeWidth="1.5" className="orbit-connection-path" />
-              <circle cx="300" cy="225" r="100" fill="none" stroke="rgba(0, 229, 255, 0.15)" strokeWidth="1" />
+              <circle cx="300" cy="225" r="160" fill="none" stroke="rgba(255, 99, 37, 0.15)" strokeWidth="1.5" className="orbit-connection-path" />
+              <circle cx="300" cy="225" r="100" fill="none" stroke="rgba(14, 15, 137, 0.15)" strokeWidth="1" />
 
               {/* Pulsing connections to central hub */}
-              <line x1="300" y1="225" x2="300" y2="65" stroke="#00E5FF" strokeWidth="1.5" className="flow-vector-line" />
-              <line x1="300" y1="225" x2="455" y2="155" stroke="#7C3AED" strokeWidth="1.5" className="flow-vector-line" style={{ animationDelay: '0.4s' }} />
-              <line x1="300" y1="225" x2="395" y2="335" stroke="#00FFB2" strokeWidth="1.5" className="flow-vector-line" style={{ animationDelay: '0.8s' }} />
-              <line x1="300" y1="225" x2="205" y2="335" stroke="#00E5FF" strokeWidth="1.5" className="flow-vector-line" style={{ animationDelay: '1.2s' }} />
-              <line x1="300" y1="225" x2="145" y2="155" stroke="#7C3AED" strokeWidth="1.5" className="flow-vector-line" style={{ animationDelay: '1.6s' }} />
+              <line x1="300" y1="225" x2="300" y2="65" stroke="#FF6325" strokeWidth="1.5" className="flow-vector-line" />
+              <line x1="300" y1="225" x2="455" y2="155" stroke="#0E0F89" strokeWidth="1.5" className="flow-vector-line" style={{ animationDelay: '0.4s' }} />
+              <line x1="300" y1="225" x2="395" y2="335" stroke="#135029" strokeWidth="1.5" className="flow-vector-line" style={{ animationDelay: '0.8s' }} />
+              <line x1="300" y1="225" x2="205" y2="335" stroke="#FF6325" strokeWidth="1.5" className="flow-vector-line" style={{ animationDelay: '1.2s' }} />
+              <line x1="300" y1="225" x2="145" y2="155" stroke="#0E0F89" strokeWidth="1.5" className="flow-vector-line" style={{ animationDelay: '1.6s' }} />
             </svg>
 
             {/* Central Hub Node */}
             <motion.div 
               whileHover={{ scale: 1.05 }}
-              className="absolute z-10 h-28 w-28 rounded-full bg-slate-900 border-4 border-[#7C3AED] flex flex-col items-center justify-center text-center shadow-lg shadow-purple-500/20 cursor-pointer select-none"
+              className="absolute z-10 h-28 w-28 rounded-full bg-[#0A3161] border-4 border-[#FF6325] flex flex-col items-center justify-center text-center shadow-lg shadow-[#FF6325]/20 cursor-pointer select-none"
             >
-              <Building className="h-7 w-7 text-[#00E5FF] mb-1 animate-pulse" />
+              <Building className="h-7 w-7 text-[#FF6325] mb-1 animate-pulse" />
               <span className="text-[10px] font-black text-white uppercase tracking-wider">BETA HUB</span>
             </motion.div>
 
@@ -418,56 +529,56 @@ export default function Partners() {
             {/* Node 1: Cloud (Top Center) */}
             <motion.div 
               whileHover={{ scale: 1.08 }}
-              className="absolute top-[35px] left-1/2 -translate-x-1/2 z-10 h-16 w-16 rounded-full bg-slate-900 border border-[#00E5FF] flex items-center justify-center shadow-md cursor-pointer group"
+              className="absolute top-[35px] left-1/2 -translate-x-1/2 z-10 h-16 w-16 rounded-full bg-slate-900 border border-[#FF6325] flex items-center justify-center shadow-md cursor-pointer group"
             >
-              <div className="absolute -top-6 px-2 py-0.5 rounded bg-[#00E5FF]/10 border border-[#00E5FF]/20 text-[#00E5FF] text-[8px] font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute -top-6 px-2 py-0.5 rounded bg-[#FF6325]/10 border border-[#FF6325]/20 text-[#FF6325] text-[8px] font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">
                 Cloud
               </div>
-              <Globe className="h-5 w-5 text-white group-hover:text-[#00E5FF] transition-colors" />
+              <Globe className="h-5 w-5 text-white group-hover:text-[#FF6325] transition-colors" />
             </motion.div>
 
             {/* Node 2: Technology (Top Right) */}
             <motion.div 
               whileHover={{ scale: 1.08 }}
-              className="absolute top-[125px] right-[115px] z-10 h-16 w-16 rounded-full bg-slate-900 border border-[#7C3AED] flex items-center justify-center shadow-md cursor-pointer group"
+              className="absolute top-[125px] right-[115px] z-10 h-16 w-16 rounded-full bg-slate-900 border border-[#0E0F89] flex items-center justify-center shadow-md cursor-pointer group"
             >
-              <div className="absolute -top-6 px-2 py-0.5 rounded bg-[#7C3AED]/10 border border-[#7C3AED]/20 text-[#7C3AED] text-[8px] font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute -top-6 px-2 py-0.5 rounded bg-[#0E0F89]/10 border border-[#0E0F89]/20 text-[#3B82F6] text-[8px] font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">
                 Technology
               </div>
-              <Code2 className="h-5 w-5 text-white group-hover:text-[#7C3AED] transition-colors" />
+              <Code2 className="h-5 w-5 text-white group-hover:text-[#3B82F6] transition-colors" />
             </motion.div>
 
             {/* Node 3: Integration (Bottom Right) */}
             <motion.div 
               whileHover={{ scale: 1.08 }}
-              className="absolute bottom-[85px] right-[170px] z-10 h-16 w-16 rounded-full bg-slate-900 border border-[#00FFB2] flex items-center justify-center shadow-md cursor-pointer group"
+              className="absolute bottom-[85px] right-[170px] z-10 h-16 w-16 rounded-full bg-slate-900 border border-[#135029] flex items-center justify-center shadow-md cursor-pointer group"
             >
-              <div className="absolute -bottom-6 px-2 py-0.5 rounded bg-[#00FFB2]/10 border border-[#00FFB2]/20 text-[#00FFB2] text-[8px] font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute -bottom-6 px-2 py-0.5 rounded bg-[#135029]/10 border border-[#135029]/20 text-[#10B981] text-[8px] font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">
                 Integration
               </div>
-              <Cpu className="h-5 w-5 text-white group-hover:text-[#00FFB2] transition-colors" />
+              <Cpu className="h-5 w-5 text-white group-hover:text-[#10B981] transition-colors" />
             </motion.div>
 
             {/* Node 4: Reseller (Bottom Left) */}
             <motion.div 
               whileHover={{ scale: 1.08 }}
-              className="absolute bottom-[85px] left-[170px] z-10 h-16 w-16 rounded-full bg-slate-900 border border-[#00E5FF] flex items-center justify-center shadow-md cursor-pointer group"
+              className="absolute bottom-[85px] left-[170px] z-10 h-16 w-16 rounded-full bg-slate-900 border border-[#FF6325] flex items-center justify-center shadow-md cursor-pointer group"
             >
-              <div className="absolute -bottom-6 px-2 py-0.5 rounded bg-[#00E5FF]/10 border border-[#00E5FF]/20 text-[#00E5FF] text-[8px] font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute -bottom-6 px-2 py-0.5 rounded bg-[#FF6325]/10 border border-[#FF6325]/20 text-[#FF6325] text-[8px] font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">
                 Reseller
               </div>
-              <Users className="h-5 w-5 text-white group-hover:text-[#00E5FF] transition-colors" />
+              <Users className="h-5 w-5 text-white group-hover:text-[#FF6325] transition-colors" />
             </motion.div>
 
             {/* Node 5: Strategic (Top Left) */}
             <motion.div 
               whileHover={{ scale: 1.08 }}
-              className="absolute top-[125px] left-[115px] z-10 h-16 w-16 rounded-full bg-slate-900 border border-[#7C3AED] flex items-center justify-center shadow-md cursor-pointer group"
+              className="absolute top-[125px] left-[115px] z-10 h-16 w-16 rounded-full bg-slate-900 border border-[#0E0F89] flex items-center justify-center shadow-md cursor-pointer group"
             >
-              <div className="absolute -top-6 px-2 py-0.5 rounded bg-[#7C3AED]/10 border border-[#7C3AED]/20 text-[#7C3AED] text-[8px] font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute -top-6 px-2 py-0.5 rounded bg-[#0E0F89]/10 border border-[#0E0F89]/20 text-[#3B82F6] text-[8px] font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">
                 Strategic
               </div>
-              <Layers className="h-5 w-5 text-white group-hover:text-[#7C3AED] transition-colors" />
+              <Layers className="h-5 w-5 text-white group-hover:text-[#3B82F6] transition-colors" />
             </motion.div>
           </div>
         </div>
@@ -475,7 +586,7 @@ export default function Partners() {
         {/* SECTION 3: PARTNER BENEFITS SECTION */}
         <div className="space-y-16">
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-[#7C3AED] text-xs font-semibold uppercase tracking-wider">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#FF6325]/10 border border-[#FF6325]/20 text-[#FF6325] text-xs font-semibold uppercase tracking-wider">
               <Award className="h-3.5 w-3.5" />
               <span>Program Benefits</span>
             </div>
@@ -512,7 +623,7 @@ export default function Partners() {
         {/* SECTION 4: PARTNER CATEGORIES */}
         <div id="partner-categories" className="space-y-16">
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-[#7C3AED] text-xs font-semibold uppercase tracking-wider">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#FF6325]/10 border border-[#FF6325]/20 text-[#FF6325] text-xs font-semibold uppercase tracking-wider">
               <Users className="h-3.5 w-3.5" />
               <span>Alliance Tiers</span>
             </div>
@@ -557,28 +668,28 @@ export default function Partners() {
         </div>
 
         {/* SECTION 5: SUCCESS METRICS SECTION */}
-        <div className="py-12 border-t border-b border-purple-950/20">
+        <div className="py-12 border-t border-b border-white/5">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto text-center">
             <div>
-              <div className="text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#00E5FF] to-[#7C3AED] tracking-tight">
+              <div className="text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#FF6325] to-[#0E0F89] tracking-tight">
                 <CountUpNumber value="100+" />
               </div>
               <p className="text-[10px] text-[#CBD5E1] font-bold uppercase tracking-widest mt-1">Ecosystem Partners</p>
             </div>
             <div>
-              <div className="text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#00FFB2] to-[#00E5FF] tracking-tight">
+              <div className="text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#135029] to-[#0A3161] tracking-tight">
                 <CountUpNumber value="50+" />
               </div>
               <p className="text-[10px] text-[#CBD5E1] font-bold uppercase tracking-widest mt-1">Integrations Built</p>
             </div>
             <div>
-              <div className="text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#7C3AED] to-[#00FFB2] tracking-tight">
+              <div className="text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#0E0F89] to-[#FF6325] tracking-tight">
                 <CountUpNumber value="20+" />
               </div>
               <p className="text-[10px] text-[#CBD5E1] font-bold uppercase tracking-widest mt-1">Countries Served</p>
             </div>
             <div>
-              <div className="text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#00E5FF] to-[#7C3AED] tracking-tight">
+              <div className="text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#0A3161] to-[#135029] tracking-tight">
                 <CountUpNumber value="99.9%" />
               </div>
               <p className="text-[10px] text-[#CBD5E1] font-bold uppercase tracking-widest mt-1">Platform SLA</p>
@@ -590,7 +701,7 @@ export default function Partners() {
         <div className="space-y-12">
           <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6">
             <div className="text-left space-y-3">
-              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-[#7C3AED] text-xs font-semibold uppercase tracking-wider">
+              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#FF6325]/10 border border-[#FF6325]/20 text-[#FF6325] text-xs font-semibold uppercase tracking-wider">
                 <Layers className="h-3.5 w-3.5" />
                 <span>Case Studies</span>
               </div>
@@ -659,7 +770,7 @@ export default function Partners() {
         {/* SECTION 7: PARTNERSHIP JOURNEY ROADMAP */}
         <div className="space-y-16">
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-[#7C3AED] text-xs font-semibold uppercase tracking-wider">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#FF6325]/10 border border-[#FF6325]/20 text-[#FF6325] text-xs font-semibold uppercase tracking-wider">
               <Zap className="h-3.5 w-3.5" />
               <span>Progression Roadmap</span>
             </div>
@@ -667,28 +778,31 @@ export default function Partners() {
             <p className="text-[#CBD5E1] text-sm">Visualizing the integration milestones from application submission to launching growth programs.</p>
           </div>
 
-          <div className="glass-card-neon p-8 rounded-3xl border border-purple-500/20 shadow-xl text-left relative overflow-hidden">
+          <div className="glass-card-neon p-8 rounded-3xl border border-white/10 shadow-xl text-left relative overflow-hidden">
             {/* Horizontal Timeline flow */}
             <div className="relative flex flex-col md:flex-row items-start md:items-stretch justify-between gap-8 md:gap-4 overflow-x-auto pb-4 scrollbar-none">
-              {journeyRoadmap.map((node, idx) => (
-                <div key={node.step} className="flex-1 min-w-[140px] space-y-4 relative group">
-                  {/* glowing step number node circle */}
-                  <div className="flex items-center space-x-3">
-                    <div className="h-9 w-9 rounded-full bg-slate-900 border border-[#00E5FF] flex items-center justify-center font-black text-xs text-[#00E5FF] shadow-md shadow-cyan-500/10 group-hover:bg-[#00E5FF] group-hover:text-slate-950 transition duration-300">
-                      {node.step}
+              {journeyRoadmap.map((node, idx) => {
+                const colorSet = getRoadmapColor(idx);
+                return (
+                  <div key={node.step} className="flex-1 min-w-[140px] space-y-4 relative group">
+                    {/* glowing step number node circle */}
+                    <div className="flex items-center space-x-3">
+                      <div className={`h-9 w-9 rounded-full bg-slate-900 border ${colorSet.border} flex items-center justify-center font-black text-xs ${colorSet.text} shadow-md ${colorSet.shadow} ${colorSet.hoverBg} ${colorSet.hoverText} transition duration-300`}>
+                        {node.step}
+                      </div>
+                      {/* Connecting line */}
+                      {idx < journeyRoadmap.length - 1 && (
+                        <div className="hidden md:block h-[1px] flex-grow bg-gradient-to-r from-[#FF6325]/40 via-[#0E0F89]/40 to-[#135029]/40" />
+                      )}
                     </div>
-                    {/* Connecting line */}
-                    {idx < journeyRoadmap.length - 1 && (
-                      <div className="hidden md:block h-[1px] flex-grow bg-gradient-to-r from-[#00E5FF]/40 to-[#7C3AED]/40" />
-                    )}
-                  </div>
 
-                  <div className="space-y-1 pr-4">
-                    <h4 className="text-sm font-black text-white group-hover:text-[#00E5FF] transition-colors">{node.title}</h4>
-                    <p className="text-[10px] text-[#CBD5E1] leading-relaxed font-medium">{node.desc}</p>
+                    <div className="space-y-1 pr-4">
+                      <h4 className={`text-sm font-black text-white ${colorSet.focusText} transition-colors`}>{node.title}</h4>
+                      <p className="text-[10px] text-[#CBD5E1] leading-relaxed font-medium">{node.desc}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
@@ -696,7 +810,7 @@ export default function Partners() {
         {/* SECTION 8: RESOURCES SECTION */}
         <div className="space-y-16">
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-[#7C3AED] text-xs font-semibold uppercase tracking-wider">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#FF6325]/10 border border-[#FF6325]/20 text-[#FF6325] text-xs font-semibold uppercase tracking-wider">
               <FileText className="h-3.5 w-3.5" />
               <span>Developer Resources</span>
             </div>
@@ -747,23 +861,23 @@ export default function Partners() {
                 <div 
                   className={`h-8 w-8 rounded-full border flex items-center justify-center text-xs font-black transition-all duration-300 ${
                     currentStep === stepNum 
-                      ? 'bg-[#00E5FF] border-[#00E5FF] text-slate-950 shadow-md shadow-cyan-500/20 scale-105' 
+                      ? 'bg-[#FF6325] border-[#FF6325] text-white shadow-md shadow-[#FF6325]/20 scale-105' 
                       : currentStep > stepNum 
-                        ? 'bg-[#7C3AED] border-[#7C3AED] text-white' 
+                        ? 'bg-[#0E0F89] border-[#0E0F89] text-white' 
                         : 'bg-slate-900 border-slate-800 text-slate-500'
                   }`}
                 >
                   {stepNum}
                 </div>
                 {stepNum < 4 && (
-                  <div className={`h-[2px] flex-grow mx-2 ${currentStep > stepNum ? 'bg-[#7C3AED]' : 'bg-slate-850'}`} />
+                  <div className={`h-[2px] flex-grow mx-2 ${currentStep > stepNum ? 'bg-[#0E0F89]' : 'bg-slate-800'}`} />
                 )}
               </div>
             ))}
           </div>
 
           {/* Form container */}
-          <div className="glass-card-neon p-8 rounded-3xl border border-purple-500/20 shadow-2xl relative">
+          <div className="glass-card-neon p-8 rounded-3xl border border-white/10 shadow-2xl relative">
             <form onSubmit={handleSubmit} className="space-y-6 text-left">
               <AnimatePresence mode="wait">
                 {currentStep === 1 && (
@@ -775,7 +889,7 @@ export default function Partners() {
                     transition={{ duration: 0.2 }}
                     className="space-y-4"
                   >
-                    <h3 className="text-lg font-bold text-white border-b border-purple-500/10 pb-2 mb-4">Step 1: Company Profile</h3>
+                    <h3 className="text-lg font-bold text-white border-b border-white/5 pb-2 mb-4">Step 1: Company Profile</h3>
                     
                     <div className="space-y-1">
                       <label className="text-xs font-extrabold text-slate-400 uppercase">Company Name</label>
@@ -785,7 +899,7 @@ export default function Partners() {
                         value={companyName}
                         onChange={(e) => setCompanyName(e.target.value)}
                         placeholder="e.g. Acme Corporation"
-                        className="w-full bg-[#050816] text-white placeholder-slate-600 border border-purple-500/20 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#00E5FF] text-sm transition"
+                        className="w-full bg-[#0A3161]/50 text-white placeholder-slate-450 border border-white/10 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#FF6325] text-sm transition"
                       />
                     </div>
 
@@ -798,7 +912,7 @@ export default function Partners() {
                           value={website}
                           onChange={(e) => setWebsite(e.target.value)}
                           placeholder="e.g. https://acme.com"
-                          className="w-full bg-[#050816] text-white placeholder-slate-600 border border-purple-500/20 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#00E5FF] text-sm transition"
+                          className="w-full bg-[#0A3161]/50 text-white placeholder-slate-450 border border-white/10 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#FF6325] text-sm transition"
                         />
                       </div>
                       <div className="space-y-1">
@@ -806,13 +920,13 @@ export default function Partners() {
                         <select
                           value={companySize}
                           onChange={(e) => setCompanySize(e.target.value)}
-                          className="w-full bg-[#050816] text-white border border-purple-500/20 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#00E5FF] text-sm transition"
+                          className="w-full bg-[#0A3161]/50 text-white border border-white/10 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#FF6325] text-sm transition"
                         >
-                          <option value="1-10">1-10 Employees</option>
-                          <option value="11-50">11-50 Employees</option>
-                          <option value="51-200">51-200 Employees</option>
-                          <option value="201-500">201-500 Employees</option>
-                          <option value="500+">500+ Employees</option>
+                          <option value="1-10" className="bg-slate-900">1-10 Employees</option>
+                          <option value="11-50" className="bg-slate-900">11-50 Employees</option>
+                          <option value="51-200" className="bg-slate-900">51-200 Employees</option>
+                          <option value="201-500" className="bg-slate-900">201-500 Employees</option>
+                          <option value="500+" className="bg-slate-900">500+ Employees</option>
                         </select>
                       </div>
                     </div>
@@ -828,20 +942,20 @@ export default function Partners() {
                     transition={{ duration: 0.2 }}
                     className="space-y-4"
                   >
-                    <h3 className="text-lg font-bold text-white border-b border-purple-500/10 pb-2 mb-4">Step 2: Partnership Details</h3>
+                    <h3 className="text-lg font-bold text-white border-b border-white/5 pb-2 mb-4">Step 2: Partnership Details</h3>
 
                     <div className="space-y-1">
                       <label className="text-xs font-extrabold text-slate-400 uppercase">Partnership Type</label>
                       <select
                         value={partnerType}
                         onChange={(e) => setPartnerType(e.target.value)}
-                        className="w-full bg-[#050816] text-white border border-purple-500/20 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#00E5FF] text-sm transition"
+                        className="w-full bg-[#0A3161]/50 text-white border border-white/10 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#FF6325] text-sm transition"
                       >
-                        <option value="Technology Partner">Technology Partner</option>
-                        <option value="Integration Partner">Integration Partner</option>
-                        <option value="Reseller Partner">Reseller Partner</option>
-                        <option value="Consulting Partner">Consulting Partner</option>
-                        <option value="Strategic Alliance Partner">Strategic Alliance Partner</option>
+                        <option value="Technology Partner" className="bg-slate-900">Technology Partner</option>
+                        <option value="Integration Partner" className="bg-slate-900">Integration Partner</option>
+                        <option value="Reseller Partner" className="bg-slate-900">Reseller Partner</option>
+                        <option value="Consulting Partner" className="bg-slate-900">Consulting Partner</option>
+                        <option value="Strategic Alliance Partner" className="bg-slate-900">Strategic Alliance Partner</option>
                       </select>
                     </div>
 
@@ -850,13 +964,13 @@ export default function Partners() {
                       <select
                         value={marketFocus}
                         onChange={(e) => setMarketFocus(e.target.value)}
-                        className="w-full bg-[#050816] text-white border border-purple-500/20 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#00E5FF] text-sm transition"
+                        className="w-full bg-[#0A3161]/50 text-white border border-white/10 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#FF6325] text-sm transition"
                       >
-                        <option value="Global">Global / Multi-region</option>
-                        <option value="North America">North America (US/CA)</option>
-                        <option value="Europe">Europe (EMEA)</option>
-                        <option value="Asia Pacific">Asia Pacific (APAC)</option>
-                        <option value="Latin America">Latin America (LATAM)</option>
+                        <option value="Global" className="bg-slate-900">Global / Multi-region</option>
+                        <option value="North America" className="bg-slate-900">North America (US/CA)</option>
+                        <option value="Europe" className="bg-slate-900">Europe (EMEA)</option>
+                        <option value="Asia Pacific" className="bg-slate-900">Asia Pacific (APAC)</option>
+                        <option value="Latin America" className="bg-slate-900">Latin America (LATAM)</option>
                       </select>
                     </div>
                   </motion.div>
@@ -871,7 +985,7 @@ export default function Partners() {
                     transition={{ duration: 0.2 }}
                     className="space-y-4"
                   >
-                    <h3 className="text-lg font-bold text-white border-b border-purple-500/10 pb-2 mb-4">Step 3: Partnership Proposal</h3>
+                    <h3 className="text-lg font-bold text-white border-b border-white/5 pb-2 mb-4">Step 3: Partnership Proposal</h3>
 
                     <div className="space-y-1">
                       <label className="text-xs font-extrabold text-slate-400 uppercase">Proposal Summary</label>
@@ -881,7 +995,7 @@ export default function Partners() {
                         value={proposal}
                         onChange={(e) => setProposal(e.target.value)}
                         placeholder="Briefly describe how we can co-sell, build integrated APIs, or distribute software solutions together..."
-                        className="w-full bg-[#050816] text-white placeholder-slate-650 border border-purple-500/20 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#00E5FF] text-sm transition resize-none"
+                        className="w-full bg-[#0A3161]/50 text-white placeholder-slate-450 border border-white/10 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#FF6325] text-sm transition resize-none"
                       />
                     </div>
                   </motion.div>
@@ -896,7 +1010,7 @@ export default function Partners() {
                     transition={{ duration: 0.2 }}
                     className="space-y-4"
                   >
-                    <h3 className="text-lg font-bold text-white border-b border-purple-500/10 pb-2 mb-4">Step 4: Contact Point</h3>
+                    <h3 className="text-lg font-bold text-white border-b border-white/5 pb-2 mb-4">Step 4: Contact Point</h3>
 
                     <div className="space-y-1">
                       <label className="text-xs font-extrabold text-slate-400 uppercase">Contact Full Name</label>
@@ -906,7 +1020,7 @@ export default function Partners() {
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                         placeholder="e.g. Bruce Wayne"
-                        className="w-full bg-[#050816] text-white placeholder-slate-600 border border-purple-500/20 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#00E5FF] text-sm transition"
+                        className="w-full bg-[#0A3161]/50 text-white placeholder-slate-450 border border-white/10 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#FF6325] text-sm transition"
                       />
                     </div>
 
@@ -919,7 +1033,7 @@ export default function Partners() {
                           value={workEmail}
                           onChange={(e) => setWorkEmail(e.target.value)}
                           placeholder="e.g. bruce@waynecorp.com"
-                          className="w-full bg-[#050816] text-white placeholder-slate-600 border border-purple-500/20 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#00E5FF] text-sm transition"
+                          className="w-full bg-[#0A3161]/50 text-white placeholder-slate-450 border border-white/10 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#FF6325] text-sm transition"
                         />
                       </div>
                       <div className="space-y-1">
@@ -930,7 +1044,7 @@ export default function Partners() {
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
                           placeholder="e.g. +1 555-0199"
-                          className="w-full bg-[#050816] text-white placeholder-slate-600 border border-purple-500/20 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#00E5FF] text-sm transition"
+                          className="w-full bg-[#0A3161]/50 text-white placeholder-slate-450 border border-white/10 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#FF6325] text-sm transition"
                         />
                       </div>
                     </div>
@@ -939,11 +1053,11 @@ export default function Partners() {
               </AnimatePresence>
 
               {/* Navigation buttons */}
-              <div className="flex items-center justify-between pt-4 border-t border-purple-500/10">
+              <div className="flex items-center justify-between pt-4 border-t border-white/5">
                 <button
                   type="button"
                   onClick={handlePrevStep}
-                  className={`px-5 py-2 rounded-xl text-xs font-bold bg-[#161B33] text-[#CBD5E1] border border-purple-500/10 hover:border-purple-500/35 transition cursor-pointer select-none ${
+                  className={`px-5 py-2 rounded-xl text-xs font-bold bg-white/5 text-[#CBD5E1] border border-white/10 hover:border-white/20 transition cursor-pointer select-none ${
                     currentStep === 1 ? 'opacity-30 pointer-events-none' : ''
                   }`}
                 >
@@ -954,7 +1068,7 @@ export default function Partners() {
                   <button
                     type="button"
                     onClick={handleNextStep}
-                    className="px-6 py-2.5 rounded-xl text-xs font-black text-slate-950 bg-[#00E5FF] hover:bg-[#00c5db] transition shadow-md cursor-pointer select-none"
+                    className="px-6 py-2.5 rounded-xl text-xs font-black text-white bg-[#FF6325] hover:bg-[#e0531b] transition shadow-md cursor-pointer select-none"
                   >
                     Next Step
                   </button>
@@ -962,7 +1076,7 @@ export default function Partners() {
                   <button
                     type="submit"
                     disabled={status === 'loading'}
-                    className="px-6 py-2.5 rounded-xl text-xs font-black text-slate-950 bg-[#00FFB2] hover:bg-[#00e09d] transition shadow-md cursor-pointer select-none disabled:bg-slate-800 disabled:text-slate-500"
+                    className="px-6 py-2.5 rounded-xl text-xs font-black text-white bg-gradient-to-r from-[#FF6325] to-[#0E0F89] hover:from-[#e0531b] hover:to-[#0c0d75] border border-[#FF6325]/50 transition shadow-md cursor-pointer select-none disabled:bg-slate-800 disabled:text-slate-500"
                   >
                     {status === 'loading' ? 'Submitting Details...' : 'Submit Application'}
                   </button>
@@ -988,9 +1102,9 @@ export default function Partners() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
-                  className="mt-6 p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 text-xs text-rose-455 flex items-center space-x-2 text-left"
+                  className="mt-6 p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 text-xs text-rose-400 flex items-center space-x-2 text-left"
                 >
-                  <AlertCircle className="h-5 w-5 flex-shrink-0 text-rose-455" />
+                  <AlertCircle className="h-5 w-5 flex-shrink-0 text-rose-400" />
                   <span>{statusMsg}</span>
                 </motion.div>
               )}
@@ -999,10 +1113,10 @@ export default function Partners() {
         </div>
 
         {/* SECTION 10: FINAL CTA SECTION */}
-        <div className="relative overflow-hidden rounded-3xl p-10 md:p-16 border border-purple-500/30 text-center shadow-2xl" style={{ background: 'linear-gradient(135deg, #7C3AED, #00E5FF)' }}>
+        <div className="relative overflow-hidden rounded-3xl p-10 md:p-16 border border-[#0A3161]/15 text-center shadow-2xl" style={{ background: 'linear-gradient(135deg, #F2FAF5 0%, #E7EFFB 33%, #EAEBFA 66%, #FFEAE2 100%)' }}>
           {/* Floating blur circles */}
-          <div className="absolute top-[-40px] left-[-40px] w-52 h-52 bg-white/10 rounded-full blur-2xl pointer-events-none" />
-          <div className="absolute bottom-[-40px] right-[-40px] w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none" />
+          <div className="absolute top-[-40px] left-[-40px] w-52 h-52 bg-white/40 rounded-full blur-2xl pointer-events-none" />
+          <div className="absolute bottom-[-40px] right-[-40px] w-64 h-64 bg-white/40 rounded-full blur-2xl pointer-events-none" />
 
           <div className="relative z-10 space-y-6 max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-5xl font-black text-white leading-tight">
@@ -1014,13 +1128,13 @@ export default function Partners() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
               <a
                 href="#apply-wizard"
-                className="w-full sm:w-auto px-8 py-3.5 rounded-xl text-sm font-black bg-purple-950/20 hover:bg-purple-950/45 text-white border border-white/20 hover:border-white/40 transition-all duration-300 hover:scale-[1.02]"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-xl text-sm font-black bg-[#FF6325] hover:bg-[#e0531b] text-white transition-all duration-300 hover:scale-[1.02] shadow-md shadow-[#FF6325]/15"
               >
                 Become a Partner
               </a>
               <a
                 href="/support"
-                className="w-full sm:w-auto px-8 py-3.5 rounded-xl text-sm font-black bg-purple-950/20 hover:bg-purple-950/45 text-white border border-white/20 hover:border-white/40 transition-all duration-300 hover:scale-[1.02]"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-xl text-sm font-black bg-white hover:bg-slate-50 text-[#0A3161] border border-[#0A3161]/15 hover:border-[#0A3161]/35 transition-all duration-300 hover:scale-[1.02]"
               >
                 Schedule a Meeting
               </a>

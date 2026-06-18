@@ -163,7 +163,7 @@ export default function Navbar() {
                   <div
                     key={link.name}
                     ref={productsDropdownRef}
-                    className="relative"
+                    className=""
                   >
                     <button 
                       type="button"
@@ -177,7 +177,7 @@ export default function Navbar() {
                     </button>
                     
                     {isDropdownOpen && (
-                      <div className="absolute left-[-16px] mt-3 w-[640px] rounded-2xl bg-white border border-slate-200 shadow-2xl p-4 z-50 text-left text-slate-800">
+                      <div className="absolute left-4 sm:left-6 lg:left-8 top-full mt-1.5 w-[640px] rounded-2xl bg-white border border-slate-200 shadow-2xl p-4 z-50 text-left text-slate-800">
                         <table className="w-full text-left border-collapse">
                           <thead>
                             <tr className="bg-slate-50 border-b border-slate-100 text-slate-500 text-[10px] uppercase tracking-wider font-extrabold select-none">

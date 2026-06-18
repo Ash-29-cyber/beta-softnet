@@ -9,11 +9,9 @@ import {
   Globe, 
   Zap, 
   Sparkles, 
-  Terminal, 
   Mail, 
   Briefcase, 
   UserCheck, 
-  ChevronRight, 
   User, 
   Star 
 } from 'lucide-react';
@@ -32,31 +30,15 @@ export default function Home() {
   const products = [
     {
       name: 'BNX MAIL',
-      description: 'WhatsApp-style collaborative email platform. Unify SMTP/IMAP boxes and resolve client threads together in real-time.',
+      description: 'A WhatsApp-style collaborative email platform designed for modern teams. Unify multiple SMTP/IMAP boxes into a single group inbox, assign ownership, and resolve client support threads together in real-time with zero friction.',
       icon: Mail,
       color: 'bg-blue-500/10 border-blue-500/20 text-[#004AAD]',
       features: ['SMTP & IMAP', 'Shared Threads', 'Live WebSockets', 'Group Inbox'],
       link: '/bnx-mail/dashboard'
     },
     {
-      name: 'B2AUTH SECURITY',
-      description: 'Unified authentication and security platform. Shield applications with role management and active token validations.',
-      icon: Shield,
-      color: 'bg-emerald-500/10 border-emerald-500/20 text-emerald-600',
-      features: ['SSO Integration', 'Multi-Factor Auth', 'JWT Verification', 'Admin Console'],
-      link: '/products#b2auth-security'
-    },
-    {
-      name: 'CLIKS PERSONAL',
-      description: 'Personal productivity and organization suite. Keep notes, schedules, and milestones structured in one unified interface.',
-      icon: User,
-      color: 'bg-indigo-500/10 border-indigo-500/20 text-indigo-600',
-      features: ['Task Milestones', 'Google Calendar', 'Markdown Notes', 'Personal Widgets'],
-      link: '/products#cliks'
-    },
-    {
       name: 'CLIKS BUSINESS',
-      description: 'Enterprise collaboration and sprint workflow engine. Fuel project releases, live group chat, and shared files.',
+      description: 'An all-in-one enterprise collaboration and sprint workflow engine. Fuel your project releases, manage tasks, coordinate with live team chat, share documents, and track milestones with real-time analytics.',
       icon: Briefcase,
       color: 'bg-violet-500/10 border-violet-500/20 text-violet-600',
       features: ['Agile Sprints', 'Workspace Chat', 'Analytical Reports', 'Doc Collaborator'],
@@ -136,128 +118,116 @@ export default function Home() {
         }
       `}</style>
 
-      {/* SECTION 1: HERO BANNER */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-        <div className="hero-blue-banner animated-gradient-bg relative overflow-hidden rounded-3xl py-20 px-6 md:px-12 md:py-28 text-center shadow-2xl border border-blue-500/20">
-          {/* Decorative Elements */}
-          <div className="absolute inset-0 bg-mesh-pattern bg-mesh opacity-10 pointer-events-none" />
-          <div className="absolute inset-0 bg-white/5 backdrop-blur-[1px] pointer-events-none" />
-          
+      {/* HERO SECTION: TWO-COLUMN LAYOUT */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 pt-8 md:pt-16">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
+          {/* Left Column: Heading, description, and buttons */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="relative z-10 max-w-4xl mx-auto space-y-6"
+            className="w-full lg:w-5/12 space-y-6 text-left"
           >
-            {/* Tagline Pill */}
-            <motion.div variants={itemVariants} className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-white text-xs font-semibold tracking-wide shadow-sm">
-              <Terminal className="h-3.5 w-3.5 text-cyan-300 animate-pulse" />
-              <span>V1.2.0 RELEASED • SECURE CLOUD SYNC</span>
+            <motion.div variants={itemVariants} className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#E9F4FF] border border-[#004AAD]/20 text-[#004AAD] text-xs font-semibold uppercase tracking-wider">
+              <Sparkles className="h-3.5 w-3.5" />
+              <span>Product Suite</span>
             </motion.div>
-
-            {/* Heading */}
-            <motion.h1 variants={itemVariants} className="text-4xl md:text-7xl font-extrabold tracking-tight leading-tight text-white">
+            
+            <motion.h1 variants={itemVariants} className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight tracking-tight">
               Unified Software for a
-              <span className="block bg-gradient-to-r from-cyan-300 via-blue-200 to-indigo-200 bg-clip-text text-transparent mt-2">
+              <span className="block bg-gradient-to-r from-[#004AAD] to-indigo-600 bg-clip-text text-transparent mt-1">
                 Connected Generation
               </span>
             </motion.h1>
 
-            {/* Subtitle */}
-            <motion.p variants={itemVariants} className="text-lg md:text-xl font-medium max-w-2xl mx-auto">
+            <motion.p variants={itemVariants} className="text-slate-600 text-sm md:text-base leading-relaxed">
               Beta Softnet builds secure, real-time corporate applications. Consolidation is here: SMTP mail threads, live authentication protocols, and agile sprints under one dashboard.
             </motion.p>
 
-            {/* CTA Buttons */}
-            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
+            <motion.div variants={itemVariants} className="flex flex-wrap gap-4 pt-2">
               <Link
                 to="/products"
-                className="w-full sm:w-auto px-8 py-4 rounded-xl text-base font-bold bg-white text-[#004AAD] hover:bg-slate-50 shadow-xl transition-all duration-300 flex items-center justify-center space-x-2 group hover:scale-[1.02]"
+                className="px-6 py-3.5 rounded-xl text-sm font-bold bg-[#004AAD] hover:bg-[#003882] text-white shadow-lg shadow-blue-500/10 transition-all duration-300 flex items-center space-x-2 group hover:scale-[1.02]"
               >
                 <span>Explore Product Suite</span>
-                <ArrowRight className="h-5 w-5 text-[#004AAD] group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="h-4 w-4 text-white group-hover:translate-x-0.5 transition-transform" />
               </Link>
               <Link
                 to="/support"
-                className="w-full sm:w-auto px-8 py-4 rounded-xl text-base font-bold bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/30 transition-all duration-300 hover:scale-[1.02] flex items-center justify-center"
+                className="px-6 py-3.5 rounded-xl text-sm font-bold bg-slate-100 hover:bg-slate-200/80 text-slate-700 border border-slate-200 transition-all duration-300 hover:scale-[1.02]"
               >
                 Get Direct Support
               </Link>
             </motion.div>
           </motion.div>
-        </div>
-      </div>
 
-      {/* SECTION 2: PRODUCT HIGHLIGHTS */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 text-center">
-        <div className="max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#E9F4FF] border border-[#004AAD]/20 text-[#004AAD] text-xs font-semibold uppercase tracking-wider">
-            <Sparkles className="h-3.5 w-3.5" />
-            <span>Product Highlights</span>
-          </div>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900">
-            Innovative Tools, Single Ecosystem
-          </h2>
-          <p className="text-slate-500 text-lg">
-            Discover our flagship solutions designed to streamline communications, access, and sprints.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {products.map((product, idx) => {
-            const Icon = product.icon;
-            return (
-              <motion.div
-                key={product.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="glass-card glass-card-hover p-8 rounded-3xl border border-slate-200 shadow-md text-left flex flex-col justify-between"
-              >
-                <div className="space-y-6">
-                  {/* Icon and Name */}
-                  <div className="flex items-center space-x-4">
-                    <div className={`h-12 w-12 rounded-2xl flex items-center justify-center border ${product.color}`}>
-                      <Icon className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-extrabold text-slate-900 tracking-tight">{product.name}</h3>
-                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Enterprise Suite</span>
-                    </div>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-slate-600 text-sm leading-relaxed">
-                    {product.description}
-                  </p>
-
-                  {/* Features badges */}
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {product.features.map((feat) => (
-                      <span 
-                        key={feat}
-                        className="px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200 text-slate-650 text-[10px] font-extrabold uppercase tracking-wide"
-                      >
-                        {feat}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Footer link button */}
-                <div className="pt-8 flex justify-start">
-                  <Link
-                    to={product.link}
-                    className="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-slate-100 hover:bg-[#E9F4FF] hover:text-[#004AAD] text-slate-700 border border-slate-200 hover:border-[#004AAD]/30 text-xs font-bold transition duration-300 group"
+          {/* Right Column: Featured Apps Box containing the products grid */}
+          <div className="w-full lg:w-7/12 glass-card p-6 md:p-8 rounded-3xl border border-slate-200 bg-white/50 backdrop-blur-sm shadow-sm space-y-6">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+              <h3 className="text-sm font-extrabold text-[#004AAD] uppercase tracking-wider flex items-center space-x-2">
+                <Sparkles className="h-4 w-4" />
+                <span>Featured Apps</span>
+              </h3>
+              <span className="px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-600 border border-blue-100 text-[9px] font-bold uppercase tracking-wider">
+                2 Active
+              </span>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {products.map((product, idx) => {
+                const Icon = product.icon;
+                return (
+                  <motion.div
+                    key={product.name}
+                    initial={{ opacity: 0, x: 30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: idx * 0.1 }}
+                    className="h-full"
                   >
-                    <span>Launch Application</span>
-                    <ChevronRight className="h-4 w-4 text-slate-500 group-hover:text-[#004AAD] group-hover:translate-x-0.5 transition" />
-                  </Link>
-                </div>
-              </motion.div>
-            );
-          })}
+                    <Link
+                      to={product.link}
+                      className="glass-card glass-card-hover p-5 rounded-2xl border border-slate-200/80 bg-white shadow-sm flex flex-col justify-between group text-left h-full transition-all duration-200 hover:shadow-md hover:border-[#004AAD]/30"
+                    >
+                      <div className="space-y-3.5">
+                        {/* Top Row: Icon and Tag */}
+                        <div className="flex items-center justify-between">
+                          <div className={`h-10 w-10 rounded-xl flex items-center justify-center border flex-shrink-0 group-hover:scale-105 transition-transform duration-300 ${product.color}`}>
+                            <Icon className="h-4.5 w-4.5" />
+                          </div>
+                          <span className="px-1.5 py-0.2 rounded text-[8px] font-bold uppercase tracking-wider bg-slate-100 border border-slate-250/50 text-slate-500">
+                            Suite
+                          </span>
+                        </div>
+                        
+                        {/* Middle: Title & Description */}
+                        <div className="space-y-1">
+                          <h4 className="text-sm font-bold text-slate-900 group-hover:text-[#004AAD] transition-colors duration-200">
+                            {product.name}
+                          </h4>
+                          <p className="text-slate-500 text-[11px] leading-relaxed">
+                            {product.description}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Bottom: Feature Badges */}
+                      <div className="flex flex-wrap gap-1 mt-4 pt-3 border-t border-slate-100/60">
+                        {product.features.slice(0, 3).map((feat) => (
+                          <span
+                            key={feat}
+                            className="px-1.5 py-0.2 rounded bg-slate-50 border border-slate-150 text-slate-500 text-[8px] font-semibold"
+                          >
+                            {feat}
+                          </span>
+                        ))}
+                      </div>
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
 

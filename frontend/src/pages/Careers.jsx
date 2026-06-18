@@ -66,15 +66,6 @@ const jobs = [
   { id: 7, title: 'Technical Support Specialist', team: 'Support', location: 'Chennai', type: 'Full-Time', experience: '2+ Years', skills: ['APIs', 'SMTP', 'SQL'] }
 ];
 
-const journeyStages = [
-  { id: 1, stage: 'Student', desc: 'Real-world coding challenges, developer training, and open-source contributions.', highlight: 'Foundation & Basics' },
-  { id: 2, stage: 'Intern', desc: 'Working in scrum teams, contributing code to staging environments, and mentorship.', highlight: 'Team Integration' },
-  { id: 3, stage: 'Associate', desc: 'Owning independent modules, code reviews, and writing functional specs.', highlight: 'Module Ownership' },
-  { id: 4, stage: 'Engineer', desc: 'Architecting end-to-end features, resolving bottlenecks, and production deployments.', highlight: 'Feature Autonomy' },
-  { id: 5, stage: 'Senior Engineer', desc: 'System design scaling, mentoring juniors, leading sub-systems, and security compliance.', highlight: 'System Architecture' },
-  { id: 6, stage: 'Tech Lead', desc: 'Directing product technical strategy, resource planning, and architecting critical infrastructure.', highlight: 'Technical Vision' }
-];
-
 const benefits = [
   { emoji: '💰', title: 'Bonus', desc: 'Competitive base package with performance bonuses tied to milestones.' },
   { emoji: '🏠', title: 'Remote Work', desc: 'Flexible hours and high-end remote developer workstation setup.' },
@@ -184,21 +175,30 @@ export default function Careers() {
     <div className="careers-purple-pink-theme min-h-screen relative overflow-hidden pb-20 pt-24">
       <style>{`
         .careers-purple-pink-theme {
-          background-color: #0B1020 !important;
-          color: #FFFFFF !important;
+          background: linear-gradient(135deg, #F5F3FF 0%, #EFF6FF 50%, #FDF2F8 100%) !important;
+          color: #1E293B !important;
           position: relative;
           z-index: 10;
         }
-        .careers-purple-pink-theme h1, 
-        .careers-purple-pink-theme h2, 
-        .careers-purple-pink-theme h3, 
-        .careers-purple-pink-theme h4, 
-        .careers-purple-pink-theme h5, 
-        .careers-purple-pink-theme h6 {
-          color: #FFFFFF !important;
+        .careers-purple-pink-theme h1:not(.text-transparent), 
+        .careers-purple-pink-theme h2:not(.text-transparent), 
+        .careers-purple-pink-theme h3:not(.text-transparent), 
+        .careers-purple-pink-theme h4:not(.text-transparent), 
+        .careers-purple-pink-theme h5:not(.text-transparent), 
+        .careers-purple-pink-theme h6:not(.text-transparent) {
+          color: #0F172A !important;
+        }
+        .careers-purple-pink-theme h1.text-white:not(.text-transparent), 
+        .careers-purple-pink-theme h2.text-white:not(.text-transparent), 
+        .careers-purple-pink-theme h3.text-white:not(.text-transparent), 
+        .careers-purple-pink-theme h4.text-white:not(.text-transparent), 
+        .careers-purple-pink-theme h5.text-white:not(.text-transparent), 
+        .careers-purple-pink-theme h6.text-white:not(.text-transparent),
+        .careers-purple-pink-theme div.text-white {
+          color: #0F172A !important;
         }
         .careers-purple-pink-theme p {
-          color: #CBD5E1 !important; /* Secondary Text */
+          color: #475569 !important;
         }
         .careers-purple-pink-theme span {
           color: inherit;
@@ -207,7 +207,22 @@ export default function Careers() {
           color: inherit;
         }
         .careers-purple-pink-theme label {
-          color: #CBD5E1 !important;
+          color: #334155 !important;
+        }
+        .careers-purple-pink-theme input,
+        .careers-purple-pink-theme textarea {
+          background-color: #ffffff !important;
+          color: #0F172A !important;
+          border-color: rgba(139, 92, 246, 0.2) !important;
+        }
+        .careers-purple-pink-theme input::placeholder,
+        .careers-purple-pink-theme textarea::placeholder {
+          color: #94A3B8 !important;
+        }
+        .careers-purple-pink-theme .cta-block h2,
+        .careers-purple-pink-theme .cta-block p,
+        .careers-purple-pink-theme .cta-block a {
+          color: #ffffff !important;
         }
 
         /* Animated gradient blobs */
@@ -259,16 +274,16 @@ export default function Careers() {
 
         /* Purple glowing cards */
         .glass-card-purple {
-          background: rgba(22, 27, 51, 0.7) !important;
+          background: rgba(255, 255, 255, 0.75) !important;
           backdrop-filter: blur(12px) !important;
-          border: 1px solid rgba(139, 92, 246, 0.15) !important;
-          box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
+          border: 1px solid rgba(139, 92, 246, 0.2) !important;
+          box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.06) !important;
           transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
         }
         .glass-card-purple:hover {
-          background: rgba(22, 27, 51, 0.95) !important;
+          background: rgba(255, 255, 255, 0.92) !important;
           border-color: rgba(236, 72, 153, 0.4) !important; /* Secondary border pink */
-          box-shadow: 0 0 25px rgba(139, 92, 246, 0.35) !important; /* Purple glow */
+          box-shadow: 0 0 25px rgba(139, 92, 246, 0.15) !important; /* Purple glow */
           transform: translateY(-5px);
         }
 
@@ -283,14 +298,15 @@ export default function Careers() {
 
         /* Hacker-style double borders for jobs */
         .hacker-layout-box {
-          border: 1px solid rgba(139, 92, 246, 0.3);
+          background: rgba(255, 255, 255, 0.75) !important;
+          border: 1px solid rgba(139, 92, 246, 0.25) !important;
           position: relative;
         }
         .hacker-layout-box::before {
           content: '';
           position: absolute;
           inset: 2px;
-          border: 1px solid rgba(236, 72, 153, 0.15);
+          border: 1px solid rgba(236, 72, 153, 0.12);
           pointer-events: none;
         }
       `}</style>
@@ -319,7 +335,7 @@ export default function Careers() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="hacker-layout-box bg-[#161B33]/60 p-8 sm:p-12 rounded-3xl backdrop-blur-md shadow-2xl border border-purple-500/30 text-center max-w-2xl mx-auto space-y-6"
+            className="hacker-layout-box p-8 sm:p-12 rounded-3xl backdrop-blur-md shadow-2xl border border-purple-500/30 text-center max-w-2xl mx-auto space-y-6"
           >
             <h1 className="text-2xl sm:text-4xl font-extrabold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] uppercase">
               YOUR FUTURE STARTS HERE
@@ -327,22 +343,22 @@ export default function Careers() {
             
             <div className="grid grid-cols-3 gap-4 border-t border-b border-purple-500/20 py-6 text-center">
               <div>
-                <div className="text-xl sm:text-3xl font-black text-white">
+                <div className="text-xl sm:text-3xl font-black text-[#8B5CF6]">
                   <CountUpNumber value="25" />
                 </div>
-                <p className="text-[10px] text-[#CBD5E1] font-bold uppercase tracking-wider mt-1">Open Positions</p>
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-1">Open Positions</p>
               </div>
               <div>
-                <div className="text-xl sm:text-3xl font-black text-white">
+                <div className="text-xl sm:text-3xl font-black text-[#8B5CF6]">
                   <CountUpNumber value="12" />
                 </div>
-                <p className="text-[10px] text-[#CBD5E1] font-bold uppercase tracking-wider mt-1">Teams</p>
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-1">Teams</p>
               </div>
               <div>
-                <div className="text-xl sm:text-3xl font-black text-white">
+                <div className="text-xl sm:text-3xl font-black text-[#8B5CF6]">
                   <CountUpNumber value="4" />
                 </div>
-                <p className="text-[10px] text-[#CBD5E1] font-bold uppercase tracking-wider mt-1">Locations</p>
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-1">Locations</p>
               </div>
             </div>
 
@@ -360,59 +376,6 @@ export default function Careers() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 space-y-36">
 
-        {/* SECTION 2: CAREER JOURNEY SECTION */}
-        <div className="space-y-16">
-          <div className="text-center max-w-2xl mx-auto space-y-3">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-[#EC4899] text-xs font-semibold uppercase tracking-wider">
-              <Sparkles className="h-3.5 w-3.5" />
-              <span>Career Journey Roadmap</span>
-            </div>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight">Our Career Journey</h2>
-            <p className="text-[#CBD5E1] text-sm">Visualize your growth path. Each step is designed to expand your responsibilities.</p>
-          </div>
-
-          {/* Vertical Roadmap Timeline */}
-          <div className="relative max-w-3xl mx-auto pl-8 sm:pl-0">
-            {/* Central Timeline Thread Line */}
-            <div className="absolute left-8 sm:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#8B5CF6] via-[#EC4899] to-[#8B5CF6] -translate-x-1/2 pointer-events-none" />
-
-            <div className="space-y-12">
-              {journeyStages.map((stage, idx) => {
-                const isEven = idx % 2 === 0;
-                return (
-                  <motion.div
-                    key={stage.id}
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.6, delay: idx * 0.1 }}
-                    className={`relative flex flex-col sm:flex-row items-start sm:items-center ${isEven ? 'sm:flex-row-reverse' : ''}`}
-                  >
-                    {/* Circle Node on Central Line */}
-                    <div className="absolute left-0 sm:left-1/2 h-8 w-8 rounded-full bg-[#161B33] border-4 border-[#EC4899] -translate-x-1/2 flex items-center justify-center z-10 shadow-lg shadow-pink-500/25">
-                      <div className="h-2 w-2 rounded-full bg-white" />
-                    </div>
-
-                    {/* Card container */}
-                    <div className={`w-full sm:w-[45%] text-left pl-6 sm:pl-0 ${isEven ? 'sm:pl-8' : 'sm:pr-8'}`}>
-                      <div className="glass-card-purple p-6 rounded-3xl border border-purple-500/20 shadow-md">
-                        <span className="text-[10px] font-extrabold text-[#F59E0B] uppercase tracking-widest block mb-1">
-                          {stage.highlight}
-                        </span>
-                        <h4 className="text-xl font-bold text-white mb-2">
-                          {stage.stage}
-                        </h4>
-                        <p className="text-[#CBD5E1] text-xs leading-relaxed">
-                          {stage.desc}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
 
         {/* SECTION 3: OPEN ROLES SECTION */}
         <div id="search-roles" className="space-y-12">
@@ -421,8 +384,7 @@ export default function Careers() {
               <Briefcase className="h-3.5 w-3.5" />
               <span>Current Openings</span>
             </div>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight">Open Roles</h2>
-            <p className="text-[#CBD5E1] text-sm">Join Chennai teams. Search by keyword or apply directly inside our dashboard.</p>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">Open Roles</h2>
           </div>
 
           {/* Search Controls */}
@@ -434,10 +396,10 @@ export default function Careers() {
                 placeholder="Search by title, team, or skill (e.g. React, Spring)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-[#0B1020]/60 text-white placeholder-slate-550 border border-purple-500/25 rounded-2xl py-3 pl-12 pr-4 focus:outline-none focus:border-[#EC4899] text-sm"
+                className="w-full bg-white text-slate-800 placeholder-slate-400 border border-purple-200 rounded-2xl py-3 pl-12 pr-4 focus:outline-none focus:border-[#EC4899] text-sm"
               />
             </div>
-            <div className="flex items-center space-x-2 text-xs text-[#CBD5E1] bg-[#161B33] px-4 py-3 rounded-2xl border border-purple-500/10 w-full md:w-auto flex-shrink-0 select-none">
+            <div className="flex items-center space-x-2 text-xs text-purple-700 bg-purple-50 px-4 py-3 rounded-2xl border border-purple-200 w-full md:w-auto flex-shrink-0 select-none">
               <MapPin className="h-4 w-4 text-[#EC4899]" />
               <span>Office: Chennai, India</span>
             </div>
@@ -452,7 +414,7 @@ export default function Careers() {
                 className={`px-5 py-2 rounded-xl text-xs font-extrabold tracking-wide border transition-all duration-300 cursor-pointer ${
                   selectedCategory === cat 
                     ? 'bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] text-white border-transparent shadow-lg shadow-purple-500/20' 
-                    : 'bg-[#161B33] text-slate-400 border-purple-500/10 hover:border-[#8B5CF6]/30 hover:text-white'
+                    : 'bg-white text-slate-600 border-purple-200 hover:border-[#8B5CF6]/30 hover:text-[#8B5CF6]'
                 }`}
               >
                 {cat}
@@ -472,11 +434,11 @@ export default function Careers() {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.3 }}
-                    className="hacker-layout-box bg-[#161B33] p-6 rounded-2xl text-left flex flex-col justify-between space-y-6 transition-all duration-300 hover:border-[#8B5CF6] hover:shadow-lg hover:shadow-purple-500/20 group"
+                    className="hacker-layout-box p-6 rounded-2xl text-left flex flex-col justify-between space-y-6 transition-all duration-300 hover:border-[#8B5CF6] hover:shadow-lg hover:shadow-purple-500/10 group"
                   >
                     <div className="space-y-4">
                       <div>
-                        <h3 className="text-lg font-black text-white tracking-tight group-hover:text-[#EC4899] transition-colors duration-300">
+                        <h3 className="text-lg font-black tracking-tight group-hover:text-[#EC4899] transition-colors duration-300">
                           {job.title}
                         </h3>
                         <span className="text-[9px] font-extrabold text-[#F59E0B] uppercase tracking-widest block mt-0.5">
@@ -484,7 +446,7 @@ export default function Careers() {
                         </span>
                       </div>
 
-                      <div className="space-y-2 border-t border-b border-purple-500/10 py-3 text-xs text-[#CBD5E1] font-medium">
+                      <div className="space-y-2 border-t border-b border-purple-500/10 py-3 text-xs text-slate-600 font-medium">
                         <div className="flex items-center space-x-2">
                           <span className="text-[#EC4899]">•</span>
                           <span>{job.location} • {job.type}</span>
@@ -498,14 +460,14 @@ export default function Careers() {
 
                     <button
                       onClick={() => setSelectedJob(job)}
-                      className="w-full py-2 rounded-xl text-xs font-black bg-purple-600/20 hover:bg-gradient-to-r hover:from-[#8B5CF6] hover:to-[#EC4899] text-white border border-[#8B5CF6]/30 hover:border-transparent transition-all duration-300 text-center cursor-pointer shadow-sm"
+                      className="w-full py-2 rounded-xl text-xs font-black bg-purple-600/15 hover:bg-gradient-to-r hover:from-[#8B5CF6] hover:to-[#EC4899] text-[#8B5CF6] hover:text-white border border-[#8B5CF6]/30 hover:border-transparent transition-all duration-300 text-center cursor-pointer shadow-sm"
                     >
                       [Apply Now]
                     </button>
                   </motion.div>
                 ))
               ) : (
-                <div className="col-span-full text-center py-12 text-[#CBD5E1]/60 italic text-sm">
+                <div className="col-span-full text-center py-12 text-slate-400 italic text-sm">
                   No open positions found. Try adjusting filters or search keywords.
                 </div>
               )}
@@ -520,8 +482,8 @@ export default function Careers() {
               <Users className="h-3.5 w-3.5" />
               <span>Team Culture</span>
             </div>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-white">Our Team Culture</h2>
-            <p className="text-[#CBD5E1] text-sm">A look inside our technical sprints, hackathons, and global offsites.</p>
+            <h2 className="text-3xl md:text-5xl font-extrabold">Our Team Culture</h2>
+            <p className="text-slate-500 text-sm">A look inside our technical sprints, hackathons, and global offsites.</p>
           </div>
 
           {/* Sequential Grid Layout */}
@@ -529,13 +491,13 @@ export default function Careers() {
             {/* Box 1 (Text Quote) */}
             <div className="glass-card-purple p-6 rounded-3xl border border-purple-500/20 flex flex-col justify-between shadow-md relative overflow-hidden group">
               <Quote className="h-8 w-8 text-[#EC4899] opacity-40 mb-4" />
-              <p className="text-sm font-medium italic text-[#CBD5E1] leading-relaxed text-left">
+              <p className="text-sm font-medium italic text-slate-600 leading-relaxed text-left">
                 "We don't build software to hit corporate metrics. We design and deliver real-time systems that solve actual production bottlenecks for customers globally."
               </p>
               <div className="flex items-center space-x-3 mt-6 border-t border-purple-500/10 pt-4">
                 <img src="/marcus_avatar.png" alt="Marcus" className="h-9 w-9 rounded-full object-cover border border-purple-500/30" />
                 <div className="text-left">
-                  <h5 className="text-xs font-bold text-white">Marcus Sterling</h5>
+                  <h5 className="text-xs font-bold">Marcus Sterling</h5>
                   <p className="text-[10px] text-[#EC4899] font-semibold">Chief Technology Officer</p>
                 </div>
               </div>
@@ -543,25 +505,25 @@ export default function Careers() {
 
             {/* Box 2 (Image Container) */}
             <div className="glass-card-purple p-6 rounded-3xl border border-purple-500/20 flex flex-col justify-between shadow-md relative overflow-hidden group">
-              <div className="rounded-2xl overflow-hidden border border-purple-500/10 bg-[#0B1020]/40 p-2 flex-grow flex items-center justify-center">
+              <div className="rounded-2xl overflow-hidden border border-purple-500/10 bg-white/50 p-2 flex-grow flex items-center justify-center">
                 <img src="/tech_illustration.png" alt="Tech illustration" className="w-full h-auto object-cover rounded-xl transition duration-500 group-hover:scale-105" />
               </div>
               <div className="text-left mt-4">
-                <h5 className="text-xs font-bold text-white">Interactive Technology</h5>
-                <p className="text-[10px] text-[#CBD5E1]">Developing premium user interfaces with React and Stomp protocols.</p>
+                <h5 className="text-xs font-bold">Interactive Technology</h5>
+                <p className="text-[10px] text-slate-500">Developing premium user interfaces with React and Stomp protocols.</p>
               </div>
             </div>
 
             {/* Box 3 (Text Quote) */}
             <div className="glass-card-purple p-6 rounded-3xl border border-purple-500/20 flex flex-col justify-between shadow-md relative overflow-hidden group">
               <Quote className="h-8 w-8 text-[#8B5CF6] opacity-40 mb-4" />
-              <p className="text-sm font-medium italic text-[#CBD5E1] leading-relaxed text-left">
+              <p className="text-sm font-medium italic text-slate-600 leading-relaxed text-left">
                 "Our designs prioritize aesthetics and responsiveness. Using HSL palettes and custom-built tokens, we create interfaces that look absolutely premium."
               </p>
               <div className="flex items-center space-x-3 mt-6 border-t border-purple-500/10 pt-4">
                 <img src="/ananya_avatar.png" alt="Ananya" className="h-9 w-9 rounded-full object-cover border border-purple-500/30" />
                 <div className="text-left">
-                  <h5 className="text-xs font-bold text-white">Ananya Nair</h5>
+                  <h5 className="text-xs font-bold">Ananya Nair</h5>
                   <p className="text-[10px] text-[#8B5CF6] font-semibold">Head of Design</p>
                 </div>
               </div>
@@ -570,8 +532,8 @@ export default function Careers() {
             {/* Box 4 (Small Card) */}
             <div className="glass-card-purple p-6 rounded-3xl border border-purple-500/20 shadow-md relative overflow-hidden text-left flex flex-col justify-between group">
               <div>
-                <h4 className="text-base font-bold text-white mb-2">No-Meeting Wednesdays</h4>
-                <p className="text-xs text-[#CBD5E1] leading-relaxed">
+                <h4 className="text-base font-bold mb-2">No-Meeting Wednesdays</h4>
+                <p className="text-xs text-slate-500 leading-relaxed">
                   We protect developers' deep focus. Mid-week days are dedicated purely to code, research, and flow.
                 </p>
               </div>
@@ -583,13 +545,13 @@ export default function Careers() {
             {/* Box 5 (Quote) */}
             <div className="glass-card-purple p-6 rounded-3xl border border-purple-500/20 flex flex-col justify-between shadow-md relative overflow-hidden group">
               <Quote className="h-8 w-8 text-[#EC4899] opacity-40 mb-4" />
-              <p className="text-sm font-medium italic text-[#CBD5E1] leading-relaxed text-left">
+              <p className="text-sm font-medium italic text-slate-600 leading-relaxed text-left">
                 "Working asynchronously is our superpower. We pair program over codebases and communicate through design RFCs instead of sitting in long daily standups."
               </p>
               <div className="flex items-center space-x-3 mt-6 border-t border-purple-500/10 pt-4">
                 <img src="/rohan_avatar.png" alt="Rohan" className="h-9 w-9 rounded-full object-cover border border-purple-500/30" />
                 <div className="text-left">
-                  <h5 className="text-xs font-bold text-white">Rohan Sen</h5>
+                  <h5 className="text-xs font-bold">Rohan Sen</h5>
                   <p className="text-[10px] text-[#EC4899] font-semibold">Frontend Architect</p>
                 </div>
               </div>
@@ -604,8 +566,8 @@ export default function Careers() {
               <Award className="h-3.5 w-3.5" />
               <span>Compensation & Benefits</span>
             </div>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-white">Perks & Benefits</h2>
-            <p className="text-[#CBD5E1] text-sm">We provide everything you need to deliver high-quality work, grow your skillset, and stay healthy.</p>
+            <h2 className="text-3xl md:text-5xl font-extrabold">Perks & Benefits</h2>
+            <p className="text-slate-500 text-sm">We provide everything you need to deliver high-quality work, grow your skillset, and stay healthy.</p>
           </div>
 
           {/* Floating Circular Cards Layout */}
@@ -619,7 +581,7 @@ export default function Careers() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className={`h-48 w-48 rounded-full border border-purple-500/20 bg-[#161B33]/80 shadow-lg shadow-purple-500/5 flex flex-col items-center justify-center p-6 text-center space-y-2 relative group overflow-hidden ${
+                  className={`h-48 w-48 rounded-full border border-purple-200 bg-white/80 shadow-lg shadow-purple-500/5 flex flex-col items-center justify-center p-6 text-center space-y-2 relative group overflow-hidden ${
                     isEven ? 'float-circle-even' : 'float-circle-odd'
                   }`}
                 >
@@ -629,10 +591,10 @@ export default function Careers() {
                   <span className="text-3xl select-none" role="img" aria-label={ben.title}>
                     {ben.emoji}
                   </span>
-                  <h4 className="text-sm font-extrabold text-white group-hover:text-[#EC4899] transition-colors">
+                  <h4 className="text-sm font-extrabold group-hover:text-[#EC4899] transition-colors">
                     {ben.title}
                   </h4>
-                  <p className="text-[10px] text-[#CBD5E1] leading-relaxed line-clamp-3 select-none">
+                  <p className="text-[10px] text-slate-500 leading-relaxed line-clamp-3 select-none">
                     {ben.desc}
                   </p>
                 </motion.div>
@@ -648,8 +610,8 @@ export default function Careers() {
               <CheckSquare className="h-3.5 w-3.5" />
               <span>Hiring Pipeline</span>
             </div>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-white">Our Hiring Process</h2>
-            <p className="text-[#CBD5E1] text-sm">A quick outline of how we validate core competencies and welcome new team members.</p>
+            <h2 className="text-3xl md:text-5xl font-extrabold">Our Hiring Process</h2>
+            <p className="text-slate-500 text-sm">A quick outline of how we validate core competencies and welcome new team members.</p>
           </div>
 
           {/* Connected Glowing Nodes Timeline */}
@@ -672,10 +634,10 @@ export default function Careers() {
                     <span className="text-[9px] font-extrabold text-[#F59E0B] uppercase tracking-widest mb-1">
                       Step {step.id}
                     </span>
-                    <h4 className="text-xs font-black text-white group-hover:text-[#EC4899] transition-colors">
+                    <h4 className="text-xs font-black group-hover:text-[#EC4899] transition-colors">
                       {step.title}
                     </h4>
-                    <p className="text-[10px] text-[#CBD5E1] leading-relaxed mt-1 font-medium">
+                    <p className="text-[10px] text-slate-500 leading-relaxed mt-1 font-medium">
                       {step.desc}
                     </p>
                   </motion.div>
@@ -693,8 +655,8 @@ export default function Careers() {
         {/* SECTION 7: RESUME DROP ZONE */}
         <div id="resume-drop" className="space-y-6 max-w-3xl mx-auto">
           <div className="text-center space-y-2">
-            <h3 className="text-2xl font-extrabold text-white">General Application</h3>
-            <p className="text-[#CBD5E1] text-sm">Don't see a matching position? Drop your resume in our talent pool.</p>
+            <h3 className="text-2xl font-extrabold">General Application</h3>
+            <p className="text-slate-500 text-sm">Don't see a matching position? Drop your resume in our talent pool.</p>
           </div>
 
           <div 
@@ -716,18 +678,18 @@ export default function Careers() {
               className="hidden"
             />
             <div className="flex flex-col items-center justify-center space-y-4">
-              <div className="h-14 w-14 rounded-full bg-[#161B33] flex items-center justify-center border border-purple-500/30 text-[#EC4899] shadow-inner">
+              <div className="h-14 w-14 rounded-full bg-slate-100 flex items-center justify-center border border-purple-300/40 text-[#EC4899] shadow-inner">
                 <Upload className="h-6 w-6" />
               </div>
               <div className="space-y-1">
-                <h4 className="text-base font-bold text-white">
+                <h4 className="text-base font-bold">
                   {resume ? resume.name : 'Drag & drop your resume PDF here'}
                 </h4>
-                <p className="text-xs text-slate-550 font-medium">Only PDF formats supported (Max 10MB)</p>
+                <p className="text-xs text-slate-500 font-medium">Only PDF formats supported (Max 10MB)</p>
               </div>
               
               {resume ? (
-                <div className="flex items-center space-x-2 text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-lg">
+                <div className="flex items-center space-x-2 text-xs text-emerald-600 bg-emerald-50 border border-emerald-100 px-3 py-1.5 rounded-lg">
                   <CheckCircle2 className="h-4 w-4" />
                   <span>Resume loaded successfully. Complete the quick form below to submit.</span>
                 </div>
@@ -751,8 +713,8 @@ export default function Careers() {
               className="glass-card-purple p-6 rounded-3xl border border-purple-500/20 text-left space-y-4"
             >
               <div className="flex items-center justify-between">
-                <h4 className="text-sm font-bold text-white">General Candidate Submission</h4>
-                <button onClick={() => setResume(null)} className="text-purple-400 hover:text-white transition">
+                <h4 className="text-sm font-bold">General Candidate Submission</h4>
+                <button onClick={() => setResume(null)} className="text-purple-600 hover:text-purple-800 transition">
                   <X className="h-4 w-4" />
                 </button>
               </div>
@@ -769,7 +731,7 @@ export default function Careers() {
                   placeholder="Full Name"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  className="bg-[#0B1020] border border-purple-500/20 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-[#EC4899]"
+                  className="bg-white border border-purple-200 rounded-xl px-3 py-2 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#EC4899]"
                 />
                 <input
                   type="email"
@@ -777,7 +739,7 @@ export default function Careers() {
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="bg-[#0B1020] border border-purple-500/20 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-[#EC4899]"
+                  className="bg-white border border-purple-200 rounded-xl px-3 py-2 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#EC4899]"
                 />
                 <input
                   type="text"
@@ -785,25 +747,25 @@ export default function Careers() {
                   placeholder="Phone"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="bg-[#0B1020] border border-purple-500/20 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-[#EC4899]"
+                  className="bg-white border border-purple-200 rounded-xl px-3 py-2 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#EC4899]"
                 />
                 <button
                   type="submit"
                   disabled={status === 'loading'}
-                  className="sm:col-span-3 w-full py-2.5 rounded-xl bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] text-white text-xs font-black transition-all flex items-center justify-center space-x-2 cursor-pointer disabled:from-slate-800 disabled:to-slate-900 disabled:text-slate-500"
+                  className="sm:col-span-3 w-full py-2.5 rounded-xl bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] text-white text-xs font-black transition-all flex items-center justify-center space-x-2 cursor-pointer disabled:from-slate-200 disabled:to-slate-300 disabled:text-slate-400"
                 >
                   {status === 'loading' ? <span>Submitting Profile...</span> : <span>Submit Profile</span>}
                 </button>
               </form>
               
               {status === 'success' && (
-                <div className="text-xs text-[#CBD5E1] bg-emerald-500/10 border border-emerald-500/20 p-3 rounded-xl flex items-center space-x-2">
+                <div className="text-xs text-emerald-600 bg-emerald-50 border border-emerald-100 p-3 rounded-xl flex items-center space-x-2">
                   <CheckCircle2 className="h-4.5 w-4.5" />
                   <span>{message}</span>
                 </div>
               )}
               {status === 'error' && (
-                <div className="text-xs text-rose-455 bg-rose-500/10 border border-rose-500/20 p-3 rounded-xl flex items-center space-x-2">
+                <div className="text-xs text-rose-600 bg-rose-50 border border-rose-100 p-3 rounded-xl flex items-center space-x-2">
                   <AlertCircle className="h-4.5 w-4.5" />
                   <span>{message}</span>
                 </div>
@@ -813,7 +775,7 @@ export default function Careers() {
         </div>
 
         {/* SECTION 8: CALL TO ACTION SECTION */}
-        <div className="relative overflow-hidden rounded-3xl p-10 md:p-16 border border-purple-500/30 text-center shadow-2xl" style={{ background: 'linear-gradient(135deg, #8B5CF6, #EC4899)' }}>
+        <div className="cta-block relative overflow-hidden rounded-3xl p-10 md:p-16 border border-purple-500/30 text-center shadow-2xl" style={{ background: 'linear-gradient(135deg, #8B5CF6, #EC4899)' }}>
           {/* Floating glow circles inside CTA */}
           <div className="absolute top-[-30px] left-[-30px] w-48 h-48 bg-white/10 rounded-full blur-2xl pointer-events-none" />
           <div className="absolute bottom-[-30px] right-[-30px] w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none" />
@@ -852,31 +814,30 @@ export default function Careers() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full max-w-lg glass-card-purple rounded-3xl p-6 md:p-8 border border-purple-500/20 shadow-2xl text-left"
+              className="relative w-full max-w-lg bg-white rounded-3xl p-6 md:p-8 border border-purple-100 shadow-2xl text-left"
             >
               <button
                 onClick={() => setSelectedJob(null)}
-                className="absolute right-4 top-4 p-1.5 rounded-lg hover:bg-purple-500/20 text-purple-400 hover:text-white transition cursor-pointer"
+                className="absolute right-4 top-4 p-1.5 rounded-lg hover:bg-purple-50 text-purple-400 hover:text-purple-600 transition cursor-pointer"
               >
                 <X className="h-5 w-5" />
               </button>
-
               <div className="mb-6 space-y-1">
                 <span className="text-xs font-bold text-[#EC4899] uppercase tracking-widest">Apply for position</span>
-                <h3 className="text-2xl font-black text-white">{selectedJob.title}</h3>
-                <p className="text-[#CBD5E1] text-xs font-medium">{selectedJob.team} &bull; {selectedJob.location}</p>
+                <h3 className="text-2xl font-black">{selectedJob.title}</h3>
+                <p className="text-slate-500 text-xs font-medium">{selectedJob.team} &bull; {selectedJob.location}</p>
               </div>
 
               {status === 'success' ? (
                 <div className="py-8 text-center space-y-4">
-                  <div className="h-12 w-12 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mx-auto text-emerald-400">
+                  <div className="h-12 w-12 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center mx-auto text-emerald-600">
                     <CheckCircle2 className="h-6 w-6" />
                   </div>
-                  <h4 className="text-lg font-bold text-white">Application Received!</h4>
-                  <p className="text-[#CBD5E1] text-xs leading-relaxed max-w-sm mx-auto">{message}</p>
+                  <h4 className="text-lg font-bold">Application Received!</h4>
+                  <p className="text-slate-500 text-xs leading-relaxed max-w-sm mx-auto">{message}</p>
                   <button
                     onClick={() => setSelectedJob(null)}
-                    className="px-6 py-2.5 rounded-xl bg-purple-600/20 hover:bg-gradient-to-r hover:from-[#8B5CF6] hover:to-[#EC4899] text-white border border-purple-500/30 text-xs font-extrabold transition cursor-pointer"
+                    className="px-6 py-2.5 rounded-xl bg-purple-600/10 hover:bg-gradient-to-r hover:from-[#8B5CF6] hover:to-[#EC4899] text-[#8B5CF6] hover:text-white border border-purple-500/30 text-xs font-extrabold transition cursor-pointer"
                   >
                     Close Modal
                   </button>
@@ -884,45 +845,45 @@ export default function Careers() {
               ) : (
                 <form onSubmit={handleApply} className="space-y-4">
                   <div className="space-y-1">
-                    <label className="text-xs font-bold text-slate-400 uppercase">Full Name</label>
+                    <label className="text-xs font-bold text-slate-500 uppercase">Full Name</label>
                     <input
                       type="text"
                       required
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       placeholder="e.g. Robert Downey"
-                      className="w-full bg-[#0B1020] text-white placeholder-slate-500 border border-purple-500/20 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#EC4899] text-sm transition"
+                      className="w-full bg-white text-slate-800 placeholder-slate-400 border border-purple-200 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#EC4899] text-sm transition"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1">
-                      <label className="text-xs font-bold text-slate-400 uppercase">Email Address</label>
+                      <label className="text-xs font-bold text-slate-500 uppercase">Email Address</label>
                       <input
                         type="email"
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="e.g. rob@domain.com"
-                        className="w-full bg-[#0B1020] text-white placeholder-slate-500 border border-purple-500/20 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#EC4899] text-sm transition"
+                        className="w-full bg-white text-slate-800 placeholder-slate-400 border border-purple-200 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#EC4899] text-sm transition"
                       />
                     </div>
                     <div className="space-y-1">
-                      <label className="text-xs font-bold text-slate-400 uppercase">Phone Number</label>
+                      <label className="text-xs font-bold text-slate-500 uppercase">Phone Number</label>
                       <input
                         type="text"
                         required
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="e.g. +1 555-0199"
-                        className="w-full bg-[#0B1020] text-white placeholder-slate-500 border border-purple-500/20 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#EC4899] text-sm transition"
+                        className="w-full bg-white text-slate-800 placeholder-slate-400 border border-purple-200 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#EC4899] text-sm transition"
                       />
                     </div>
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-400 uppercase">Resume Upload (PDF Only)</label>
-                    <div className="relative border border-dashed border-purple-500/30 rounded-xl p-6 bg-[#0B1020] hover:bg-[#161B33] hover:border-purple-500/50 transition flex flex-col items-center justify-center cursor-pointer">
+                    <label className="text-xs font-bold text-slate-500 uppercase">Resume Upload (PDF Only)</label>
+                    <div className="relative border border-dashed border-purple-300 rounded-xl p-6 bg-slate-50 hover:bg-slate-100/60 transition flex flex-col items-center justify-center cursor-pointer">
                       <input
                         type="file"
                         accept=".pdf"
@@ -938,7 +899,7 @@ export default function Careers() {
                   </div>
 
                   {status === 'error' && (
-                    <div className="flex items-center space-x-2 text-rose-400 text-xs p-3 rounded-xl bg-rose-500/10 border border-rose-500/20">
+                    <div className="flex items-center space-x-2 text-rose-600 text-xs p-3 rounded-xl bg-rose-50 border border-rose-100">
                       <AlertCircle className="h-4.5 w-4.5 flex-shrink-0" />
                       <span>{message}</span>
                     </div>
@@ -947,7 +908,7 @@ export default function Careers() {
                   <button
                     type="submit"
                     disabled={status === 'loading'}
-                    className="w-full py-3 rounded-xl bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] text-white text-xs font-black transition flex items-center justify-center space-x-2 disabled:from-slate-800 disabled:to-slate-900 disabled:text-slate-500 cursor-pointer"
+                    className="w-full py-3 rounded-xl bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] text-white text-xs font-black transition flex items-center justify-center space-x-2 disabled:from-slate-200 disabled:to-slate-300 disabled:text-slate-400 cursor-pointer"
                   >
                     {status === 'loading' ? (
                       <span>Submitting...</span>

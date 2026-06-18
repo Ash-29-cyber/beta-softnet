@@ -503,14 +503,19 @@ export default function Careers() {
               </div>
             </div>
 
-            {/* Box 2 (Image Container) */}
+            {/* Box 2 (Text Highlight Content) */}
             <div className="glass-card-purple p-6 rounded-3xl border border-purple-500/20 flex flex-col justify-between shadow-md relative overflow-hidden group">
-              <div className="rounded-2xl overflow-hidden border border-purple-500/10 bg-white/50 p-2 flex-grow flex items-center justify-center">
-                <img src="/tech_illustration.png" alt="Tech illustration" className="w-full h-auto object-cover rounded-xl transition duration-500 group-hover:scale-105" />
+              <Code2 className="h-8 w-8 text-[#8B5CF6] opacity-40 mb-4" />
+              <div className="space-y-3 flex-grow text-left">
+                <h4 className="text-sm font-bold text-slate-800">Interactive Technology</h4>
+                <p className="text-xs text-slate-500 leading-relaxed">
+                  We develop premium user interfaces using React, Tailwind CSS, and custom WebSocket pipelines (STOMP). Our engineers focus on low-latency state synchronization, smooth keyframe animations, and highly responsive layouts that delight users.
+                </p>
               </div>
-              <div className="text-left mt-4">
-                <h5 className="text-xs font-bold">Interactive Technology</h5>
-                <p className="text-[10px] text-slate-500">Developing premium user interfaces with React and Stomp protocols.</p>
+              <div className="border-t border-purple-500/10 pt-4 mt-6 text-left">
+                <span className="text-[10px] uppercase font-bold text-[#8B5CF6] tracking-wider">
+                  Our Engineering Core
+                </span>
               </div>
             </div>
 

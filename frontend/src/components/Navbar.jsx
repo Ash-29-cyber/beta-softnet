@@ -318,7 +318,14 @@ export default function Navbar() {
             <div ref={searchContainerRef} className="mr-2 flex items-center justify-center">
               {isSearchExpanded ? (
                 <div className="relative w-36 lg:w-44 xl:w-52 nav-search-container animate-fadeIn">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-blue-305 nav-search-icon" />
+                  <button
+                    type="button"
+                    onClick={() => setIsSearchExpanded(false)}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 p-0.5 hover:bg-slate-200/30 rounded-full transition cursor-pointer z-10 flex items-center justify-center border-none bg-transparent"
+                    title="Close Search"
+                  >
+                    <Search className="h-4 w-4 text-blue-305 nav-search-icon" />
+                  </button>
                   <input
                     ref={searchInputRef}
                     type="text"

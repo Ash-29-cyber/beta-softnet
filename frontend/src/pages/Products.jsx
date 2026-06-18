@@ -70,8 +70,8 @@ export default function Products() {
   const [products, setProducts] = useState(defaultProducts);
   const [loading, setLoading] = useState(true);
   const [isCategoryOpen, setIsCategoryOpen] = useState(true);
-  const [isPublicOpen, setIsPublicOpen] = useState(false);
-  const [isBusinessOpen, setIsBusinessOpen] = useState(false);
+  const [isPublicOpen, setIsPublicOpen] = useState(true);
+  const [isBusinessOpen, setIsBusinessOpen] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -235,21 +235,17 @@ export default function Products() {
                     </div>
                   </th>
                   <th 
-                    className="py-5 px-6 md:px-8 text-slate-600 w-2/5 cursor-pointer hover:bg-slate-100/60 transition duration-200"
-                    onClick={() => setIsPublicOpen(!isPublicOpen)}
+                    className="py-5 px-6 md:px-8 text-slate-600 w-2/5 select-none"
                   >
                     <div className="flex items-center space-x-1.5">
                       <span>Public</span>
-                      <ChevronDown className={`h-4 w-4 text-slate-400 transform transition-transform duration-200 ${isPublicOpen ? 'rotate-180' : ''}`} />
                     </div>
                   </th>
                   <th 
-                    className="py-5 px-6 md:px-8 text-slate-600 w-2/5 cursor-pointer hover:bg-slate-100/60 transition duration-200 rounded-tr-3xl"
-                    onClick={() => setIsBusinessOpen(!isBusinessOpen)}
+                    className="py-5 px-6 md:px-8 text-slate-600 w-2/5 rounded-tr-3xl select-none"
                   >
                     <div className="flex items-center space-x-1.5">
                       <span>Business</span>
-                      <ChevronDown className={`h-4 w-4 text-slate-400 transform transition-transform duration-200 ${isBusinessOpen ? 'rotate-180' : ''}`} />
                     </div>
                   </th>
                 </tr>

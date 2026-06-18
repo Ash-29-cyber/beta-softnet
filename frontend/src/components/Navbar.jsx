@@ -9,12 +9,12 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownCategoryOpen, setIsDropdownCategoryOpen] = useState(true);
-  const [isDropdownPublicOpen, setIsDropdownPublicOpen] = useState(false);
-  const [isDropdownBusinessOpen, setIsDropdownBusinessOpen] = useState(false);
+  const [isDropdownPublicOpen, setIsDropdownPublicOpen] = useState(true);
+  const [isDropdownBusinessOpen, setIsDropdownBusinessOpen] = useState(true);
   const [isMobileProductsOpen, setIsMobileProductsOpen] = useState(false);
   const [isMobileCategoryOpen, setIsMobileCategoryOpen] = useState(true);
-  const [isMobilePublicOpen, setIsMobilePublicOpen] = useState(false);
-  const [isMobileBusinessOpen, setIsMobileBusinessOpen] = useState(false);
+  const [isMobilePublicOpen, setIsMobilePublicOpen] = useState(true);
+  const [isMobileBusinessOpen, setIsMobileBusinessOpen] = useState(true);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
@@ -111,10 +111,10 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center -ml-2 sm:-ml-4 space-x-4 flex-1 justify-start">
             <Link to="/" className="flex items-center select-none">
-              <img src="/logo.png" alt="Beta Logo" className="h-16 w-auto object-contain rounded-lg shadow-sm" />
+              <img src="/logo.png" alt="Beta Logo" className="h-16 w-auto object-contain" />
             </Link>
 
-            <div className="relative animate-fadeIn ml-12 sm:ml-16" ref={locationRef}>
+            <div className="relative animate-fadeIn ml-2 sm:ml-4" ref={locationRef}>
               <button
                 onClick={() => setIsLocationOpen(!isLocationOpen)}
                 className="flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-slate-100/90 border border-slate-200/80 hover:bg-slate-200/60 transition duration-300 text-xs font-bold text-slate-700 cursor-pointer focus:outline-none"
@@ -182,30 +182,24 @@ export default function Navbar() {
                           <thead>
                             <tr className="bg-slate-50 border-b border-slate-100 text-slate-500 text-[10px] uppercase tracking-wider font-extrabold select-none">
                               <th 
-                                className="py-2.5 px-4 rounded-l-lg text-slate-500 w-1/5 cursor-pointer hover:bg-slate-100 transition duration-200"
-                                onClick={() => setIsDropdownCategoryOpen(!isDropdownCategoryOpen)}
+                                className="py-2.5 px-4 rounded-l-lg text-slate-500 w-1/5 select-none"
                               >
                                 <div className="flex items-center space-x-1">
                                   <span>Category</span>
-                                  <ChevronDown className={`h-3 w-3 text-slate-400 transform transition-transform duration-200 ${isDropdownCategoryOpen ? 'rotate-180' : ''}`} />
                                 </div>
                               </th>
                               <th 
-                                className="py-2.5 px-4 text-slate-500 w-2/5 cursor-pointer hover:bg-slate-100 transition duration-200"
-                                onClick={() => setIsDropdownPublicOpen(!isDropdownPublicOpen)}
+                                className="py-2.5 px-4 text-slate-500 w-2/5 select-none"
                               >
                                 <div className="flex items-center space-x-1">
                                   <span>Public</span>
-                                  <ChevronDown className={`h-3 w-3 text-slate-400 transform transition-transform duration-200 ${isDropdownPublicOpen ? 'rotate-180' : ''}`} />
                                 </div>
                               </th>
                               <th 
-                                className="py-2.5 px-4 rounded-r-lg text-slate-500 w-2/5 cursor-pointer hover:bg-slate-100 transition duration-200"
-                                onClick={() => setIsDropdownBusinessOpen(!isDropdownBusinessOpen)}
+                                className="py-2.5 px-4 rounded-r-lg text-slate-500 w-2/5 select-none"
                               >
                                 <div className="flex items-center space-x-1">
                                   <span>Business</span>
-                                  <ChevronDown className={`h-3 w-3 text-slate-400 transform transition-transform duration-200 ${isDropdownBusinessOpen ? 'rotate-180' : ''}`} />
                                 </div>
                               </th>
                             </tr>
@@ -297,18 +291,6 @@ export default function Navbar() {
                             </tr>
                           </tbody>
                         </table>
-
-                        <div className="border-t border-slate-100 mt-3 pt-3 flex justify-between items-center text-[10px] font-bold text-slate-400 uppercase tracking-wider">
-                          <span>Beta Ecosystem</span>
-                          <Link
-                            to="/products"
-                            onClick={() => setIsDropdownOpen(false)}
-                            className="bg-[#004AAD] hover:bg-[#003c8a] !text-white font-extrabold text-[10px] tracking-wider uppercase px-4 py-2 rounded-full transition flex items-center space-x-1.5 duration-300 shadow-md shadow-blue-950/10 cursor-pointer"
-                          >
-                            <span className="text-white">All Products Overview</span>
-                            <ChevronRight className="h-3.5 w-3.5 text-white" />
-                          </Link>
-                        </div>
                       </div>
                     )}
                   </div>
@@ -508,77 +490,44 @@ export default function Navbar() {
                       <ChevronDown className={`h-4 w-4 text-slate-400 transform transition-transform ${isMobileProductsOpen ? 'rotate-180' : ''}`} />
                     </button>
                     {isMobileProductsOpen && (
-                      <div className="pl-4 pr-3 py-2 space-y-2 bg-slate-50 border border-slate-150/80 rounded-lg text-left">
-                        {/* Mobile Category Toggle */}
-                        <div className="space-y-1">
-                          <button
-                            onClick={() => setIsMobileCategoryOpen(!isMobileCategoryOpen)}
-                            className="w-full flex items-center justify-between px-3 py-1 rounded text-sm font-semibold text-slate-700 hover:bg-slate-100 focus:outline-none cursor-pointer"
-                          >
-                            <span>Category</span>
-                            <ChevronDown className={`h-3.5 w-3.5 text-slate-400 transform transition-transform ${isMobileCategoryOpen ? 'rotate-180' : ''}`} />
-                          </button>
-                          {isMobileCategoryOpen && (
-                            <div className="pl-6 py-1">
-                              <span className="inline-block px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-700 text-[10px] font-extrabold uppercase tracking-widest select-none">
-                                Base
-                              </span>
-                            </div>
-                          )}
+                      <div className="pl-4 pr-3 py-2 space-y-2 bg-slate-50 border border-slate-150/80 rounded-lg text-left">                        {/* Mobile Category */}
+                        <div className="space-y-2 px-3 py-1 text-left">
+                          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Category</p>
+                          <div className="py-1 pl-1">
+                            <span className="inline-block px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-700 text-[10px] font-extrabold uppercase tracking-widest select-none">
+                              Base
+                            </span>
+                          </div>
                         </div>
 
-                        {/* Mobile Public Toggle */}
-                        <div className="space-y-1">
-                          <button
-                            onClick={() => setIsMobilePublicOpen(!isMobilePublicOpen)}
-                            className="w-full flex items-center justify-between px-3 py-1 rounded text-sm font-semibold text-slate-700 hover:bg-slate-100 focus:outline-none cursor-pointer"
-                          >
-                            <span>Public</span>
-                            <ChevronDown className={`h-3.5 w-3.5 text-slate-400 transform transition-transform ${isMobilePublicOpen ? 'rotate-180' : ''}`} />
-                          </button>
-                          {isMobilePublicOpen && (
-                            <div className="pl-6 space-y-2 py-1">
-                              <div
-                                className="flex items-center space-x-2 text-slate-600 text-xs py-1 select-none"
-                              >
-                                <Mail className="h-4 w-4 text-blue-500" />
-                                <span>BNX Mail</span>
-                              </div>
-                              <div
-                                className="flex items-center space-x-2 text-slate-600 text-xs py-1 select-none"
-                              >
-                                <Shield className="h-4 w-4 text-cyan-500" />
-                                <span>B2Auth Security</span>
-                              </div>
-                              <div
-                                className="flex items-center space-x-2 text-slate-600 text-xs py-1 select-none"
-                              >
-                                <User className="h-4 w-4 text-emerald-500" />
-                                <span>Cliks</span>
-                              </div>
+                        {/* Mobile Public */}
+                        <div className="space-y-2.5 border-t border-slate-100 pt-3 px-3">
+                          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest text-left">Public</p>
+                          <div className="space-y-2.5 pl-1">
+                            <div className="flex items-center space-x-2.5 text-slate-700 text-xs py-1 select-none text-left">
+                              <Mail className="h-4 w-4 text-blue-500" />
+                              <span className="font-bold">BNX Mail</span>
                             </div>
-                          )}
+                            <div className="flex items-center space-x-2.5 text-slate-700 text-xs py-1 select-none text-left">
+                              <Shield className="h-4 w-4 text-cyan-500" />
+                              <span className="font-bold">B2Auth Security</span>
+                            </div>
+                            <div className="flex items-center space-x-2.5 text-slate-700 text-xs py-1 select-none text-left">
+                              <User className="h-4 w-4 text-emerald-500" />
+                              <span className="font-bold">Cliks</span>
+                            </div>
+                          </div>
                         </div>
 
-                        {/* Mobile Business Toggle */}
-                        <div className="space-y-1">
-                          <button
-                            onClick={() => setIsMobileBusinessOpen(!isMobileBusinessOpen)}
-                            className="w-full flex items-center justify-between px-3 py-1 rounded text-sm font-semibold text-slate-700 hover:bg-slate-100 focus:outline-none cursor-pointer"
-                          >
-                            <span>Business</span>
-                            <ChevronDown className={`h-3.5 w-3.5 text-slate-400 transform transition-transform ${isMobileBusinessOpen ? 'rotate-180' : ''}`} />
-                          </button>
-                          {isMobileBusinessOpen && (
-                            <div className="pl-6 space-y-2 py-1">
-                              <div
-                                className="flex items-center space-x-2 text-slate-650 text-xs py-1 select-none"
-                              >
-                                <Briefcase className="h-4 w-4 text-teal-555" />
-                                <span>Cliks Business</span>
-                              </div>
+                        {/* Mobile Business */}
+                        <div className="space-y-2.5 border-t border-slate-100 pt-3 px-3">
+                          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest text-left">Business</p>
+                          <div className="space-y-2.5 pl-1">
+                            <div className="flex items-center space-x-2.5 text-slate-700 text-xs py-1 select-none text-left">
+                              <Briefcase className="h-4 w-4 text-teal-600" />
+                              <span className="font-bold">Cliks Business</span>
                             </div>
-                          )}
+                          </div>
                         </div>
                       </div>
                     )}

@@ -31,7 +31,7 @@ export default function Footer() {
           {/* Brand Info */}
           <div className="md:col-span-1 space-y-4">
             <Link to="/" className="flex items-center select-none">
-              <img src="/logo.png" alt="Beta Logo" className="h-14 w-auto object-contain rounded-lg shadow-sm" />
+              <img src="/logo.png" alt="Beta Logo" className="h-14 w-auto object-contain" />
             </Link>
             <p className="text-sm text-slate-500">
               Unified Software for a Connected Generation. Building next-generation collaboration, auth, and productivity suites.

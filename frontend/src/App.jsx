@@ -14,6 +14,8 @@ import CliksBusinessDashboard from './pages/CliksBusinessDashboard';
 import BnxMailDashboard from './pages/BnxMailDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import { AuthProvider } from './context/AuthContext';
+import ScrollToTop from './components/ScrollToTop';
+
 
 function AppContent() {
   const location = useLocation();
@@ -57,6 +59,7 @@ export default function App() {
   return (
     <AuthProvider>
       <Router>
+        <ScrollToTop />
         <AppContent />
       </Router>
     </AuthProvider>

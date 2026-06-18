@@ -94,11 +94,11 @@ export default function Partners() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] pb-24">
       {/* Hero Section */}
-      <div className="relative overflow-hidden bg-gradient-to-tr from-[#004AAD] to-[#0066f2] py-20 text-white text-center hero-blue-banner">
+      <div className="relative overflow-hidden bg-gradient-to-tr from-[#25083B] to-[#5B108F] py-20 text-white text-center hero-blue-banner">
         {/* Glow grid mesh overlay */}
         <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none opacity-40" />
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[60%] rounded-full bg-blue-400/20 blur-[130px] pointer-events-none" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[60%] rounded-full bg-indigo-400/20 blur-[130px] pointer-events-none" />
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[60%] rounded-full bg-purple-400/20 blur-[130px] pointer-events-none" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[60%] rounded-full bg-violet-400/20 blur-[130px] pointer-events-none" />
 
         <div className="max-w-4xl mx-auto px-4 relative z-10 space-y-6">
           <motion.div
@@ -112,7 +112,7 @@ export default function Partners() {
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-extrabold tracking-tight select-none"
+            className="text-4xl md:text-5xl font-extrabold tracking-tight select-none text-white"
           >
             Build the Future of Collaboration Together
           </motion.h1>
@@ -120,7 +120,7 @@ export default function Partners() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.1 }}
-            className="text-blue-100 text-sm md:text-base max-w-xl mx-auto font-medium select-none"
+            className="text-purple-100 text-sm md:text-base max-w-xl mx-auto font-medium select-none"
           >
             Join our ecosystem to deliver next-generation productivity, authentication, and security solutions to enterprises worldwide.
           </motion.p>

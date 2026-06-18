@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Shield, Activity, Users, Globe, Zap, Sparkles, Terminal, Mail, Briefcase, UserCheck } from 'lucide-react';
+import { ArrowRight, Shield, Activity, Users, Globe, Zap, Sparkles, Terminal, Mail, Briefcase, UserCheck, ChevronRight } from 'lucide-react';
 
 export default function Home() {
   const containerVariants = {
@@ -184,6 +184,65 @@ export default function Home() {
               </motion.div>
             );
           })}
+        </div>
+      </div>
+
+      {/* Company Story & Mission Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center glass-card border border-slate-800 rounded-3xl p-8 md:p-12 relative overflow-hidden">
+          {/* Background glowing blob */}
+          <div className="absolute -top-24 -left-24 w-72 h-72 bg-blue-500/10 rounded-full blur-[80px] pointer-events-none" />
+          
+          <div className="space-y-6 text-left relative z-10">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400 uppercase tracking-wider">
+              <UserCheck className="h-3.5 w-3.5" />
+              <span>Who We Are</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
+              Pioneering the Next-Generation Workspace
+            </h2>
+            <p className="text-slate-400 leading-relaxed text-sm md:text-base">
+              At Beta Softnet, we believe corporate tools should be fast, elegant, and secure. Since our founding in 2022, we have focused on bridging the gap between secure communication frameworks and real-time team collaboration.
+            </p>
+            <p className="text-slate-400 leading-relaxed text-sm md:text-base">
+              Today, our unified software ecosystem powers over 1.2 million active connections globally. We help modern teams consolidate their mailboxes, authentication protocols, and daily project sprints into one simplified portal.
+            </p>
+            <div className="pt-2">
+              <Link
+                to="/about"
+                className="inline-flex items-center space-x-1.5 text-sm font-bold text-blue-400 hover:text-blue-300 transition group"
+              >
+                <span>Read Our Full Story</span>
+                <ChevronRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 relative z-10">
+            <div className="glass-card p-6 rounded-2xl border border-slate-800 flex items-start space-x-4">
+              <div className="p-3 bg-blue-500/10 rounded-xl text-blue-400 flex-shrink-0">
+                <Globe className="h-6 w-6" />
+              </div>
+              <div className="text-left">
+                <h3 className="text-base font-bold text-white mb-1">Our Mission</h3>
+                <p className="text-slate-400 text-xs md:text-sm leading-relaxed font-medium">
+                  To provide secure, elegant, and unified SaaS products that enable enterprise teams to collaborate without boundaries.
+                </p>
+              </div>
+            </div>
+
+            <div className="glass-card p-6 rounded-2xl border border-slate-800 flex items-start space-x-4">
+              <div className="p-3 bg-emerald-500/10 rounded-xl text-emerald-400 flex-shrink-0">
+                <Shield className="h-6 w-6" />
+              </div>
+              <div className="text-left">
+                <h3 className="text-base font-bold text-white mb-1">Our Vision</h3>
+                <p className="text-slate-400 text-xs md:text-sm leading-relaxed font-medium">
+                  To establish the global standard for next-generation workspace communications, protected by absolute auth protocols.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

@@ -21,7 +21,7 @@ export default function Support() {
     phone: '+1 (800) 555-0199',
     email: 'support@betasoftnet.com',
     hours: 'Mon - Fri, 9:00 AM - 6:00 PM IST',
-    address: 'Beta Softnet Towers, Plot C-24, G-Block, BKC, Bandra East, Mumbai, MH 400051, India'
+    address: 'Beta Softnet Towers, No. 12, Main Road, Tiruvallur, Tamil Nadu 602001, India'
   };
 
   const supportFaqs = [
@@ -81,11 +81,11 @@ export default function Support() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] pb-16">
       {/* Hero Section */}
-      <div className="relative overflow-hidden bg-gradient-to-tr from-[#004AAD] to-[#0066f2] py-20 text-white text-center hero-blue-banner">
+      <div className="relative overflow-hidden bg-gradient-to-tr from-[#022C22] to-[#0B5C46] py-20 text-white text-center hero-blue-banner">
         {/* Glow grid mesh overlay */}
         <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none opacity-40" />
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[60%] rounded-full bg-blue-400/20 blur-[130px] pointer-events-none" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[60%] rounded-full bg-indigo-400/20 blur-[130px] pointer-events-none" />
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[60%] rounded-full bg-emerald-400/20 blur-[130px] pointer-events-none" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[60%] rounded-full bg-teal-400/20 blur-[130px] pointer-events-none" />
 
         <div className="max-w-4xl mx-auto px-4 relative z-10 space-y-6">
           <span className="inline-block px-3 py-1 rounded-full bg-slate-100 border border-slate-300 text-xs font-bold uppercase tracking-widest text-black select-none">
@@ -94,7 +94,7 @@ export default function Support() {
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight select-none">
             How Can We Help You?
           </h1>
-          <p className="text-blue-100 text-sm md:text-base max-w-xl mx-auto font-medium select-none">
+          <p className="text-emerald-100 text-sm md:text-base max-w-xl mx-auto font-medium select-none">
             Search our knowledge base, browse core product resources, or lodge a direct developer request to our support engineering squad.
           </p>
 
@@ -106,7 +106,7 @@ export default function Support() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search guides, setup configs, integration logs..."
-              className="w-full bg-white text-slate-800 placeholder-slate-400 border-none rounded-full py-3.5 pl-12 pr-6 text-sm shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-300/40 transition duration-300"
+              className="w-full bg-white text-slate-800 placeholder-slate-400 border-none rounded-full py-3.5 pl-12 pr-6 text-sm shadow-xl focus:outline-none focus:ring-4 focus:ring-emerald-300/40 transition duration-300"
             />
           </div>
         </div>

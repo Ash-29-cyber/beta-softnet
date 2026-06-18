@@ -112,12 +112,12 @@ export default function Products() {
     return (
       <div 
         id={product.name.toLowerCase().replace(/\s+/g, '-')}
-        className="space-y-4 p-5 rounded-2xl bg-slate-50/60 border border-slate-200/60 hover:border-emerald-500/30 transition-all duration-300 scroll-mt-24 text-left"
+        className="space-y-4 p-6 rounded-2xl glass-card glass-card-hover border border-slate-200 shadow-sm transition-all duration-300 scroll-mt-24 text-left"
       >
         {/* Icon & Name */}
         <div className="flex items-center space-x-3">
-          <div className="h-10 w-10 bg-gradient-to-tr from-emerald-50 to-teal-50 rounded-full border border-emerald-200/50 flex-shrink-0 flex items-center justify-center">
-            <IconComponent className="h-5 w-5 text-emerald-600" />
+          <div className="h-11 w-11 bg-gradient-to-tr from-blue-50 to-indigo-50 rounded-xl border border-blue-250/60 flex-shrink-0 flex items-center justify-center text-[#004AAD]">
+            <IconComponent className="h-5 w-5" />
           </div>
           <div>
             <h4 className="text-sm font-extrabold text-slate-900 tracking-tight">{product.name}</h4>
@@ -135,7 +135,7 @@ export default function Products() {
           <div className="pt-3 border-t border-slate-200">
             <div className="flex flex-wrap gap-1.5">
               {product.features.map((feat, i) => (
-                <span key={feat.id || i} className="px-2 py-0.5 rounded bg-emerald-50 border border-emerald-200/40 text-emerald-700 text-[9px] font-semibold">
+                <span key={feat.id || i} className="px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/20 text-[#004AAD] text-[9px] font-bold uppercase tracking-wider">
                   {feat.featureName || feat}
                 </span>
               ))}
@@ -178,7 +178,7 @@ export default function Products() {
   const otherProducts = products.filter(p => !coreIds.includes(p.id));
 
   return (
-    <div className="relative min-h-screen pt-20 pb-24 px-4 sm:px-6 lg:px-8">
+    <div className="relative min-h-screen bg-transparent pt-20 pb-24 px-4 sm:px-6 lg:px-8 z-10">
       {/* Background radial highlights */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-500/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-teal-500/5 rounded-full blur-[120px] pointer-events-none" />
@@ -191,13 +191,19 @@ export default function Products() {
             animate={{ opacity: 1, scale: 1 }}
             className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#E9F4FF] border border-[#004AAD]/20 text-[#004AAD] text-xs font-semibold"
           >
-            <Activity className="h-3.5 w-3.5" />
+            <motion.span
+              animate={{ y: [0, -3, 0] }}
+              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+              className="flex items-center justify-center animate-pulse"
+            >
+              <Activity className="h-3.5 w-3.5" />
+            </motion.span>
             <span>ENTERPRISE SUITE</span>
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-extrabold text-white"
+            className="text-4xl md:text-5xl font-extrabold text-slate-900"
           >
             Innovate with the Beta Ecosystem
           </motion.h1>
@@ -205,7 +211,7 @@ export default function Products() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.1 }}
-            className="text-slate-400 text-lg"
+            className="text-slate-500 text-lg"
           >
             A suite of premium collaborative tools designed to solve communication, security, and productivity challenges.
           </motion.p>

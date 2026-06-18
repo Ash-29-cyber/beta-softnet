@@ -79,7 +79,7 @@ export default function Support() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] pb-16">
+    <div className="min-h-screen bg-transparent pb-16 relative z-10">
       {/* Hero Section */}
       <div className="relative overflow-hidden bg-gradient-to-tr from-[#022C22] to-[#0B5C46] py-20 text-white text-center hero-blue-banner">
         {/* Glow grid mesh overlay */}
@@ -177,10 +177,10 @@ export default function Support() {
         </div>
 
         {/* Product Support Section */}
-        <div className="space-y-6">
+        <div className="space-y-6 bg-[#fed600] border border-[#e0bc00]/40 p-8 rounded-3xl shadow-sm">
           <div className="text-left space-y-1.5">
             <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">Ecosystem Product Support</h2>
-            <p className="text-sm text-slate-500">Guides, diagnostic links, and configuration standards for our primary suites.</p>
+            <p className="text-sm text-slate-955 font-semibold">Guides, diagnostic links, and configuration standards for our primary suites.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -565,20 +565,7 @@ export default function Support() {
         </div>
       </div>
 
-      {/* Internal Support Page Footer Callout */}
-      <div className="mt-20 border-t border-slate-200 bg-slate-100/50 py-8 text-center text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center space-x-1.5">
-            <HelpCircle className="h-4.5 w-4.5 text-slate-400" />
-            <span className="font-semibold text-slate-650">Beta Softnet Technical Assistance Helpdesk</span>
-          </div>
-          <div className="flex flex-wrap justify-center gap-6 font-semibold text-slate-500">
-            <span>Hotline: {supportContactInfo.phone}</span>
-            <span>Email: {supportContactInfo.email}</span>
-            <span>Hours: {supportContactInfo.hours}</span>
-          </div>
-        </div>
-      </div>
+
     </div>
   );
 }

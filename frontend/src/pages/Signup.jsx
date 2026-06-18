@@ -53,74 +53,74 @@ export default function Signup() {
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="w-full max-w-md glass-card p-8 rounded-3xl border border-slate-800 shadow-2xl relative"
+        className="w-full max-w-md glass-card p-8 rounded-3xl border border-slate-200 shadow-2xl relative"
       >
         {/* Header */}
         <div className="text-center space-y-2 mb-8">
           <div className="h-12 w-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center mx-auto text-white shadow-lg shadow-blue-500/20">
             <UserPlus className="h-5 w-5" />
           </div>
-          <h2 className="text-2xl font-extrabold text-white tracking-tight">Create Support Account</h2>
+          <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">Create Support Account</h2>
           <p className="text-slate-500 text-xs uppercase tracking-widest font-bold">Secure Admin Registration</p>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5 text-left">
           <div className="space-y-1">
-            <label className="text-xs font-bold text-slate-400 uppercase">Username / Email</label>
+            <label className="text-xs font-bold text-slate-500 uppercase">Username / Email</label>
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-600" />
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="partner@company.com"
-                className="w-full bg-slate-900 text-white placeholder-slate-600 border border-slate-800 rounded-lg py-2 px-3 pl-10 focus:outline-none focus:border-blue-500 text-sm transition"
+                className="w-full bg-white text-slate-900 placeholder-slate-400 border border-slate-200 rounded-lg py-2 px-3 pl-10 focus:outline-none focus:border-blue-500 text-sm transition"
               />
             </div>
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs font-bold text-slate-400 uppercase">Password</label>
+            <label className="text-xs font-bold text-slate-500 uppercase">Password</label>
             <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-600" />
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Minimum 6 characters"
-                className="w-full bg-slate-900 text-white placeholder-slate-600 border border-slate-800 rounded-lg py-2 px-3 pl-10 focus:outline-none focus:border-blue-500 text-sm transition"
+                className="w-full bg-white text-slate-900 placeholder-slate-400 border border-slate-200 rounded-lg py-2 px-3 pl-10 focus:outline-none focus:border-blue-500 text-sm transition"
               />
             </div>
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs font-bold text-slate-400 uppercase">Confirm Password</label>
+            <label className="text-xs font-bold text-slate-500 uppercase">Confirm Password</label>
             <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-600" />
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
               <input
                 type="password"
                 required
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Verify your password"
-                className="w-full bg-slate-900 text-white placeholder-slate-600 border border-slate-800 rounded-lg py-2 px-3 pl-10 focus:outline-none focus:border-blue-500 text-sm transition"
+                className="w-full bg-white text-slate-900 placeholder-slate-400 border border-slate-200 rounded-lg py-2 px-3 pl-10 focus:outline-none focus:border-blue-500 text-sm transition"
               />
             </div>
           </div>
 
           {error && (
-            <div className="flex items-center space-x-2 text-rose-400 text-xs p-3 rounded-lg bg-rose-950/20 border border-rose-900/30">
-              <AlertCircle className="h-4 w-4 flex-shrink-0" />
+            <div className="flex items-center space-x-2 text-rose-600 text-xs p-3 rounded-lg bg-rose-50 border border-rose-100">
+              <AlertCircle className="h-4.5 w-4.5 flex-shrink-0" />
               <span>{error}</span>
             </div>
           )}
 
           {success && (
-            <div className="flex items-center space-x-2 text-emerald-400 text-xs p-3 rounded-lg bg-emerald-950/20 border border-emerald-900/30">
-              <CheckCircle2 className="h-4 w-4 flex-shrink-0" />
+            <div className="flex items-center space-x-2 text-emerald-600 text-xs p-3 rounded-lg bg-emerald-50 border border-emerald-100">
+              <CheckCircle2 className="h-4.5 w-4.5 flex-shrink-0" />
               <span>{success}</span>
             </div>
           )}
@@ -128,7 +128,7 @@ export default function Signup() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition flex items-center justify-center space-x-2 disabled:bg-slate-800"
+            className="w-full py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition flex items-center justify-center space-x-2 disabled:bg-slate-200"
           >
             {loading ? (
               <>
@@ -142,10 +142,10 @@ export default function Signup() {
         </form>
 
         {/* Navigation Footer */}
-        <div className="mt-6 pt-4 border-t border-slate-900/50 text-center">
+        <div className="mt-6 pt-4 border-t border-slate-250 text-center">
           <p className="text-xs text-slate-500">
             Already have an account?{' '}
-            <Link to="/login" className="font-semibold text-blue-400 hover:text-blue-300 transition">
+            <Link to="/login" className="font-semibold text-[#004AAD] hover:text-[#003c8a] transition">
               Sign In
             </Link>
           </p>

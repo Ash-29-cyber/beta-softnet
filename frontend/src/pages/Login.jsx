@@ -47,50 +47,50 @@ export default function Login() {
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="w-full max-w-md glass-card p-8 rounded-3xl border border-slate-800 shadow-2xl relative"
+        className="w-full max-w-md glass-card p-8 rounded-3xl border border-slate-200 shadow-2xl relative"
       >
         {/* Header */}
         <div className="text-center space-y-2 mb-8">
           <div className="h-12 w-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center mx-auto text-white shadow-lg shadow-blue-500/20">
             <Lock className="h-5 w-5" />
           </div>
-          <h2 className="text-2xl font-extrabold text-white tracking-tight">Admin Portal</h2>
+          <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">Admin Portal</h2>
           <p className="text-slate-500 text-xs uppercase tracking-widest font-bold">Secure Gatekeeping</p>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5 text-left">
           <div className="space-y-1">
-            <label className="text-xs font-bold text-slate-400 uppercase">Username / Email</label>
+            <label className="text-xs font-bold text-slate-500 uppercase">Username / Email</label>
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-600" />
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
               <input
                 type="text"
                 required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="admin@betasoftnet.com"
-                className="w-full bg-slate-900 text-white placeholder-slate-600 border border-slate-800 rounded-lg py-2 px-3 pl-10 focus:outline-none focus:border-blue-500 text-sm transition"
+                className="w-full bg-white text-slate-900 placeholder-slate-400 border border-slate-200 rounded-lg py-2 px-3 pl-10 focus:outline-none focus:border-blue-500 text-sm transition"
               />
             </div>
           </div>
 
           <div className="space-y-1">
             <div className="flex items-center justify-between">
-              <label className="text-xs font-bold text-slate-400 uppercase">Password</label>
-              <a href="#" className="text-xs font-semibold text-blue-400 hover:text-blue-300 transition">
+              <label className="text-xs font-bold text-slate-500 uppercase">Password</label>
+              <a href="#" className="text-xs font-semibold text-[#004AAD] hover:text-[#003c8a] transition">
                 Forgot password?
               </a>
             </div>
             <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-600" />
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
-                className="w-full bg-slate-900 text-white placeholder-slate-600 border border-slate-800 rounded-lg py-2 px-3 pl-10 focus:outline-none focus:border-blue-500 text-sm transition"
+                className="w-full bg-white text-slate-900 placeholder-slate-400 border border-slate-200 rounded-lg py-2 px-3 pl-10 focus:outline-none focus:border-blue-500 text-sm transition"
               />
             </div>
           </div>
@@ -101,9 +101,9 @@ export default function Login() {
               id="remember_me"
               name="remember_me"
               type="checkbox"
-              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-slate-800 rounded bg-slate-900 cursor-pointer"
+              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-slate-350 rounded bg-white cursor-pointer"
             />
-            <label htmlFor="remember_me" className="ml-2 block text-xs text-slate-400 cursor-pointer select-none">
+            <label htmlFor="remember_me" className="ml-2 block text-xs text-slate-500 cursor-pointer select-none">
               Remember my session
             </label>
           </div>
@@ -132,10 +132,10 @@ export default function Login() {
         </form>
 
         {/* Credentials Tip */}
-        <div className="mt-6 pt-4 border-t border-slate-900/50 text-center">
+        <div className="mt-6 pt-4 border-t border-slate-200 text-center">
           <p className="text-xs text-slate-500 leading-normal">
             Demo Credentials:<br />
-            <span className="font-semibold text-slate-400">admin@betasoftnet.com</span> / <span className="font-semibold text-slate-400">admin123</span>
+            <span className="font-semibold text-slate-700">admin@betasoftnet.com</span> / <span className="font-semibold text-slate-700">admin123</span>
           </p>
         </div>
       </motion.div>

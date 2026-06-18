@@ -1,87 +1,94 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Briefcase, Award, Heart, Shield, Sparkles, Upload, CheckCircle2, AlertCircle, X, Quote, Code2, HelpCircle, ChevronDown, Check, Cpu, Zap } from 'lucide-react';
+import { 
+  Briefcase, 
+  Award, 
+  Sparkles, 
+  Upload, 
+  CheckCircle2, 
+  AlertCircle, 
+  X, 
+  Quote, 
+  Code2, 
+  Search, 
+  User, 
+  Users,
+  MapPin,
+  CheckSquare,
+  FileText
+} from 'lucide-react';
 import api from '../api';
 
-const benefits = [
-  { title: 'Global Remote', desc: 'Work from anywhere in the world. We offer home office stipends.', icon: Sparkles },
-  { title: 'Premium Health', desc: 'Full medical, dental, and vision insurance covered 100% for you.', icon: Heart },
-  { title: 'Continuous Growth', desc: '$2,000 yearly education grant for courses, conferences, or books.', icon: Award },
-  { title: 'Secure Future', desc: '401(k) matching up to 5% and monthly wellness allowances.', icon: Shield }
-];
+// Custom Count Up animation component
+function CountUpNumber({ value }) {
+  const numericValue = parseFloat(value);
+  const suffix = value.replace(/^[0-9.]+/, ''); // Extracts '%', 'K+', '+', '/7', etc.
+  const [displayValue, setDisplayValue] = useState(() => isNaN(numericValue) ? value : '0');
 
-const culturePillars = [
-  {
-    title: 'Autonomy & Trust',
-    desc: 'We don\'t micromanage. We focus on engineering impact and code delivery, not screen time.',
-    icon: Shield
-  },
-  {
-    title: 'Open Source Spirit',
-    desc: 'We contribute back to the libraries we rely on. Developers are encouraged to share and publish packages.',
-    icon: Sparkles
-  },
-  {
-    title: 'Work-Life Harmony',
-    desc: 'Work is a marathon, not a sprint. We maintain clear boundaries to prevent remote work fatigue.',
-    icon: Heart
-  },
-  {
-    title: 'Async-First Flow',
-    desc: 'Decisions are documented in RFCs. We value deep work windows and structured, asynchronous alignment.',
-    icon: Briefcase
-  }
-];
+  useEffect(() => {
+    if (isNaN(numericValue)) {
+      const timer = setTimeout(() => setDisplayValue(value), 0);
+      return () => clearTimeout(timer);
+    }
+    let startTimestamp = null;
+    const duration = 1800; // 1.8 seconds transition
+    const startValue = 0;
 
-const dxPrinciples = [
-  {
-    title: 'Continuous Deployment',
-    desc: 'We deploy multiple times a day. We trust automated test suites to catch regressions before they reach staging.',
-    icon: Zap
-  },
-  {
-    title: 'RFC-Driven Design',
-    desc: 'Architectural changes and major feature layouts are designed in written documents, allowing everyone to contribute async.',
-    icon: Code2
-  },
-  {
-    title: 'Green Build Guarantee',
-    desc: 'We treat broken builds as high-priority blockages. The main trunk is kept compilable and green at all times.',
-    icon: Check
-  },
-  {
-    title: 'Sustainable Velocity',
-    desc: 'We value high code quality and healthy capacity planning. We avoid crunch and prioritize code cleanup sprints.',
-    icon: Cpu
-  }
-];
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      const currentVal = progress * (numericValue - startValue) + startValue;
+      
+      if (numericValue % 1 !== 0) {
+        setDisplayValue(currentVal.toFixed(1) + suffix);
+      } else {
+        setDisplayValue(Math.floor(currentVal) + suffix);
+      }
+
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+
+    window.requestAnimationFrame(step);
+  }, [value, numericValue, suffix]);
+
+  return <span>{displayValue}</span>;
+}
 
 const jobs = [
-  { id: 1, title: 'Lead Security Engineer', team: 'Platform Security', location: 'Remote (US/EU)', type: 'Full-Time' },
-  { id: 2, title: 'Senior React Developer', team: 'Frontend Core', location: 'Remote (Global)', type: 'Full-Time' },
-  { id: 3, title: 'Spring Boot Specialist', team: 'Backend Services', location: 'Remote (APAC/EU)', type: 'Full-Time' },
-  { id: 4, title: 'UI/UX Product Designer', team: 'Product Design', location: 'Remote (Global)', type: 'Full-Time' },
-  { id: 5, title: 'Technical Writer & Documenter', team: 'Developer Relations', location: 'Remote (Global)', type: 'Full-Time' },
-  { id: 6, title: 'Customer Success Engineer', team: 'Global Operations', location: 'Remote (APAC)', type: 'Full-Time' }
+  { id: 1, title: 'Frontend Developer', team: 'Engineering', location: 'Chennai', type: 'Full-Time', experience: '2+ Years', skills: ['React', 'TypeScript', 'Tailwind'] },
+  { id: 2, title: 'Backend Engineer', team: 'Engineering', location: 'Chennai', type: 'Full-Time', experience: '3+ Years', skills: ['Spring Boot', 'Java', 'PostgreSQL'] },
+  { id: 4, title: 'Product Designer', team: 'Product', location: 'Chennai', type: 'Full-Time', experience: '2+ Years', skills: ['Figma', 'Prototyping', 'Design Systems'] },
+  { id: 5, title: 'Security Engineer', team: 'Engineering', location: 'Chennai', type: 'Full-Time', experience: '4+ Years', skills: ['JWT', 'OAuth', 'Spring Security'] },
+  { id: 3, title: 'AI & Data Scientist', team: 'AI & Data', location: 'Chennai', type: 'Full-Time', experience: '3+ Years', skills: ['Python', 'PyTorch', 'NLP'] },
+  { id: 6, title: 'Growth Marketer', team: 'Marketing', location: 'Chennai', type: 'Full-Time', experience: '3+ Years', skills: ['SEO', 'SEM', 'Campaigns'] },
+  { id: 7, title: 'Technical Support Specialist', team: 'Support', location: 'Chennai', type: 'Full-Time', experience: '2+ Years', skills: ['APIs', 'SMTP', 'SQL'] }
 ];
 
-const faqItems = [
-  {
-    q: "Can I work from anywhere in the world?",
-    a: "Yes! Beta Softnet is a fully remote-first organization. We have team members across APAC, EU, and the US. We only require a 4-hour timezone overlap with your core team members for collaborative meetings."
-  },
-  {
-    q: "What hardware and software setup do you provide?",
-    a: "We ship top-of-the-line Apple MacBooks (M-series Pro or Max) or equivalent high-end Linux/Windows workstations based on your preference. We also provide a $1,500 home office setup stipend and cover all developer licensing costs."
-  },
-  {
-    q: "How do you handle developer performance and growth?",
-    a: "We conduct bi-annual reviews focused on engineering impact, code quality, and peer collaboration. We also support career progression tracks for both Individual Contributors (ICs) and Engineering Managers."
-  },
-  {
-    q: "Do you sponsor visas or require relocation?",
-    a: "Since we are fully remote, we employ team members globally through local entities or professional employer organizations (PEOs). This means you can work from your home country without needing visa sponsorship or relocation."
-  }
+const journeyStages = [
+  { id: 1, stage: 'Student', desc: 'Real-world coding challenges, developer training, and open-source contributions.', highlight: 'Foundation & Basics' },
+  { id: 2, stage: 'Intern', desc: 'Working in scrum teams, contributing code to staging environments, and mentorship.', highlight: 'Team Integration' },
+  { id: 3, stage: 'Associate', desc: 'Owning independent modules, code reviews, and writing functional specs.', highlight: 'Module Ownership' },
+  { id: 4, stage: 'Engineer', desc: 'Architecting end-to-end features, resolving bottlenecks, and production deployments.', highlight: 'Feature Autonomy' },
+  { id: 5, stage: 'Senior Engineer', desc: 'System design scaling, mentoring juniors, leading sub-systems, and security compliance.', highlight: 'System Architecture' },
+  { id: 6, stage: 'Tech Lead', desc: 'Directing product technical strategy, resource planning, and architecting critical infrastructure.', highlight: 'Technical Vision' }
+];
+
+const benefits = [
+  { emoji: '💰', title: 'Bonus', desc: 'Competitive base package with performance bonuses tied to milestones.' },
+  { emoji: '🏠', title: 'Remote Work', desc: 'Flexible hours and high-end remote developer workstation setup.' },
+  { emoji: '📚', title: 'Learning', desc: 'Annual education grant of $2,000 for courses and tech conferences.' },
+  { emoji: '✈️', title: 'Trips', desc: 'Distributed team offsites and engineering hackathons worldwide.' },
+  { emoji: '🎯', title: 'Mentorship', desc: 'Regular syncs with domain architects and technical roadmap reviews.' }
+];
+
+const processSteps = [
+  { id: '1', title: 'Application', desc: 'Profile & PDF resume upload', icon: FileText, color: 'text-purple-400', bg: 'bg-purple-500/10 border-purple-500/20' },
+  { id: '2', title: 'Assessment', desc: 'Async technical coding sprint', icon: Code2, color: 'text-pink-400', bg: 'bg-pink-500/10 border-pink-500/20' },
+  { id: '3', title: 'Interview', desc: 'Systems architecture alignment', icon: User, color: 'text-amber-405', bg: 'bg-amber-500/10 border-amber-500/20' },
+  { id: '4', title: 'Offer', desc: 'Proposal and equity breakdown', icon: Award, color: 'text-purple-400', bg: 'bg-purple-500/10 border-purple-500/20' },
+  { id: '5', title: 'Welcome', desc: 'Developer bootcamp onboarding', icon: CheckCircle2, color: 'text-pink-400', bg: 'bg-pink-500/10 border-pink-500/20' }
 ];
 
 export default function Careers() {
@@ -92,7 +99,55 @@ export default function Careers() {
   const [resume, setResume] = useState(null);
   const [status, setStatus] = useState('idle'); // idle, loading, success, error
   const [message, setMessage] = useState('');
-  const [openFaq, setOpenFaq] = useState(null);
+
+  // Live Job Search & Filters State
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All Jobs');
+
+  // Drag and drop zone state
+  const [dragActive, setDragActive] = useState(false);
+  const fileInputRef = useRef(null);
+
+  const handleDrag = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.type === "dragenter" || e.type === "dragover") {
+      setDragActive(true);
+    } else if (e.type === "dragleave") {
+      setDragActive(false);
+    }
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      const file = e.dataTransfer.files[0];
+      if (file.type === "application/pdf") {
+        setResume(file);
+      } else {
+        alert("Only PDF files are supported.");
+      }
+    }
+  };
+
+  const handleFileChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setResume(e.target.files[0]);
+    }
+  };
+
+  // Filter logic
+  const filteredJobs = jobs.filter(job => {
+    const matchesSearch = job.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                          job.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          job.skills.some(skill => skill.toLowerCase().includes(searchQuery.toLowerCase()));
+    const matchesCategory = selectedCategory === 'All Jobs' || 
+                            job.team === selectedCategory ||
+                            (selectedCategory === 'AI & Data' && job.title === 'Security Engineer');
+    return matchesSearch && matchesCategory;
+  });
 
   const handleApply = async (e) => {
     e.preventDefault();
@@ -114,7 +169,6 @@ export default function Careers() {
       });
       setStatus('success');
       setMessage(`Application for ${selectedJob.title} submitted successfully!`);
-      // Reset
       setFullName('');
       setEmail('');
       setPhone('');
@@ -127,367 +181,670 @@ export default function Careers() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] pb-24">
-      {/* Hero Section */}
-      <div className="relative overflow-hidden bg-gradient-to-tr from-[#004AAD] to-[#0066f2] py-20 text-white text-center hero-blue-banner">
-        {/* Glow grid mesh overlay */}
-        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none opacity-40" />
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[60%] rounded-full bg-blue-400/20 blur-[130px] pointer-events-none" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[60%] rounded-full bg-indigo-400/20 blur-[130px] pointer-events-none" />
+    <div className="careers-purple-pink-theme min-h-screen relative overflow-hidden pb-20 pt-24">
+      <style>{`
+        .careers-purple-pink-theme {
+          background-color: #0B1020 !important;
+          color: #FFFFFF !important;
+          position: relative;
+          z-index: 10;
+        }
+        .careers-purple-pink-theme h1, 
+        .careers-purple-pink-theme h2, 
+        .careers-purple-pink-theme h3, 
+        .careers-purple-pink-theme h4, 
+        .careers-purple-pink-theme h5, 
+        .careers-purple-pink-theme h6 {
+          color: #FFFFFF !important;
+        }
+        .careers-purple-pink-theme p {
+          color: #CBD5E1 !important; /* Secondary Text */
+        }
+        .careers-purple-pink-theme span {
+          color: inherit;
+        }
+        .careers-purple-pink-theme a {
+          color: inherit;
+        }
+        .careers-purple-pink-theme label {
+          color: #CBD5E1 !important;
+        }
 
-        <div className="max-w-4xl mx-auto px-4 relative z-10 space-y-6">
+        /* Animated gradient blobs */
+        @keyframes floatBlobPink {
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.95); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        @keyframes floatBlobPurple {
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(-40px, 40px) scale(0.9); }
+          66% { transform: translate(30px, -20px) scale(1.05); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .blob-pink {
+          animation: floatBlobPink 16s ease-in-out infinite;
+        }
+        .blob-purple {
+          animation: floatBlobPurple 20s ease-in-out infinite;
+        }
+
+        /* Floating geometric shapes */
+        @keyframes spinSlow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        .shape-spin-slow {
+          animation: spinSlow 30s linear infinite;
+        }
+
+        /* Floating Benefits Circles */
+        @keyframes benefitFloatEven {
+          0% { transform: translateY(0) scale(1); }
+          50% { transform: translateY(-12px) scale(1.03); }
+          100% { transform: translateY(0) scale(1); }
+        }
+        @keyframes benefitFloatOdd {
+          0% { transform: translateY(0) scale(1); }
+          50% { transform: translateY(-18px) scale(0.98); }
+          100% { transform: translateY(0) scale(1); }
+        }
+        .float-circle-even {
+          animation: benefitFloatEven 6s ease-in-out infinite;
+        }
+        .float-circle-odd {
+          animation: benefitFloatOdd 8s ease-in-out infinite;
+        }
+
+        /* Purple glowing cards */
+        .glass-card-purple {
+          background: rgba(22, 27, 51, 0.7) !important;
+          backdrop-filter: blur(12px) !important;
+          border: 1px solid rgba(139, 92, 246, 0.15) !important;
+          box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
+          transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+        }
+        .glass-card-purple:hover {
+          background: rgba(22, 27, 51, 0.95) !important;
+          border-color: rgba(236, 72, 153, 0.4) !important; /* Secondary border pink */
+          box-shadow: 0 0 25px rgba(139, 92, 246, 0.35) !important; /* Purple glow */
+          transform: translateY(-5px);
+        }
+
+        /* Scrollbar hidden */
+        .scrollbar-none::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-none {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+
+        /* Hacker-style double borders for jobs */
+        .hacker-layout-box {
+          border: 1px solid rgba(139, 92, 246, 0.3);
+          position: relative;
+        }
+        .hacker-layout-box::before {
+          content: '';
+          position: absolute;
+          inset: 2px;
+          border: 1px solid rgba(236, 72, 153, 0.15);
+          pointer-events: none;
+        }
+      `}</style>
+
+      {/* SECTION 1: HERO SECTION */}
+      <div className="relative overflow-hidden min-h-[95vh] flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 border-b border-purple-950/30">
+        {/* Animated Background blobs */}
+        <div className="absolute top-[10%] left-[5%] w-[450px] h-[450px] bg-[#8B5CF6]/15 rounded-full blur-[140px] pointer-events-none blob-purple" />
+        <div className="absolute bottom-[10%] right-[5%] w-[500px] h-[500px] bg-[#EC4899]/15 rounded-full blur-[140px] pointer-events-none blob-pink" />
+        
+        {/* Floating geometric shapes (SVG) */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden select-none opacity-20">
+          <svg className="absolute top-[20%] right-[15%] w-24 h-24 text-[#8B5CF6] shape-spin-slow" viewBox="0 0 100 100">
+            <polygon points="50,15 90,85 10,85" fill="none" stroke="currentColor" strokeWidth="2" />
+          </svg>
+          <svg className="absolute bottom-[25%] left-[10%] w-32 h-32 text-[#EC4899] shape-spin-slow" style={{ animationDirection: 'reverse' }} viewBox="0 0 100 100">
+            <rect x="15" y="15" width="70" height="70" fill="none" stroke="currentColor" strokeWidth="2" />
+          </svg>
+          <div className="absolute top-[40%] left-[30%] w-3 h-3 rounded-full bg-[#F59E0B] animate-ping" />
+          <div className="absolute bottom-[35%] right-[25%] w-4 h-4 rounded-full bg-[#8B5CF6] animate-pulse" />
+        </div>
+
+        <div className="max-w-4xl mx-auto text-center space-y-12 relative z-10">
+          {/* Header Terminal Layout */}
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-300 text-xs font-bold uppercase tracking-widest text-black select-none"
-          >
-            <Briefcase className="h-3.5 w-3.5 text-black" />
-            <span>Join Our Core Team</span>
-          </motion.div>
-          <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-extrabold tracking-tight select-none"
+            transition={{ duration: 0.8 }}
+            className="hacker-layout-box bg-[#161B33]/60 p-8 sm:p-12 rounded-3xl backdrop-blur-md shadow-2xl border border-purple-500/30 text-center max-w-2xl mx-auto space-y-6"
           >
-            Shape the Future of SaaS
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.1 }}
-            className="text-blue-100 text-sm md:text-base max-w-xl mx-auto font-medium select-none"
-          >
-            We are looking for creative developers, designers, and platform architects to build secure corporate applications.
-          </motion.p>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 space-y-24">
-
-        {/* Benefits Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {benefits.map((benefit, idx) => {
-            const Icon = benefit.icon;
-            return (
-              <motion.div
-                key={benefit.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="glass-card glass-card-hover p-6 rounded-2xl border border-slate-200 text-left space-y-3 shadow-sm"
-              >
-                <div className="p-2.5 bg-blue-500/10 rounded-lg w-max border border-blue-500/20 text-[#004AAD]">
-                  <Icon className="h-5 w-5" />
-                </div>
-                <h3 className="text-base font-bold text-slate-900">{benefit.title}</h3>
-                <p className="text-slate-500 text-xs leading-relaxed">{benefit.desc}</p>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* CTO Quote & Engineering Spotlight */}
-        <div className="relative overflow-hidden rounded-3xl bg-slate-900 text-white p-8 md:p-12 border border-slate-800 hero-blue-banner">
-          <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
-          <div className="absolute top-0 right-0 w-[40%] h-[100%] rounded-full bg-blue-500/15 blur-[100px] pointer-events-none" />
-          
-          <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center justify-between">
-            <div className="flex-1 space-y-6">
-              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/30 text-xs font-semibold text-blue-300">
-                <Quote className="h-3.5 w-3.5 text-blue-300" />
-                <span>Engineering Focus</span>
-              </div>
-              <blockquote className="text-xl md:text-2xl font-medium leading-relaxed text-slate-100 italic">
-                "We don't build software by sitting in meetings all day. We write clean code, document our architectural decisions in collaborative RFCs, and trust our developers to ship quality work autonomously. It's about protecting deep focus and building software that lasts."
-              </blockquote>
-              <div className="border-t border-slate-800/80 pt-4 flex items-center space-x-4">
-                <div className="h-12 w-12 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center font-black text-sm text-white shadow-md">
-                  MS
-                </div>
-                <div>
-                  <h4 className="text-base font-bold text-white">Marcus Sterling</h4>
-                  <p className="text-xs text-blue-400 font-medium">Chief Technology Officer & Partner</p>
-                </div>
-              </div>
-            </div>
+            <h1 className="text-2xl sm:text-4xl font-extrabold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] uppercase">
+              YOUR FUTURE STARTS HERE
+            </h1>
             
-            <div className="hidden lg:flex w-72 h-48 rounded-2xl bg-gradient-to-tr from-blue-950/40 to-slate-900 border border-blue-500/20 items-center justify-center relative overflow-hidden group shadow-inner">
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur opacity-10 group-hover:opacity-20 transition duration-1000" />
-              <div className="text-center p-6 space-y-2 relative z-10">
-                <Code2 className="h-8 w-8 mx-auto text-blue-400 mb-2 animate-pulse" />
-                <span className="text-xs uppercase tracking-widest text-blue-300 font-bold block">Developer Experience</span>
-                <p className="text-[10px] text-slate-400">Green builds guarantee & multi-daily deployments</p>
+            <div className="grid grid-cols-3 gap-4 border-t border-b border-purple-500/20 py-6 text-center">
+              <div>
+                <div className="text-xl sm:text-3xl font-black text-white">
+                  <CountUpNumber value="25" />
+                </div>
+                <p className="text-[10px] text-[#CBD5E1] font-bold uppercase tracking-wider mt-1">Open Positions</p>
+              </div>
+              <div>
+                <div className="text-xl sm:text-3xl font-black text-white">
+                  <CountUpNumber value="12" />
+                </div>
+                <p className="text-[10px] text-[#CBD5E1] font-bold uppercase tracking-wider mt-1">Teams</p>
+              </div>
+              <div>
+                <div className="text-xl sm:text-3xl font-black text-white">
+                  <CountUpNumber value="4" />
+                </div>
+                <p className="text-[10px] text-[#CBD5E1] font-bold uppercase tracking-wider mt-1">Locations</p>
               </div>
             </div>
-          </div>
-        </div>
 
-        {/* Why Work at Beta Softnet */}
-        <div className="space-y-12 pt-6">
-          <div className="text-center max-w-2xl mx-auto space-y-3">
-            <h2 className="text-3xl font-extrabold text-slate-900">Why Work at Beta Softnet?</h2>
-            <p className="text-slate-500 text-sm">
-              We focus on building a healthy environment where developers and creators can flourish without friction.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            {culturePillars.map((pillar, idx) => {
-              const Icon = pillar.icon;
-              return (
-                <div
-                  key={pillar.title}
-                  className="glass-card glass-card-hover p-6 rounded-2xl border border-slate-200 text-left space-y-4 flex flex-col justify-between"
-                >
-                  <div className="space-y-3">
-                    <div className="h-10 w-10 rounded-xl bg-slate-50 flex items-center justify-center border border-slate-100 shadow-sm text-slate-800">
-                      <Icon className="h-5 w-5 text-blue-600" />
-                    </div>
-                    <h3 className="text-base font-bold text-slate-900">{pillar.title}</h3>
-                    <p className="text-slate-500 text-xs leading-relaxed">{pillar.desc}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Open Roles */}
-        <div className="space-y-8">
-          <div className="text-left space-y-2 max-w-2xl">
-            <h2 className="text-3xl font-extrabold text-slate-900">Open Positions</h2>
-            <p className="text-slate-500 text-sm">Filter our remote positions and submit your profile today.</p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-4">
-            {jobs.map((job, idx) => (
-              <motion.div
-                key={job.id}
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.05 }}
-                className="glass-card glass-card-hover p-6 rounded-2xl border border-slate-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-sm"
+            <div className="pt-2">
+              <a
+                href="#search-roles"
+                className="inline-flex items-center px-8 py-3 rounded-xl text-sm font-extrabold text-white bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] hover:from-[#7c4ee6] hover:to-[#db3c8b] transition-all duration-300 shadow-lg shadow-purple-500/20 transform hover:scale-[1.03] select-none"
               >
-                <div className="space-y-1.5 text-left">
-                  <h3 className="text-lg font-bold text-slate-900">{job.title}</h3>
-                  <div className="text-xs text-slate-500 font-semibold mt-1">
-                    {job.team} &bull; {job.location} &bull; {job.type}
-                  </div>
-                </div>
-                <button
-                  onClick={() => {
-                    setSelectedJob(job);
-                    setStatus('idle');
-                    setMessage('');
-                  }}
-                  className="px-5 py-2.5 rounded-lg text-xs font-bold bg-[#004AAD] hover:bg-[#003c8a] text-white transition glow-btn-blue shadow-lg shadow-blue-500/10 cursor-pointer"
-                >
-                  Apply Now
-                </button>
-              </motion.div>
-            ))}
-          </div>
+                <span>[Explore Careers]</span>
+              </a>
+            </div>
+          </motion.div>
         </div>
+      </div>
 
-        {/* Engineering DX Principles */}
-        <div className="space-y-12 pt-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 space-y-36">
+
+        {/* SECTION 2: CAREER JOURNEY SECTION */}
+        <div className="space-y-16">
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <h2 className="text-3xl font-extrabold text-slate-900">Engineering DX Principles</h2>
-            <p className="text-slate-500 text-sm">
-              We design tooling and workflows that keep developer friction close to zero.
-            </p>
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-[#EC4899] text-xs font-semibold uppercase tracking-wider">
+              <Sparkles className="h-3.5 w-3.5" />
+              <span>Career Journey Roadmap</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight">Our Career Journey</h2>
+            <p className="text-[#CBD5E1] text-sm">Visualize your growth path. Each step is designed to expand your responsibilities.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            {dxPrinciples.map((tech, idx) => {
-              const Icon = tech.icon;
-              return (
-                <div
-                  key={tech.title}
-                  className="glass-card glass-card-hover p-6 rounded-2xl border border-slate-200 text-left space-y-4 flex flex-col justify-between"
-                >
-                  <div className="space-y-4">
-                    <div className="h-10 w-10 rounded-xl bg-slate-50 flex items-center justify-center border border-slate-100 shadow-sm text-slate-800">
-                      <Icon className="h-5 w-5 text-blue-600" />
+          {/* Vertical Roadmap Timeline */}
+          <div className="relative max-w-3xl mx-auto pl-8 sm:pl-0">
+            {/* Central Timeline Thread Line */}
+            <div className="absolute left-8 sm:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#8B5CF6] via-[#EC4899] to-[#8B5CF6] -translate-x-1/2 pointer-events-none" />
+
+            <div className="space-y-12">
+              {journeyStages.map((stage, idx) => {
+                const isEven = idx % 2 === 0;
+                return (
+                  <motion.div
+                    key={stage.id}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6, delay: idx * 0.1 }}
+                    className={`relative flex flex-col sm:flex-row items-start sm:items-center ${isEven ? 'sm:flex-row-reverse' : ''}`}
+                  >
+                    {/* Circle Node on Central Line */}
+                    <div className="absolute left-0 sm:left-1/2 h-8 w-8 rounded-full bg-[#161B33] border-4 border-[#EC4899] -translate-x-1/2 flex items-center justify-center z-10 shadow-lg shadow-pink-500/25">
+                      <div className="h-2 w-2 rounded-full bg-white" />
                     </div>
-                    <h3 className="text-base font-bold text-slate-900">{tech.title}</h3>
-                    <p className="text-slate-500 text-[11px] leading-relaxed">{tech.desc}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
 
-        {/* Our Interview Process */}
-        <div className="space-y-12">
-          <div className="text-left space-y-2 max-w-2xl">
-            <h2 className="text-3xl font-extrabold text-slate-900">Our Interview Process</h2>
-            <p className="text-slate-500 text-sm">What to expect when you apply for a role with our distributed engineering team.</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="glass-card glass-card-hover p-6 rounded-2xl border border-slate-200 text-left space-y-3 relative overflow-hidden shadow-sm">
-              <span className="absolute top-4 right-4 text-4xl font-black text-blue-500/5 select-none">01</span>
-              <h3 className="text-base font-bold text-slate-900">Resume Screen</h3>
-              <p className="text-slate-500 text-xs leading-relaxed font-medium">
-                Our recruiting team reviews your application, resume details, and project links for initial alignment.
-              </p>
-            </div>
-
-            <div className="glass-card glass-card-hover p-6 rounded-2xl border border-slate-200 text-left space-y-3 relative overflow-hidden shadow-sm">
-              <span className="absolute top-4 right-4 text-4xl font-black text-[#f59e0b]/5 select-none">02</span>
-              <h3 className="text-base font-bold text-slate-900">Technical Review</h3>
-              <p className="text-slate-500 text-xs leading-relaxed font-medium">
-                A 60-minute session with our engineers discussing coding, systems, and standard design principles.
-              </p>
-            </div>
-
-            <div className="glass-card glass-card-hover p-6 rounded-2xl border border-slate-200 text-left space-y-3 relative overflow-hidden shadow-sm">
-              <span className="absolute top-4 right-4 text-4xl font-black text-emerald-500/5 select-none">03</span>
-              <h3 className="text-base font-bold text-slate-900">Systems Design</h3>
-              <p className="text-slate-500 text-xs leading-relaxed font-medium">
-                Deep dive into building scalable architecture, security frameworks, or complex interface structures.
-              </p>
-            </div>
-
-            <div className="glass-card glass-card-hover p-6 rounded-2xl border border-slate-200 text-left space-y-3 relative overflow-hidden shadow-sm">
-              <span className="absolute top-4 right-4 text-4xl font-black text-purple-500/5 select-none">04</span>
-              <h3 className="text-base font-bold text-slate-900">Team Alignment</h3>
-              <p className="text-slate-500 text-xs leading-relaxed font-medium">
-                Meet leadership and product managers to discuss product vision, culture fit, and remote team workflows.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Life at Beta / Culture */}
-        <div className="space-y-12">
-          <div className="text-left space-y-2 max-w-2xl">
-            <h2 className="text-3xl font-extrabold text-slate-900">Life at Beta Softnet</h2>
-            <p className="text-slate-500 text-sm">How we build together, support each other, and maintain focus in a distributed world.</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-            <div className="glass-card glass-card-hover p-6 rounded-2xl border border-slate-200 flex items-start space-x-4 shadow-sm">
-              <div className="p-3 bg-blue-500/10 rounded-xl text-[#004AAD] flex-shrink-0">
-                <Sparkles className="h-6 w-6" />
-              </div>
-              <div>
-                <h3 className="text-base font-bold text-slate-900 mb-1">Annual Hackathons</h3>
-                <p className="text-slate-500 text-xs md:text-sm leading-relaxed font-medium">
-                  We host a yearly, week-long internal hackathon. Bring your wildest ideas and team up with engineers and designers to build new standalone products for our ecosystem.
-                </p>
-              </div>
-            </div>
-
-            <div className="glass-card glass-card-hover p-6 rounded-2xl border border-slate-200 flex items-start space-x-4 shadow-sm">
-              <div className="p-3 bg-amber-500/10 rounded-xl text-amber-600 flex-shrink-0">
-                <Award className="h-6 w-6" />
-              </div>
-              <div>
-                <h3 className="text-base font-bold text-slate-900 mb-1">Learning & Development</h3>
-                <p className="text-slate-500 text-xs md:text-sm leading-relaxed font-medium">
-                  Continuous improvement is key. Every employee receives a $2,000 annual education grant for tech courses, books, developer conferences, and certifications.
-                </p>
-              </div>
-            </div>
-
-            <div className="glass-card glass-card-hover p-6 rounded-2xl border border-slate-200 flex items-start space-x-4 shadow-sm">
-              <div className="p-3 bg-emerald-500/10 rounded-xl text-emerald-600 flex-shrink-0">
-                <Heart className="h-6 w-6" />
-              </div>
-              <div>
-                <h3 className="text-base font-bold text-slate-900 mb-1">Focus Days & Core Hours</h3>
-                <p className="text-slate-500 text-xs md:text-sm leading-relaxed font-medium">
-                  To protect deep focus, we have "No-Meeting Wednesdays" and run a flexible model with 4 core hours of daily async overlap, leaving you control over your work day.
-                </p>
-              </div>
-            </div>
-
-            <div className="glass-card glass-card-hover p-6 rounded-2xl border border-slate-200 flex items-start space-x-4 shadow-sm">
-              <div className="p-3 bg-purple-500/10 rounded-xl text-purple-600 flex-shrink-0">
-                <Shield className="h-6 w-6" />
-              </div>
-              <div>
-                <h3 className="text-base font-bold text-slate-900 mb-1">Home Office Stipend</h3>
-                <p className="text-slate-500 text-xs md:text-sm leading-relaxed font-medium">
-                  We supply top-tier hardware. Newly hired team members receive a $1,500 remote home office setup stipend for noise-cancelling headphones, standing desks, or secondary monitors.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Candidates FAQ Section */}
-        <div className="space-y-12">
-          <div className="text-center max-w-2xl mx-auto space-y-3">
-            <h2 className="text-3xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
-            <p className="text-slate-500 text-sm">Everything you need to know about our recruiting, remote setup, and engineering culture.</p>
-          </div>
-
-          <div className="max-w-3xl mx-auto space-y-4">
-            {faqItems.map((item, idx) => (
-              <div
-                key={idx}
-                className="glass-card rounded-2xl border border-slate-200 overflow-hidden transition-all duration-300"
-              >
-                <button
-                  onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                  className="w-full text-left p-6 flex items-center justify-between focus:outline-none cursor-pointer hover:bg-slate-50/50 transition-colors"
-                >
-                  <div className="flex items-center space-x-3">
-                    <HelpCircle className="h-5 w-5 text-blue-500" />
-                    <span className="text-base font-bold text-slate-900">{item.q}</span>
-                  </div>
-                  <ChevronDown className={`h-5 w-5 text-slate-400 transform transition-transform duration-300 ${openFaq === idx ? 'rotate-180' : ''}`} />
-                </button>
-                
-                <AnimatePresence initial={false}>
-                  {openFaq === idx && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.2, ease: "easeInOut" }}
-                    >
-                      <div className="px-6 pb-6 pt-2 border-t border-slate-100 text-slate-600 text-xs md:text-sm leading-relaxed">
-                        {item.a}
+                    {/* Card container */}
+                    <div className={`w-full sm:w-[45%] text-left pl-6 sm:pl-0 ${isEven ? 'sm:pl-8' : 'sm:pr-8'}`}>
+                      <div className="glass-card-purple p-6 rounded-3xl border border-purple-500/20 shadow-md">
+                        <span className="text-[10px] font-extrabold text-[#F59E0B] uppercase tracking-widest block mb-1">
+                          {stage.highlight}
+                        </span>
+                        <h4 className="text-xl font-bold text-white mb-2">
+                          {stage.stage}
+                        </h4>
+                        <p className="text-[#CBD5E1] text-xs leading-relaxed">
+                          {stage.desc}
+                        </p>
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
         </div>
 
-        {/* Spontaneous Candidate General Inquiry */}
-        <div className="glass-card p-8 rounded-3xl border border-slate-200 max-w-3xl mx-auto relative overflow-hidden shadow-sm text-center space-y-6">
-          <div className="absolute left-0 right-0 top-0 h-1.5 bg-gradient-to-r from-blue-500 to-cyan-500" />
-          <div className="space-y-2 max-w-xl mx-auto">
-            <h3 className="text-xl font-extrabold text-slate-900">Don't see a role that fits?</h3>
-            <p className="text-slate-500 text-xs md:text-sm leading-relaxed">
-              We are always on the lookout for brilliant systems engineers, reactive developers, UX researchers, and technical writers. Submit your resume as a general application and we'll reach out when a match opens up.
-            </p>
+        {/* SECTION 3: OPEN ROLES SECTION */}
+        <div id="search-roles" className="space-y-12">
+          <div className="text-center max-w-2xl mx-auto space-y-3">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-[#EC4899] text-xs font-semibold uppercase tracking-wider">
+              <Briefcase className="h-3.5 w-3.5" />
+              <span>Current Openings</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight">Open Roles</h2>
+            <p className="text-[#CBD5E1] text-sm">Join Chennai teams. Search by keyword or apply directly inside our dashboard.</p>
           </div>
-          <button
-            onClick={() => {
-              setSelectedJob({ id: 'general', title: 'General Spontaneous Application', team: 'Talent Pool', location: 'Remote' });
-              setStatus('idle');
-              setMessage('');
-            }}
-            className="inline-flex items-center px-6 py-2.5 rounded-lg text-xs font-bold bg-[#004AAD] hover:bg-[#003c8a] text-white transition glow-btn-blue shadow-lg shadow-blue-500/15 cursor-pointer"
+
+          {/* Search Controls */}
+          <div className="glass-card-purple p-4 rounded-3xl border border-purple-500/20 shadow-xl flex flex-col md:flex-row items-center gap-4 text-left">
+            <div className="relative flex-grow w-full">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-purple-400" />
+              <input
+                type="text"
+                placeholder="Search by title, team, or skill (e.g. React, Spring)..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-[#0B1020]/60 text-white placeholder-slate-550 border border-purple-500/25 rounded-2xl py-3 pl-12 pr-4 focus:outline-none focus:border-[#EC4899] text-sm"
+              />
+            </div>
+            <div className="flex items-center space-x-2 text-xs text-[#CBD5E1] bg-[#161B33] px-4 py-3 rounded-2xl border border-purple-500/10 w-full md:w-auto flex-shrink-0 select-none">
+              <MapPin className="h-4 w-4 text-[#EC4899]" />
+              <span>Office: Chennai, India</span>
+            </div>
+          </div>
+
+          {/* Categories Filter Badges */}
+          <div className="flex flex-wrap gap-2 justify-center border-b border-purple-950/20 pb-6">
+            {['All Jobs'].map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`px-5 py-2 rounded-xl text-xs font-extrabold tracking-wide border transition-all duration-300 cursor-pointer ${
+                  selectedCategory === cat 
+                    ? 'bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] text-white border-transparent shadow-lg shadow-purple-500/20' 
+                    : 'bg-[#161B33] text-slate-400 border-purple-500/10 hover:border-[#8B5CF6]/30 hover:text-white'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          {/* Job grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <AnimatePresence>
+              {filteredJobs.length > 0 ? (
+                filteredJobs.map((job) => (
+                  <motion.div
+                    key={job.id}
+                    layout
+                    initial={{ opacity: 0, scale: 0.98 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.3 }}
+                    className="hacker-layout-box bg-[#161B33] p-6 rounded-2xl text-left flex flex-col justify-between space-y-6 transition-all duration-300 hover:border-[#8B5CF6] hover:shadow-lg hover:shadow-purple-500/20 group"
+                  >
+                    <div className="space-y-4">
+                      <div>
+                        <h3 className="text-lg font-black text-white tracking-tight group-hover:text-[#EC4899] transition-colors duration-300">
+                          {job.title}
+                        </h3>
+                        <span className="text-[9px] font-extrabold text-[#F59E0B] uppercase tracking-widest block mt-0.5">
+                          {job.team}
+                        </span>
+                      </div>
+
+                      <div className="space-y-2 border-t border-b border-purple-500/10 py-3 text-xs text-[#CBD5E1] font-medium">
+                        <div className="flex items-center space-x-2">
+                          <span className="text-[#EC4899]">•</span>
+                          <span>{job.location} • {job.type}</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <span className="text-[#EC4899]">•</span>
+                          <span>{job.skills.slice(0, 2).join(' / ')} • {job.experience}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => setSelectedJob(job)}
+                      className="w-full py-2 rounded-xl text-xs font-black bg-purple-600/20 hover:bg-gradient-to-r hover:from-[#8B5CF6] hover:to-[#EC4899] text-white border border-[#8B5CF6]/30 hover:border-transparent transition-all duration-300 text-center cursor-pointer shadow-sm"
+                    >
+                      [Apply Now]
+                    </button>
+                  </motion.div>
+                ))
+              ) : (
+                <div className="col-span-full text-center py-12 text-[#CBD5E1]/60 italic text-sm">
+                  No open positions found. Try adjusting filters or search keywords.
+                </div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* SECTION 4: TEAM CULTURE MASONRY */}
+        <div className="space-y-12">
+          <div className="text-center max-w-2xl mx-auto space-y-3">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-[#EC4899] text-xs font-semibold uppercase tracking-wider">
+              <Users className="h-3.5 w-3.5" />
+              <span>Team Culture</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-white">Our Team Culture</h2>
+            <p className="text-[#CBD5E1] text-sm">A look inside our technical sprints, hackathons, and global offsites.</p>
+          </div>
+
+          {/* Sequential Grid Layout */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {/* Box 1 (Text Quote) */}
+            <div className="glass-card-purple p-6 rounded-3xl border border-purple-500/20 flex flex-col justify-between shadow-md relative overflow-hidden group">
+              <Quote className="h-8 w-8 text-[#EC4899] opacity-40 mb-4" />
+              <p className="text-sm font-medium italic text-[#CBD5E1] leading-relaxed text-left">
+                "We don't build software to hit corporate metrics. We design and deliver real-time systems that solve actual production bottlenecks for customers globally."
+              </p>
+              <div className="flex items-center space-x-3 mt-6 border-t border-purple-500/10 pt-4">
+                <img src="/marcus_avatar.png" alt="Marcus" className="h-9 w-9 rounded-full object-cover border border-purple-500/30" />
+                <div className="text-left">
+                  <h5 className="text-xs font-bold text-white">Marcus Sterling</h5>
+                  <p className="text-[10px] text-[#EC4899] font-semibold">Chief Technology Officer</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Box 2 (Image Container) */}
+            <div className="glass-card-purple p-6 rounded-3xl border border-purple-500/20 flex flex-col justify-between shadow-md relative overflow-hidden group">
+              <div className="rounded-2xl overflow-hidden border border-purple-500/10 bg-[#0B1020]/40 p-2 flex-grow flex items-center justify-center">
+                <img src="/tech_illustration.png" alt="Tech illustration" className="w-full h-auto object-cover rounded-xl transition duration-500 group-hover:scale-105" />
+              </div>
+              <div className="text-left mt-4">
+                <h5 className="text-xs font-bold text-white">Interactive Technology</h5>
+                <p className="text-[10px] text-[#CBD5E1]">Developing premium user interfaces with React and Stomp protocols.</p>
+              </div>
+            </div>
+
+            {/* Box 3 (Text Quote) */}
+            <div className="glass-card-purple p-6 rounded-3xl border border-purple-500/20 flex flex-col justify-between shadow-md relative overflow-hidden group">
+              <Quote className="h-8 w-8 text-[#8B5CF6] opacity-40 mb-4" />
+              <p className="text-sm font-medium italic text-[#CBD5E1] leading-relaxed text-left">
+                "Our designs prioritize aesthetics and responsiveness. Using HSL palettes and custom-built tokens, we create interfaces that look absolutely premium."
+              </p>
+              <div className="flex items-center space-x-3 mt-6 border-t border-purple-500/10 pt-4">
+                <img src="/ananya_avatar.png" alt="Ananya" className="h-9 w-9 rounded-full object-cover border border-purple-500/30" />
+                <div className="text-left">
+                  <h5 className="text-xs font-bold text-white">Ananya Nair</h5>
+                  <p className="text-[10px] text-[#8B5CF6] font-semibold">Head of Design</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Box 4 (Small Card) */}
+            <div className="glass-card-purple p-6 rounded-3xl border border-purple-500/20 shadow-md relative overflow-hidden text-left flex flex-col justify-between group">
+              <div>
+                <h4 className="text-base font-bold text-white mb-2">No-Meeting Wednesdays</h4>
+                <p className="text-xs text-[#CBD5E1] leading-relaxed">
+                  We protect developers' deep focus. Mid-week days are dedicated purely to code, research, and flow.
+                </p>
+              </div>
+              <div className="border-t border-purple-500/10 pt-4 mt-6">
+                <span className="text-[10px] font-extrabold text-[#F59E0B] uppercase tracking-wider">Async Focus block</span>
+              </div>
+            </div>
+
+            {/* Box 5 (Quote) */}
+            <div className="glass-card-purple p-6 rounded-3xl border border-purple-500/20 flex flex-col justify-between shadow-md relative overflow-hidden group">
+              <Quote className="h-8 w-8 text-[#EC4899] opacity-40 mb-4" />
+              <p className="text-sm font-medium italic text-[#CBD5E1] leading-relaxed text-left">
+                "Working asynchronously is our superpower. We pair program over codebases and communicate through design RFCs instead of sitting in long daily standups."
+              </p>
+              <div className="flex items-center space-x-3 mt-6 border-t border-purple-500/10 pt-4">
+                <img src="/rohan_avatar.png" alt="Rohan" className="h-9 w-9 rounded-full object-cover border border-purple-500/30" />
+                <div className="text-left">
+                  <h5 className="text-xs font-bold text-white">Rohan Sen</h5>
+                  <p className="text-[10px] text-[#EC4899] font-semibold">Frontend Architect</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* SECTION 5: BENEFITS SECTION */}
+        <div className="space-y-16">
+          <div className="text-center max-w-2xl mx-auto space-y-3">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-[#EC4899] text-xs font-semibold uppercase tracking-wider">
+              <Award className="h-3.5 w-3.5" />
+              <span>Compensation & Benefits</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-white">Perks & Benefits</h2>
+            <p className="text-[#CBD5E1] text-sm">We provide everything you need to deliver high-quality work, grow your skillset, and stay healthy.</p>
+          </div>
+
+          {/* Floating Circular Cards Layout */}
+          <div className="flex flex-wrap items-center justify-center gap-10 max-w-5xl mx-auto">
+            {benefits.map((ben, idx) => {
+              const isEven = idx % 2 === 0;
+              return (
+                <motion.div
+                  key={ben.title}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  className={`h-48 w-48 rounded-full border border-purple-500/20 bg-[#161B33]/80 shadow-lg shadow-purple-500/5 flex flex-col items-center justify-center p-6 text-center space-y-2 relative group overflow-hidden ${
+                    isEven ? 'float-circle-even' : 'float-circle-odd'
+                  }`}
+                >
+                  {/* Backdrop glow */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[#8B5CF6]/10 to-[#EC4899]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+                  <span className="text-3xl select-none" role="img" aria-label={ben.title}>
+                    {ben.emoji}
+                  </span>
+                  <h4 className="text-sm font-extrabold text-white group-hover:text-[#EC4899] transition-colors">
+                    {ben.title}
+                  </h4>
+                  <p className="text-[10px] text-[#CBD5E1] leading-relaxed line-clamp-3 select-none">
+                    {ben.desc}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* SECTION 6: HIRING PROCESS */}
+        <div className="space-y-16">
+          <div className="text-center max-w-2xl mx-auto space-y-3">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-[#EC4899] text-xs font-semibold uppercase tracking-wider">
+              <CheckSquare className="h-3.5 w-3.5" />
+              <span>Hiring Pipeline</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-white">Our Hiring Process</h2>
+            <p className="text-[#CBD5E1] text-sm">A quick outline of how we validate core competencies and welcome new team members.</p>
+          </div>
+
+          {/* Connected Glowing Nodes Timeline */}
+          <div className="relative max-w-4xl mx-auto pt-6 flex flex-col md:flex-row flex-wrap md:flex-nowrap items-center justify-between gap-8 md:gap-4">
+            {processSteps.map((step, idx) => {
+              const Icon = step.icon;
+              return (
+                <React.Fragment key={step.id}>
+                  {/* Glowing Node Circle */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: idx * 0.1 }}
+                    className="glass-card-purple p-6 rounded-3xl border border-purple-500/20 text-center flex flex-col items-center justify-center shadow-md w-full md:w-[18%] group relative"
+                  >
+                    <div className={`h-12 w-12 rounded-full flex items-center justify-center border ${step.bg} mb-3 shadow-lg shadow-purple-500/10 transition-transform duration-500 group-hover:scale-105`}>
+                      <Icon className={`h-5.5 w-5.5 ${step.color}`} />
+                    </div>
+                    <span className="text-[9px] font-extrabold text-[#F59E0B] uppercase tracking-widest mb-1">
+                      Step {step.id}
+                    </span>
+                    <h4 className="text-xs font-black text-white group-hover:text-[#EC4899] transition-colors">
+                      {step.title}
+                    </h4>
+                    <p className="text-[10px] text-[#CBD5E1] leading-relaxed mt-1 font-medium">
+                      {step.desc}
+                    </p>
+                  </motion.div>
+
+                  {/* Node Connector Line */}
+                  {idx < processSteps.length - 1 && (
+                    <div className="hidden md:block h-[2px] flex-grow bg-gradient-to-r from-[#8B5CF6]/50 to-[#EC4899]/50 relative z-0 mx-2" />
+                  )}
+                </React.Fragment>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* SECTION 7: RESUME DROP ZONE */}
+        <div id="resume-drop" className="space-y-6 max-w-3xl mx-auto">
+          <div className="text-center space-y-2">
+            <h3 className="text-2xl font-extrabold text-white">General Application</h3>
+            <p className="text-[#CBD5E1] text-sm">Don't see a matching position? Drop your resume in our talent pool.</p>
+          </div>
+
+          <div 
+            onDragEnter={handleDrag}
+            onDragOver={handleDrag}
+            onDragLeave={handleDrag}
+            onDrop={handleDrop}
+            className={`glass-card-purple p-10 rounded-3xl border border-dashed text-center space-y-6 relative overflow-hidden transition-all duration-300 ${
+              dragActive 
+                ? 'border-[#EC4899] bg-[#EC4899]/5 shadow-lg shadow-[#EC4899]/10' 
+                : 'border-purple-500/20 hover:border-purple-500/50'
+            }`}
           >
-            Submit General Inquiry
-          </button>
+            <input
+              type="file"
+              accept=".pdf"
+              ref={fileInputRef}
+              onChange={handleFileChange}
+              className="hidden"
+            />
+            <div className="flex flex-col items-center justify-center space-y-4">
+              <div className="h-14 w-14 rounded-full bg-[#161B33] flex items-center justify-center border border-purple-500/30 text-[#EC4899] shadow-inner">
+                <Upload className="h-6 w-6" />
+              </div>
+              <div className="space-y-1">
+                <h4 className="text-base font-bold text-white">
+                  {resume ? resume.name : 'Drag & drop your resume PDF here'}
+                </h4>
+                <p className="text-xs text-slate-550 font-medium">Only PDF formats supported (Max 10MB)</p>
+              </div>
+              
+              {resume ? (
+                <div className="flex items-center space-x-2 text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-lg">
+                  <CheckCircle2 className="h-4 w-4" />
+                  <span>Resume loaded successfully. Complete the quick form below to submit.</span>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current.click()}
+                  className="px-5 py-2.5 rounded-xl text-xs font-black bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] hover:from-[#7c4ee6] hover:to-[#db3c8b] text-white transition-all duration-300 shadow-md cursor-pointer"
+                >
+                  Browse Files
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Quick Apply panel if file is loaded */}
+          {resume && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="glass-card-purple p-6 rounded-3xl border border-purple-500/20 text-left space-y-4"
+            >
+              <div className="flex items-center justify-between">
+                <h4 className="text-sm font-bold text-white">General Candidate Submission</h4>
+                <button onClick={() => setResume(null)} className="text-purple-400 hover:text-white transition">
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+              <form 
+                onSubmit={(e) => {
+                  setSelectedJob({ title: 'General Spontaneous Application', team: 'Ecosystem Engineering', location: 'Chennai' });
+                  handleApply(e);
+                }} 
+                className="grid grid-cols-1 sm:grid-cols-3 gap-4"
+              >
+                <input
+                  type="text"
+                  required
+                  placeholder="Full Name"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  className="bg-[#0B1020] border border-purple-500/20 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-[#EC4899]"
+                />
+                <input
+                  type="email"
+                  required
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="bg-[#0B1020] border border-purple-500/20 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-[#EC4899]"
+                />
+                <input
+                  type="text"
+                  required
+                  placeholder="Phone"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="bg-[#0B1020] border border-purple-500/20 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-[#EC4899]"
+                />
+                <button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className="sm:col-span-3 w-full py-2.5 rounded-xl bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] text-white text-xs font-black transition-all flex items-center justify-center space-x-2 cursor-pointer disabled:from-slate-800 disabled:to-slate-900 disabled:text-slate-500"
+                >
+                  {status === 'loading' ? <span>Submitting Profile...</span> : <span>Submit Profile</span>}
+                </button>
+              </form>
+              
+              {status === 'success' && (
+                <div className="text-xs text-[#CBD5E1] bg-emerald-500/10 border border-emerald-500/20 p-3 rounded-xl flex items-center space-x-2">
+                  <CheckCircle2 className="h-4.5 w-4.5" />
+                  <span>{message}</span>
+                </div>
+              )}
+              {status === 'error' && (
+                <div className="text-xs text-rose-455 bg-rose-500/10 border border-rose-500/20 p-3 rounded-xl flex items-center space-x-2">
+                  <AlertCircle className="h-4.5 w-4.5" />
+                  <span>{message}</span>
+                </div>
+              )}
+            </motion.div>
+          )}
+        </div>
+
+        {/* SECTION 8: CALL TO ACTION SECTION */}
+        <div className="relative overflow-hidden rounded-3xl p-10 md:p-16 border border-purple-500/30 text-center shadow-2xl" style={{ background: 'linear-gradient(135deg, #8B5CF6, #EC4899)' }}>
+          {/* Floating glow circles inside CTA */}
+          <div className="absolute top-[-30px] left-[-30px] w-48 h-48 bg-white/10 rounded-full blur-2xl pointer-events-none" />
+          <div className="absolute bottom-[-30px] right-[-30px] w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none" />
+
+          <div className="relative z-10 space-y-6 max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-5xl font-black text-white leading-tight">
+              Ready to Build Something Amazing?
+            </h2>
+            <p className="text-white/80 max-w-xl mx-auto text-sm md:text-base leading-relaxed font-medium">
+              Join a team of creators, system architects, and designers scaling software to thousands of businesses globally.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
+              <a
+                href="#search-roles"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-xl text-sm font-black bg-purple-950/20 hover:bg-purple-950/45 text-white border border-white/20 hover:border-white/40 transition-all duration-300 hover:scale-[1.02]"
+              >
+                Apply Now
+              </a>
+              <a
+                href="#resume-drop"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-xl text-sm font-black bg-purple-950/20 hover:bg-purple-950/45 text-white border border-white/20 hover:border-white/40 transition-all duration-300 hover:scale-[1.02]"
+              >
+                Upload Resume
+              </a>
+            </div>
+          </div>
         </div>
 
       </div>
 
-      {/* Application Form Modal */}
+      {/* APPLICATION FORM MODAL (FEATURED JOBS TARGET) */}
       <AnimatePresence>
         {selectedJob && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
@@ -495,77 +852,77 @@ export default function Careers() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full max-w-lg glass-card rounded-3xl p-6 md:p-8 border border-slate-200 shadow-2xl"
+              className="relative w-full max-w-lg glass-card-purple rounded-3xl p-6 md:p-8 border border-purple-500/20 shadow-2xl text-left"
             >
               <button
                 onClick={() => setSelectedJob(null)}
-                className="absolute right-4 top-4 p-1.5 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-slate-800 transition cursor-pointer"
+                className="absolute right-4 top-4 p-1.5 rounded-lg hover:bg-purple-500/20 text-purple-400 hover:text-white transition cursor-pointer"
               >
                 <X className="h-5 w-5" />
               </button>
 
-              <div className="mb-6 space-y-1 text-left">
-                <span className="text-xs font-bold text-[#004AAD] uppercase tracking-widest">Apply for position</span>
-                <h3 className="text-2xl font-extrabold text-slate-900">{selectedJob.title}</h3>
-                <p className="text-slate-500 text-xs">{selectedJob.team} &bull; {selectedJob.location}</p>
+              <div className="mb-6 space-y-1">
+                <span className="text-xs font-bold text-[#EC4899] uppercase tracking-widest">Apply for position</span>
+                <h3 className="text-2xl font-black text-white">{selectedJob.title}</h3>
+                <p className="text-[#CBD5E1] text-xs font-medium">{selectedJob.team} &bull; {selectedJob.location}</p>
               </div>
 
               {status === 'success' ? (
                 <div className="py-8 text-center space-y-4">
-                  <div className="h-12 w-12 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center mx-auto text-emerald-600">
+                  <div className="h-12 w-12 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mx-auto text-emerald-400">
                     <CheckCircle2 className="h-6 w-6" />
                   </div>
-                  <h4 className="text-lg font-bold text-slate-900">Application Received!</h4>
-                  <p className="text-slate-500 text-xs leading-relaxed max-w-sm mx-auto">{message}</p>
+                  <h4 className="text-lg font-bold text-white">Application Received!</h4>
+                  <p className="text-[#CBD5E1] text-xs leading-relaxed max-w-sm mx-auto">{message}</p>
                   <button
                     onClick={() => setSelectedJob(null)}
-                    className="px-6 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-bold transition cursor-pointer"
+                    className="px-6 py-2.5 rounded-xl bg-purple-600/20 hover:bg-gradient-to-r hover:from-[#8B5CF6] hover:to-[#EC4899] text-white border border-purple-500/30 text-xs font-extrabold transition cursor-pointer"
                   >
                     Close Modal
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleApply} className="space-y-4 text-left">
+                <form onSubmit={handleApply} className="space-y-4">
                   <div className="space-y-1">
-                    <label className="text-xs font-bold text-slate-500 uppercase">Full Name</label>
+                    <label className="text-xs font-bold text-slate-400 uppercase">Full Name</label>
                     <input
                       type="text"
                       required
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       placeholder="e.g. Robert Downey"
-                      className="w-full bg-white text-slate-900 placeholder-slate-400 border border-slate-200 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-500 text-sm transition"
+                      className="w-full bg-[#0B1020] text-white placeholder-slate-500 border border-purple-500/20 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#EC4899] text-sm transition"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1">
-                      <label className="text-xs font-bold text-slate-500 uppercase">Email Address</label>
+                      <label className="text-xs font-bold text-slate-400 uppercase">Email Address</label>
                       <input
                         type="email"
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="e.g. rob@domain.com"
-                        className="w-full bg-white text-slate-900 placeholder-slate-400 border border-slate-200 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-500 text-sm transition"
+                        className="w-full bg-[#0B1020] text-white placeholder-slate-500 border border-purple-500/20 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#EC4899] text-sm transition"
                       />
                     </div>
                     <div className="space-y-1">
-                      <label className="text-xs font-bold text-slate-500 uppercase">Phone Number</label>
+                      <label className="text-xs font-bold text-slate-400 uppercase">Phone Number</label>
                       <input
                         type="text"
                         required
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="e.g. +1 555-0199"
-                        className="w-full bg-white text-slate-900 placeholder-slate-400 border border-slate-200 rounded-lg py-2 px-3 focus:outline-none focus:border-blue-500 text-sm transition"
+                        className="w-full bg-[#0B1020] text-white placeholder-slate-500 border border-purple-500/20 rounded-xl py-2.5 px-4 focus:outline-none focus:border-[#EC4899] text-sm transition"
                       />
                     </div>
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-500 uppercase">Resume Upload (PDF Only)</label>
-                    <div className="relative border border-dashed border-[#004AAD]/20 rounded-lg p-6 bg-[#E9F4FF]/30 hover:bg-[#E9F4FF]/50 hover:border-[#004AAD]/40 transition flex flex-col items-center justify-center cursor-pointer">
+                    <label className="text-xs font-bold text-slate-400 uppercase">Resume Upload (PDF Only)</label>
+                    <div className="relative border border-dashed border-purple-500/30 rounded-xl p-6 bg-[#0B1020] hover:bg-[#161B33] hover:border-purple-500/50 transition flex flex-col items-center justify-center cursor-pointer">
                       <input
                         type="file"
                         accept=".pdf"
@@ -573,15 +930,15 @@ export default function Careers() {
                         onChange={(e) => setResume(e.target.files[0])}
                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                       />
-                      <Upload className="h-6 w-6 text-slate-500 mb-2" />
-                      <span className="text-xs text-[#004AAD] font-semibold">
+                      <Upload className="h-6 w-6 text-purple-400 mb-2" />
+                      <span className="text-xs text-[#EC4899] font-bold">
                         {resume ? resume.name : 'Click or drag PDF resume here'}
                       </span>
                     </div>
                   </div>
 
                   {status === 'error' && (
-                    <div className="flex items-center space-x-2 text-rose-600 text-xs p-3 rounded-lg bg-rose-50 border border-rose-100">
+                    <div className="flex items-center space-x-2 text-rose-400 text-xs p-3 rounded-xl bg-rose-500/10 border border-rose-500/20">
                       <AlertCircle className="h-4.5 w-4.5 flex-shrink-0" />
                       <span>{message}</span>
                     </div>
@@ -590,13 +947,13 @@ export default function Careers() {
                   <button
                     type="submit"
                     disabled={status === 'loading'}
-                    className="w-full py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition flex items-center justify-center space-x-2 disabled:bg-slate-200 disabled:text-slate-500 cursor-pointer"
+                    className="w-full py-3 rounded-xl bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] text-white text-xs font-black transition flex items-center justify-center space-x-2 disabled:from-slate-800 disabled:to-slate-900 disabled:text-slate-500 cursor-pointer"
                   >
                     {status === 'loading' ? (
                       <span>Submitting...</span>
                     ) : (
                       <>
-                        <Briefcase className="h-4 w-4" />
+                        <Briefcase className="h-4.5 w-4.5" />
                         <span>Submit Application</span>
                       </>
                     )}

@@ -216,26 +216,28 @@ button[type="submit"],
 }
 
 /* Dark Footer High-Contrast Overrides */
-footer,
-footer p,
-footer span,
-footer a,
-footer div {
-  color: #94a3b8 !important; /* Slate 400 */
+footer.custom-site-footer,
+footer.custom-site-footer p,
+footer.custom-site-footer span {
+  color: #64748B !important;
 }
 
-footer a:hover {
-  color: #60a5fa !important; /* Light blue on hover */
+footer.custom-site-footer a {
+  color: #004AAD !important;
 }
 
-footer h1,
-footer h2,
-footer h3,
-footer h4,
-footer h5,
-footer h6,
-footer strong {
-  color: #ffffff !important; /* High contrast white headings */
+footer.custom-site-footer a:hover {
+  color: #002D7A !important;
+}
+
+footer.custom-site-footer h1,
+footer.custom-site-footer h2,
+footer.custom-site-footer h3,
+footer.custom-site-footer h4,
+footer.custom-site-footer h5,
+footer.custom-site-footer h6,
+footer.custom-site-footer strong {
+  color: #0F172A !important;
 }
 
 /* Admin Sidebar High-Contrast Overrides */

@@ -25,16 +25,28 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-gradient-to-b from-[#F5F3FF] to-[#EFF6FF] border-t border-slate-200 pt-16 pb-8 text-black">
+    <footer className="custom-site-footer bg-[#E9F4FF] border-t border-slate-200 pt-16 pb-8 text-[#64748B]">
       <style>{`
-        footer.bg-gradient-to-b,
-        footer.bg-gradient-to-b h4,
-        footer.bg-gradient-to-b p,
-        footer.bg-gradient-to-b a {
+        footer.custom-site-footer,
+        footer.custom-site-footer p,
+        footer.custom-site-footer span,
+        footer.custom-site-footer div {
+          color: #64748B !important;
+        }
+        footer.custom-site-footer h4 {
+          color: #0F172A !important;
+        }
+        footer.custom-site-footer a {
+          color: #004AAD !important;
+        }
+        footer.custom-site-footer a:hover {
+          color: #002D7A !important;
+        }
+        footer.custom-site-footer p.footer-brand-description {
           color: #000000 !important;
         }
-        footer.bg-gradient-to-b a:hover {
-          color: #2563EB !important;
+        footer.custom-site-footer input {
+          color: #0F172A !important;
         }
       `}</style>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -44,7 +56,7 @@ export default function Footer() {
             <Link to="/" className="flex items-center justify-center select-none">
               <img src="/logo.png" alt="Beta Logo" className="h-14 w-auto object-contain mx-auto" />
             </Link>
-            <p className="text-sm text-slate-500 font-medium">
+            <p className="text-sm footer-brand-description font-semibold">
               Unified Software for a Connected Generation. Building next-generation collaboration, auth, and productivity suites.
             </p>
           </div>
